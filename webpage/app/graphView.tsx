@@ -65,7 +65,6 @@ const GraphView: React.FC<GraphViewProps> = ({ upload, updateAdjacencyMatrix, in
     }, []);
 
     if(upload && !uploadMode) {
-        console.log(adjacencyMatrix);
         setUploadMode(true);
     }
 
@@ -73,7 +72,6 @@ const GraphView: React.FC<GraphViewProps> = ({ upload, updateAdjacencyMatrix, in
         const textareaValue = textareaRef.current?.value;
         const adj = stringToAdjacencyMatrix(textareaValue ?? "");
         if(adj !== undefined) {
-            console.log(adj);
             setAdjacencyMatrix(adj);
             updateAdjacencyMatrix(adj);
         }

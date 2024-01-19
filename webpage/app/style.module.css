@@ -3,4 +3,14 @@
   border-radius: 5px;
   height: 60vh;
   width: 60vh;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+@media (max-width: 1024px) {
+  .canvas {
+    width: calc(100vw - 2.5rem);
+    height: calc(100vw - 2.5rem);
+  }
 }

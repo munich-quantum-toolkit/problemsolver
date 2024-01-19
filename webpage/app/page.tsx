@@ -45,16 +45,17 @@ export default function Home() {
   const [vertices, setVertices] = useState(Array.from(Array(adjacencyMatrix.length).keys()).map(i => (i + 1).toFixed(0)));
 
   return (
-    <main className="flex h-screen flex-col items-center">
+    <main className="flex h-screen flex-col items-center font-sans">
       <nav className="flex items-center justify-between w-full bg-slate-100 p-5">
         <a href="#" className="text-gray-900 font-medium flex flex-row gap-2 items-center"><Image alt="TUM" src={"tum_logo.svg"} width={60} height={1}></Image>MQT Pathfinder</a>
-        <a href="#" className="text-gray-900 font-medium">More on our Work</a>
-        <a href="#" className="text-gray-900 font-medium">Legal Information</a>
+        <a href="#" className="text-gray-900 font-medium hidden md:block">More on our Work</a>
+        <a href="#" className="text-gray-900 font-medium hidden md:block">Legal Information</a>
+        <a href="#" className="text-gray-900 font-medium block md:hidden"><Image alt="i" src={"info.png"} width={20} height={1}></Image></a>
       </nav>
-      <div className="flex flex-row h-full w-full items-center p-5 justify-between gap-4">
-        <div className="flex flex-col gap-4">
+      <div className="flex flex-col lg:flex-row lg:h-full w-full items-center p-5 justify-between gap-4 lg:overflow-clip">
+        <div className="flex flex-col gap-4 w-full lg:w-auto">
           <GraphView updateAdjacencyMatrix={setAdjacencyMatrix} upload={doUpload} initialAdjacencyMatrix={adjacencyMatrix}></GraphView>
-          <div className="flex flex-row justify-around">
+          <div className="flex flex-row justify-around w-full lg:w-auto">
             <button onClick={() => setDoUpload(true)} className="border-2 rounded bg-slate-100 p-2 hover:bg-slate-200 active:bg-slate-300">Change Graph</button>
             <button onClick={() => download("generator.json", settings.toJson())} className="border-2 rounded bg-slate-100 p-2 hover:bg-slate-200 active:bg-slate-300">Generate</button>
           </div>
@@ -65,7 +66,7 @@ export default function Home() {
           ]} mutualExclusions={[
             [0, 1, 2]
           ]} onChange={(states) => setSettings(settings.setEncoding(states))}></ToggleBag>
-          <div className="flex flex-row gap-4">
+          <div className="flex flex-col lg:flex-row gap-4 w-full lg:w-auto">
           <TitledTextbox title="Number of Paths:" defaultValue="1" onChange={(n) => {
             const newNum = parseInt(n);
             if(!isNaN(newNum) && newNum > 0)
@@ -78,7 +79,7 @@ export default function Home() {
           }}></TitledTextbox>
           </div>
         </div>
-        <div className="flex flex-col h-full w-4/12 justify-around">
+        <div className="flex flex-col gap-5 h-full w-full lg:w-4/12 justify-around">
           <ToggleBag cols={2} all={false} title='' items={[
             "Path is Loop",
             "Minimize Weight",
@@ -93,7 +94,7 @@ export default function Home() {
           <ToggleBag onChange={(states) => setSettings(settings.setShareNoVertices(states))} all={true} title='The following paths may not share vertices' items={Array(settings.nPaths).fill(0).map((_, i) => (i + 1) + "")}></ToggleBag>
           <ToggleBag onChange={(states) => setSettings(settings.setShareNoVertices(states))} all={true} title='The following paths may not share edges' items={Array(settings.nPaths).fill(0).map((_, i) => (i + 1) + "")}></ToggleBag>
         </div>
-        <div className="flex flex-col h-full w-3/12 justify-around">
+        <div className="flex flex-col gap-5 h-full w-full lg:w-3/12 justify-around">
           <EdgeCollector onChange={(edges) => setSettings(settings.setExactlyOnceEdges(edges))} title="The following edges must appear exactly once in each path" allVertices={vertices}></EdgeCollector>
           <EdgeCollector onChange={(edges) => setSettings(settings.setAtLeastOnceEdges(edges))} title="The following edges must appear at least once in each path" allVertices={vertices}></EdgeCollector>
           <EdgeCollector onChange={(edges) => setSettings(settings.setAtMostOnceEdges(edges))} title="The following edges must appear at most once in each path" allVertices={vertices}></EdgeCollector>
