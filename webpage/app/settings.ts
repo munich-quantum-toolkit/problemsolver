@@ -16,6 +16,8 @@ class Settings {
     atLeastOnceEdges: string[][] = [];
     atMostOnceEdges: string[][] = [];
 
+    pathPositionIs: string[][] = [];
+
     precedences: string[][] = [];
 
     shareNoEdges: number[] = [];
@@ -77,6 +79,12 @@ class Settings {
         return clone;
     }
 
+    setPathPositionIs(pathPositionIs: string[][]) {
+        const clone = this.clone();
+        clone.pathPositionIs = pathPositionIs;
+        return clone;
+    }
+
     setExactlyOnceEdges(exactlyOnceEdges: string[][]) {
         const clone = this.clone();
         clone.exactlyOnceEdges = exactlyOnceEdges;
@@ -118,6 +126,7 @@ class Settings {
         clone.precedences = this.precedences.map(value => value.slice());
         clone.shareNoEdges = this.shareNoEdges.slice();
         clone.shareNoVertices = this.shareNoVertices.slice();
+        clone.pathPositionIs = this.pathPositionIs.map(value => value.slice());
         return clone;
     }
 
@@ -194,6 +203,28 @@ class Settings {
                "path_ids": Array(this.nPaths).fill(0).map((_, index) => index + 1),
                "edges": this.atMostOnceEdges
             });
+        }
+        if(this.pathPositionIs.length > 0) {
+            const keyValue: [string[], string][] = this.pathPositionIs.map(value => [[value[0], value[1]], value[2]]);
+            const map = new Map<string, string[]>();
+            for(const entry of keyValue) {
+                if(!map.has(JSON.stringify(entry[0]))) {
+                    map.set(JSON.stringify(entry[0]), []);
+                }
+                map.get(JSON.stringify(entry[0]))!.push(entry[1]);
+            }
+            console.log(map.keys())
+
+            for(const entry of map.keys()) {
+                const entry_array = JSON.parse(entry);
+                constraints.push({
+                    "type": "PathPositionIs",
+                    "position": parseInt(entry_array[1]),
+                    "vertices": map.get(entry)!.map(vertex => parseInt(vertex)),
+                    "path_ids": [parseInt(entry_array[0])]
+                });
+                
+            }
         }
         if(this.precedences.length > 0) {
             constraints.push({

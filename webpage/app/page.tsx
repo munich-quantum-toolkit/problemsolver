@@ -9,6 +9,7 @@ import GraphView from './graphView'
 import { useEffect, useRef, useState } from 'react'
 import TitledTextbox from './titledTextbox'
 import Settings from './settings'
+import PathPosIsCollector from './pathPosIsCollector'
 
 function download(filename: string, text: string) {
   var element = document.createElement('a');
@@ -95,6 +96,7 @@ export default function Home() {
           <ToggleBag onChange={(states) => setSettings(settings.setShareNoVertices(states))} all={true} title='The following paths may not share edges' items={Array(settings.nPaths).fill(0).map((_, i) => (i + 1) + "")}></ToggleBag>
         </div>
         <div className="flex flex-col gap-5 h-full w-full lg:w-3/12 justify-around">
+          <PathPosIsCollector onChange={(entries) => setSettings(settings.setPathPositionIs(entries))} title="Vertex positions" nPaths={settings.nPaths} pathLength={settings.maxPathLength} allVertices={vertices}></PathPosIsCollector>
           <EdgeCollector onChange={(edges) => setSettings(settings.setExactlyOnceEdges(edges))} title="The following edges must appear exactly once in each path" allVertices={vertices}></EdgeCollector>
           <EdgeCollector onChange={(edges) => setSettings(settings.setAtLeastOnceEdges(edges))} title="The following edges must appear at least once in each path" allVertices={vertices}></EdgeCollector>
           <EdgeCollector onChange={(edges) => setSettings(settings.setAtMostOnceEdges(edges))} title="The following edges must appear at most once in each path" allVertices={vertices}></EdgeCollector>
