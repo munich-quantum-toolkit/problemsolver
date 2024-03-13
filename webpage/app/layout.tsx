@@ -6,8 +6,8 @@ import Head from 'next/head'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'MQT Pathfinder',
-  description: 'The UI assistant for the QUBO generator',
+  title: 'MQT QUBOMaker: Pathfinder',
+  description: 'The UI assistant for MQT QUBOMaker',
 }
 
 export default function RootLayout({

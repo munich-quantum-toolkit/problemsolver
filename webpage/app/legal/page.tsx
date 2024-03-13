@@ -6,7 +6,7 @@ export default function Legal() {
     return (
         <main className="flex h-screen flex-col items-center font-sans overflow-x-hidden">
           <nav className="flex items-center justify-between w-screen bg-slate-100 p-5">
-            <a href=".." className="text-gray-900 font-medium flex flex-row gap-2 items-center"><Image alt="TUM" src={"tum_logo.svg"} width={60} height={1}></Image>MQT Pathfinder</a>
+            <a href=".." className="text-gray-900 font-medium flex flex-row gap-2 items-center"><Image alt="TUM" src={"tum_logo.svg"} width={60} height={1}></Image>MQT QUBOMaker: Pathfinder</a>
             <a target="_blank" href="https://www.cda.cit.tum.de/research/quantum/" className="text-gray-900 font-medium hidden md:block">More on our Work</a>
             <a href="#" className="text-gray-900 font-medium hidden md:block">Legal Information</a>
             <a href="#" className="text-gray-900 font-medium block md:hidden"><Image alt="i" src={"info.png"} width={20} height={1}></Image></a>
