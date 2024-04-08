@@ -12,6 +12,10 @@ import Settings from './settings'
 import PathPosIsCollector from './pathPosIsCollector'
 
 function download(filename: string, text: string) {
+  if(text === "") {
+    alert("Please select an encoding!");
+    return;
+  }
   var element = document.createElement('a');
   element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
   element.setAttribute('download', filename);
@@ -58,7 +62,7 @@ export default function Home() {
           <GraphView updateAdjacencyMatrix={setAdjacencyMatrix} upload={doUpload} initialAdjacencyMatrix={adjacencyMatrix}></GraphView>
           <div className="flex flex-row justify-around w-full lg:w-auto">
             <button onClick={() => setDoUpload(true)} className="border-2 rounded bg-slate-100 p-2 hover:bg-slate-200 active:bg-slate-300">Change Graph</button>
-            <button onClick={() => download("generator.json", settings.toJson())} className="border-2 rounded bg-slate-100 p-2 hover:bg-slate-200 active:bg-slate-300">Generate</button>
+            <button onClick={() => download("generator.json", settings.encoding !== -1 ? settings.toJson() : "")} className="border-2 rounded bg-slate-100 p-2 hover:bg-slate-200 active:bg-slate-300">Generate</button>
           </div>
           <ToggleBag cols={3} all={false} title='Encoding' items={[
             "One-Hot",
