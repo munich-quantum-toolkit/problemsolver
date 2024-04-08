@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from 'react'
 import TitledTextbox from './titledTextbox'
 import Settings from './settings'
 import PathPosIsCollector from './pathPosIsCollector'
+import InfoScreen from './infoScreen'
 
 function download(filename: string, text: string) {
   if(text === "") {
@@ -48,6 +49,7 @@ export default function Home() {
   }, [adjacencyMatrix])
 
   const [vertices, setVertices] = useState(Array.from(Array(adjacencyMatrix.length).keys()).map(i => (i + 1).toFixed(0)));
+  const [showInfo, setShowInfo] = useState(false);
 
   return (
     <main className="flex h-screen flex-col items-center font-sans">
@@ -59,8 +61,11 @@ export default function Home() {
       </nav>
       <div className="flex flex-col lg:flex-row lg:h-full w-full items-center p-5 justify-between gap-4 lg:overflow-clip">
         <div className="flex flex-col gap-4 w-full lg:w-auto">
-          <GraphView updateAdjacencyMatrix={setAdjacencyMatrix} upload={doUpload} initialAdjacencyMatrix={adjacencyMatrix}></GraphView>
+          {
+            showInfo ? <InfoScreen></InfoScreen> : <GraphView updateAdjacencyMatrix={setAdjacencyMatrix} upload={doUpload} initialAdjacencyMatrix={adjacencyMatrix}></GraphView>
+          }
           <div className="flex flex-row justify-around w-full lg:w-auto">
+            <button onClick={() => setShowInfo(!showInfo)} className="border-2 rounded bg-slate-100 p-2 hover:bg-slate-200 active:bg-slate-300">{showInfo ? "Back" : "Help"}</button>
             <button onClick={() => setDoUpload(true)} className="border-2 rounded bg-slate-100 p-2 hover:bg-slate-200 active:bg-slate-300">Change Graph</button>
             <button onClick={() => download("generator.json", settings.encoding !== -1 ? settings.toJson() : "")} className="border-2 rounded bg-slate-100 p-2 hover:bg-slate-200 active:bg-slate-300">Generate</button>
           </div>

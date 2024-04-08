@@ -8,6 +8,25 @@
   transform: translate(-50%, 0);
 }
 
+.infoCanvas {
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.infoCanvas h1 {
+  font-weight: bolder;
+  margin-bottom: 1rem;
+}
+
+.infoCanvas p {
+  margin-bottom: 0.5rem;
+}
+
+.infoCanvas a {
+  color: #007bff;
+  text-decoration: none;
+}
+
 @media (max-width: 1024px) {
   .canvas {
     width: calc(100vw - 2.5rem);
