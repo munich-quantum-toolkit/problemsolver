@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Toggle from './toggle';
+import { useEffect } from 'react';
 
 interface ToggleBagProps {
     title: string;
@@ -13,6 +14,11 @@ interface ToggleBagProps {
 const ToggleBag: React.FC<ToggleBagProps> = ({ title, items, all, cols = 4, mutualExclusions = [], onChange }) => {
     // Component logic goes here
     const [states, setStates] = useState(Array(items.length + (all ? 1 : 0)).fill(false));
+    useEffect(() => {
+        if (states.length !== items.length + (all ? 1 : 0)) {
+            setStates(Array(items.length + (all ? 1 : 0)).fill(false));
+        }
+    }, [items]);
 
     const update = (index: number, state: boolean) => {
         const newStates = [...states];

@@ -130,27 +130,42 @@ class Settings {
         return clone;
     }
 
+    encodingToString() {
+        if(this.encoding === -1) {
+            throw new Error("Encoding not set");
+        }
+        if(this.encoding == 0) {
+            return "ONE_HOT";
+        }
+        if(this.encoding == 1) {
+            return "UNARY";
+        }
+        if(this.encoding == 2) {
+            return "BINARY";
+        }
+    }
+
     toJson() {
         if(this.encoding === -1) {
             throw new Error("Encoding not set");
         }
         const object: { [key: string]: any} = {};
         object["settings"] = {
-            "encoding": this.encoding,
+            "encoding": this.encodingToString(),
             "n_paths": this.nPaths,
             "max_path_length": this.maxPathLength,
-            "loop": this.loop,
+            "loops": this.loop,
         };
         if(this.minimizeWeight && this.maximizeWeight) {
             throw new Error("Cannot minimize and maximize weight at the same time");
         } else if(this.minimizeWeight) {
             object["objective_function"] = {
-                "type": "MinimisePathLength",
+                "type": "MinimizePathLength",
                 "path_ids": Array(this.nPaths).fill(0).map((_, index) => index + 1)
             };
         } else if(this.maximizeWeight) {
             object["objective_function"] = {
-                "type": "MaximisePathLength",
+                "type": "MaximizePathLength",
                 "path_ids": Array(this.nPaths).fill(0).map((_, index) => index + 1)
             };
         }
@@ -165,21 +180,21 @@ class Settings {
             constraints.push({
                "type": "PathContainsVerticesExactlyOnce",
                "path_ids": Array(this.nPaths).fill(0).map((_, index) => index + 1),
-               "vertices": this.exactlyOnceVertices
+               "vertices": this.exactlyOnceVertices.map(value => value + 1)
             });
         }
         if(this.atLeastOnceVertices.length > 0) {
             constraints.push({
                "type": "PathContainsVerticesAtLeastOnce",
                "path_ids": Array(this.nPaths).fill(0).map((_, index) => index + 1),
-               "vertices": this.atLeastOnceVertices
+               "vertices": this.atLeastOnceVertices.map(value => value + 1)
             });
         }
         if(this.atMostOnceVertices.length > 0) {
             constraints.push({
                "type": "PathContainsVerticesAtMostOnce",
                "path_ids": Array(this.nPaths).fill(0).map((_, index) => index + 1),
-               "vertices": this.atMostOnceVertices
+               "vertices": this.atMostOnceVertices.map(value => value + 1)
             });
         }
         //--------------------- Edges ---------------------
@@ -187,21 +202,21 @@ class Settings {
             constraints.push({
                "type": "PathContainsEdgesExactlyOnce",
                "path_ids": Array(this.nPaths).fill(0).map((_, index) => index + 1),
-               "edges": this.exactlyOnceEdges
+               "edges": this.exactlyOnceEdges.map(pair => pair.map((val) => parseInt(val)))
             });
         }
         if(this.atLeastOnceEdges.length > 0) {
             constraints.push({
                "type": "PathContainsEdgesAtLeastOnce",
                "path_ids": Array(this.nPaths).fill(0).map((_, index) => index + 1),
-               "edges": this.atLeastOnceEdges
+               "edges": this.atLeastOnceEdges.map(pair => pair.map((val) => parseInt(val)))
             });
         }
         if(this.atMostOnceEdges.length > 0) {
             constraints.push({
                "type": "PathContainsEdgesAtMostOnce",
                "path_ids": Array(this.nPaths).fill(0).map((_, index) => index + 1),
-               "edges": this.atMostOnceEdges
+               "edges": this.atMostOnceEdges.map(pair => pair.map((val) => parseInt(val)))
             });
         }
         if(this.pathPositionIs.length > 0) {
@@ -221,7 +236,7 @@ class Settings {
                     "type": "PathPositionIs",
                     "position": parseInt(entry_array[1]),
                     "vertices": map.get(entry)!.map(vertex => parseInt(vertex)),
-                    "path_ids": [parseInt(entry_array[0])]
+                    "path_id": parseInt(entry_array[0])
                 });
                 
             }
@@ -229,10 +244,9 @@ class Settings {
         if(this.precedences.length > 0) {
             constraints.push({
                "type": "PrecedenceConstraint",
-               "path_ids": Array(this.nPaths).fill(0).map((_, index) => index + 1),
                "precedences": this.precedences.map(value => ({
-                    "before": value[0],
-                    "after": value[1]
+                    "before": parseInt(value[0]),
+                    "after": parseInt(value[1])
                }))
             });
         }

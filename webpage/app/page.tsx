@@ -37,6 +37,10 @@ export default function Home() {
     [2, 0, 0, 5],
     [2, 0, 5, 0]
     ]);
+  const updateAdjacencyMatrix: (adjacencyMatrix: number[][]) => void = (adjacencyMatrix) => {
+    setAdjacencyMatrix(adjacencyMatrix);
+    setSettings(settings.setMaxPathLength(adjacencyMatrix.length));
+  }
 
   useEffect(() => {
     if(doUpload)
@@ -62,7 +66,7 @@ export default function Home() {
       <div className="flex flex-col lg:flex-row lg:h-full w-full items-center p-5 justify-between gap-4 lg:overflow-clip">
         <div className="flex flex-col gap-4 w-full lg:w-auto">
           {
-            showInfo ? <InfoScreen></InfoScreen> : <GraphView updateAdjacencyMatrix={setAdjacencyMatrix} upload={doUpload} initialAdjacencyMatrix={adjacencyMatrix}></GraphView>
+            showInfo ? <InfoScreen></InfoScreen> : <GraphView updateAdjacencyMatrix={updateAdjacencyMatrix} upload={doUpload} initialAdjacencyMatrix={adjacencyMatrix}></GraphView>
           }
           <div className="flex flex-row justify-around w-full lg:w-auto">
             <button onClick={() => setShowInfo(!showInfo)} className="border-2 rounded bg-slate-100 p-2 hover:bg-slate-200 active:bg-slate-300">{showInfo ? "Back" : "Help"}</button>
