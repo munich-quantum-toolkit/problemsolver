@@ -325,7 +325,7 @@ class QUBOGenerator:
             assignment (list[int]): The assignment for the encoding variables `x_i`.
 
         Returns:
-            dict[sp.Expr, int]: An assignment dictionary, mappingeach `y_k` to its value in {0, 1}.
+            dict[sp.Expr, int]: An assignment dictionary, mapping each `y_k` to its value in {0, 1}.
         """
         auxiliary_values: dict[sp.Expr, int] = {}
         encoding_variables = dict(self._get_encoding_variables())

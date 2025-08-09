@@ -42,7 +42,7 @@ The `pathfinder` module provides cost functions representing various constraints
 - `PathIsValid`: Checks, whether the encoding represents a valid path. Should be included in most cases.
 - `PathPositionIs`: Enforces that one of a set of vertices is located at a given position of a graph.
 - `PathStartsAt`: Enforces that one of a set of vertices is located at the start of a graph.
-- `PathEndsAt`: Enforces that one of a set of vertices is located the the end of a graph.
+- `PathEndsAt`: Enforces that one of a set of vertices is located at the end of a graph.
 - `PathContainsVerticesExactlyOnce`: Enforces that each element of a given set of vertices appears exactly once in a path.
 - `PathContainsVerticesAtLeastOnce`: Enforces that each element of a given set of vertices appears at least once in a path.
 - `PathContainsVerticesAtMostOnce`: Enforces that each element of a given set of vertices appears at most once in a path.
