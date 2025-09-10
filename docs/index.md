@@ -11,7 +11,13 @@ mystnb:
 MQT ProblemSolver provides a framework to utilize quantum computing as a technology for users with little to no quantum computing knowledge
 It is developed as part of the _{doc}`Munich Quantum Toolkit (MQT) <mqt:index>`_.
 
-This documentation covers the implementations of multiple research papers in the domain of quantum computing.
+We recommend you to start with the {doc}`installation instructions <installation>`.
+Then proceed with the esctions below.
+If you are interested in the theory behind MQT ProblemSolver, have a look at the publications in the {doc}`publication list <references>`.
+
+We appreciate any feedback and contributions to the project.
+If you want to contribute, you can find more information in the {doc}`contribution guide <contributing>`.
+If you are having trouble with the installation or the usage of MQT QuSAT, please let us know on our {doc}`support page <support>`.
 
 ## Towards an Automated Framework for Realizing Quantum Computing Solutions
 
@@ -198,6 +204,7 @@ self
 :hidden:
 :maxdepth: 1
 
+installation
 references
 ```
 
