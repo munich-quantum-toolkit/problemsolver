@@ -10,12 +10,14 @@ from typing import TYPE_CHECKING
 
 import numpy as np
 from mqt.bench import BenchmarkLevel, get_benchmark
-from qiskit import QuantumCircuit, qasm2, transpile
+from qiskit import qasm2, transpile
 from qsharp.estimator import ErrorBudgetPartition, EstimatorParams, LogicalCounts
 from qsharp.interop.qiskit import estimate
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
+
+    from qiskit import QuantumCircuit
 
 QISKIT_STD_GATES = [
     "p",

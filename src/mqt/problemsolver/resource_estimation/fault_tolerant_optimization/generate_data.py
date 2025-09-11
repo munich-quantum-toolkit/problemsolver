@@ -6,12 +6,13 @@ from typing import TYPE_CHECKING
 import pandas as pd
 from pytket import Circuit, OpType
 from pytket.extensions.qiskit import qiskit_to_tk, tk_to_qiskit
-from pytket.passes import AutoRebase, BasePass, RebaseCustom
+from pytket.passes import AutoRebase, RebaseCustom
 from qiskit import QuantumCircuit, transpile
 from qiskit.transpiler.passmanager import PassManager
 from qsharp.interop.qiskit import estimate
 
 if TYPE_CHECKING:
+    from pytket.passes import BasePass
     from qiskit.transpiler import TransformationPass
 
 SINGLE_QUBIT_AND_CX_QISKIT_STDGATES = [
