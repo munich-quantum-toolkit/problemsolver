@@ -12,7 +12,7 @@ MQT ProblemSolver provides a framework to utilize quantum computing as a technol
 It is developed as part of the _{doc}`Munich Quantum Toolkit (MQT) <mqt:index>`_.
 
 We recommend you to start with the {doc}`installation instructions <installation>`.
-Then proceed with the esctions below.
+Then proceed with the sections below.
 If you are interested in the theory behind MQT ProblemSolver, have a look at the publications in the {doc}`publication list <references>`.
 
 We appreciate any feedback and contributions to the project.
