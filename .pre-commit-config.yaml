@@ -82,7 +82,7 @@ repos:
     rev: v1.18.1
     hooks:
       - id: mypy
-        files: ^(src/mqt|tests|noxfile.py|resource_estimation)
+        files: ^(src/mqt|tests|noxfile.py)
         args: []
         additional_dependencies:
           - numpy
