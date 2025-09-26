@@ -30,8 +30,8 @@ dependencies = [
     "numpy>=1.22",
     "scipy>=1.14.1; python_version >= '3.13'",
     "scipy>=1.13.1",
-    "pandas>=2.1.2",
     "pandas>=2.2.3; python_version >= '3.13'",
+    "pandas>=2.1.2",
     "matplotlib>=3.9.4",
     "networkx>=2.8.8",
     "python_tsp>=0.5.0",
@@ -41,6 +41,9 @@ dependencies = [
     "mqt-bench>=2.0.1",
     "pytket>=2.9.1",
     "pytket-qiskit>=0.71.0",
+    # TODO(denialhaag): Remove once pytket_qiskit is updated
+    #   https://github.com/munich-quantum-toolkit/problemsolver/issues/205
+    "qiskit-ibm-runtime>=0.30.0,<0.42.0",
     "z3-solver>=4.15.3.0",
     "openpyxl>=3.1.5",
 ]
