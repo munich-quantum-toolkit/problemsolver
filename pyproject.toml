@@ -120,6 +120,8 @@ filterwarnings = [
     "error",
     # Qiskit 2.1 internal deprecation warnings
     'ignore:.*The class .* is deprecated as of Qiskit 2.1.*:DeprecationWarning:qiskit.*',
+    # Qiskit 2.2 deprecation warnings
+    'ignore:.*The class ``.*PhaseOracle`` is deprecated as of Qiskit 2.2.*:DeprecationWarning:',
 ]
 
 
