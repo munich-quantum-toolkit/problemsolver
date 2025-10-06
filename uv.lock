@@ -1659,7 +1659,7 @@ requires-dist = [
     { name = "pytket-qiskit", specifier = ">=0.72.0" },
     { name = "qiskit", specifier = ">=2.0.3" },
     { name = "qiskit-aer", specifier = ">=0.16.4" },
-    { name = "qsharp", specifier = ">=1.20.0" },
+    { name = "qsharp", specifier = ">=1.21.0" },
     { name = "scipy", specifier = ">=1.13.1" },
     { name = "scipy", marker = "python_full_version >= '3.13'", specifier = ">=1.14.1" },
     { name = "z3-solver", specifier = ">=4.15.3.0" },
