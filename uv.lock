@@ -1656,7 +1656,7 @@ requires-dist = [
     { name = "pandas", marker = "python_full_version >= '3.13'", specifier = ">=2.2.3" },
     { name = "python-tsp", specifier = ">=0.5.0" },
     { name = "pytket", specifier = ">=2.9.1" },
-    { name = "pytket-qiskit", specifier = ">=0.71.0" },
+    { name = "pytket-qiskit", specifier = ">=0.72.0" },
     { name = "qiskit", specifier = ">=2.0.3" },
     { name = "qiskit-aer", specifier = ">=0.16.4" },
     { name = "qsharp", specifier = ">=1.20.0" },
