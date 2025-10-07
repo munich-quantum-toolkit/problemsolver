@@ -151,7 +151,7 @@ To find an efficient distribution, we use resource estimation to evaluate differ
 <img src="_static/error_budget_approach.svg" height=150px>
 </p>
 
-For an examplary usage of the implementation, see below.
+For an exemplary usage of the implementation, see below.
 
 ```{code-cell} ipython3
 from mqt.problemsolver.resource_estimation.error_budget_optimization import (
