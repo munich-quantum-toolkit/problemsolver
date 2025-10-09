@@ -22,7 +22,7 @@ dynamic = ["version"]
 
 dependencies = [
     "mqt.core>=3.0.2",
-    "qiskit>=2.0.3",
+    "qiskit>=2.0.3,<2.2.0",
     "qiskit_aer>=0.16.4",
     "numpy>=2.1; python_version >= '3.13'",
     "numpy>=1.26; python_version >= '3.12'",
@@ -39,8 +39,9 @@ dependencies = [
     "joblib>=1.4.2",
     "qsharp>=1.20.0",
     "mqt-bench>=2.0.1",
-    "pytket>=2.9.1",
-    "pytket-qiskit>=0.71.0",
+    "pytket>=1.29.0",
+    "pytket-qiskit>=0.67.0",
+    "qiskit-ibm-runtime>=0.38.0,<0.42.0",
     "z3-solver>=4.15.3.0",
     "openpyxl>=3.1.5",
 ]
@@ -118,7 +119,7 @@ log_cli_level = "INFO"
 xfail_strict = true
 filterwarnings = [
     "error",
-    # Qiskit 2.1 internal deprecation warnings
+    # Qiskit 2.1 internal deprecations
     'ignore:.*The class .* is deprecated as of Qiskit 2.1.*:DeprecationWarning:qiskit.*',
 ]
 
@@ -193,7 +194,7 @@ extend-select = [
     "SLF",         # flake8-self
     "SLOT",        # flake8-slots
     "SIM",         # flake8-simplify
-    "TC",         # flake8-type-checking
+    "TC",          # flake8-type-checking
     "TID",         # flake8-tidy-imports
     "TRY",         # tryceratops
     "UP",          # pyupgrade
