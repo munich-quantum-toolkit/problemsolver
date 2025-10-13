@@ -42,6 +42,7 @@ dependencies = [
     "qsharp>=1.20.0",
     "mqt-bench>=2.0.1",
     "pytket>=1.29.0",
+    "pytket>=2.4.0; python_version >= '3.14'",
     "pytket-qiskit>=0.67.0",
     "qiskit-ibm-runtime>=0.38.0,<0.42.0",
     "z3-solver>=4.15.3.0",
