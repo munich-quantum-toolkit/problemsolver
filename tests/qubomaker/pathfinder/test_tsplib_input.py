@@ -2,9 +2,14 @@
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 import pytest
+
+if sys.version_info >= (3, 13):
+    pytest.skip("This module requires Python 3.12 or lower", allow_module_level=True)
+
 import tsplib95
 
 import mqt.qubomaker.pathfinder as pf
@@ -15,15 +20,15 @@ from .utils_test import check_equal, get_test_graph
 TEST_GRAPH = get_test_graph()
 
 
-def read_from_path(path: str, encoding: pf.EncodingType = pf.EncodingType.ONE_HOT) -> pf.PathFindingQUBOGenerator:
-    """Reads a tsplib input file and returns the corresponding `PathFindingQUBOGenerator`.
+def read_from_path(path: str, encoding: pf.EncodingType = pf.EncodingType.ONE_HOT) -> pf.PathFindingQuboGenerator:
+    """Reads a tsplib input file and returns the corresponding `PathFindingQuboGenerator`.
 
     Args:
         path: The path to the tsplib input file.
         encoding: The encoding to use.
 
     Returns:
-        The corresponding `PathFindingQUBOGenerator`.
+        The corresponding `PathFindingQuboGenerator`.
     """
     pth = Path("tests") / "pathfinder" / "resources" / "tsplib" / path
     problem = tsplib95.load(str(pth))
@@ -36,14 +41,14 @@ def test_hcp() -> None:
     json_generator = read_from_path("hcp-5.hcp")
     graph = json_generator.graph
 
-    settings = pf.PathFindingQUBOGeneratorSettings(
+    settings = pf.PathFindingQuboGeneratorSettings(
         encoding_type=pf.EncodingType.ONE_HOT,
         n_paths=1,
         max_path_length=5,
         loops=True,
     )
 
-    manual_generator = pf.PathFindingQUBOGenerator(objective_function=None, graph=graph, settings=settings)
+    manual_generator = pf.PathFindingQuboGenerator(objective_function=None, graph=graph, settings=settings)
 
     manual_generator.add_constraint(cf.PathIsValid([1]))
     manual_generator.add_constraint(cf.PathContainsVerticesExactlyOnce(graph.all_vertices, [1]))
@@ -55,14 +60,14 @@ def test_tsp() -> None:
     json_generator = read_from_path("tsp-5.tsp")
     graph = json_generator.graph
 
-    settings = pf.PathFindingQUBOGeneratorSettings(
+    settings = pf.PathFindingQuboGeneratorSettings(
         encoding_type=pf.EncodingType.ONE_HOT,
         n_paths=1,
         max_path_length=5,
         loops=True,
     )
 
-    manual_generator = pf.PathFindingQUBOGenerator(
+    manual_generator = pf.PathFindingQuboGenerator(
         objective_function=cf.MinimizePathLength([1]), graph=graph, settings=settings
     )
 
@@ -76,14 +81,14 @@ def test_atsp() -> None:
     json_generator = read_from_path("atsp-5.atsp")
     graph = json_generator.graph
 
-    settings = pf.PathFindingQUBOGeneratorSettings(
+    settings = pf.PathFindingQuboGeneratorSettings(
         encoding_type=pf.EncodingType.ONE_HOT,
         n_paths=1,
         max_path_length=5,
         loops=True,
     )
 
-    manual_generator = pf.PathFindingQUBOGenerator(
+    manual_generator = pf.PathFindingQuboGenerator(
         objective_function=cf.MinimizePathLength([1]), graph=graph, settings=settings
     )
 
@@ -97,14 +102,14 @@ def test_sop() -> None:
     json_generator = read_from_path("sop-5.sop")
     graph = json_generator.graph
 
-    settings = pf.PathFindingQUBOGeneratorSettings(
+    settings = pf.PathFindingQuboGeneratorSettings(
         encoding_type=pf.EncodingType.ONE_HOT,
         n_paths=1,
         max_path_length=5,
         loops=False,
     )
 
-    manual_generator = pf.PathFindingQUBOGenerator(
+    manual_generator = pf.PathFindingQuboGenerator(
         objective_function=cf.MinimizePathLength([1]), graph=graph, settings=settings
     )
 
@@ -128,14 +133,14 @@ def test_with_forced_edges() -> None:
     json_generator = read_from_path("forced-edges.tsp")
     graph = json_generator.graph
 
-    settings = pf.PathFindingQUBOGeneratorSettings(
+    settings = pf.PathFindingQuboGeneratorSettings(
         encoding_type=pf.EncodingType.ONE_HOT,
         n_paths=1,
         max_path_length=5,
         loops=True,
     )
 
-    manual_generator = pf.PathFindingQUBOGenerator(
+    manual_generator = pf.PathFindingQuboGenerator(
         objective_function=cf.MinimizePathLength([1]), graph=graph, settings=settings
     )
 

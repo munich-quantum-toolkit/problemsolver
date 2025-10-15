@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import itertools
 from typing import TYPE_CHECKING
 
 import numpy as np
@@ -64,6 +65,23 @@ def get_test_graph_small() -> Graph:
     )
 
 
+def get_test_graph_tiny() -> Graph:
+    """Generate a |V| = 3 graph for testing.
+
+    Returns:
+        Graph: The generated graph.
+    """
+    return Graph(
+        3,
+        [
+            (1, 2, 8),
+            (1, 3, 4),
+            (2, 1, 2),
+            (3, 2, 3),
+        ],
+    )
+
+
 def paths_equal_with_loops(a: list[int], b: list[int]) -> bool:
     """Check if two paths are equal, in the presence of loops.
 
@@ -79,8 +97,8 @@ def paths_equal_with_loops(a: list[int], b: list[int]) -> bool:
     """
     if len(a) != len(b):
         return False
-    edges_a = [*list(zip(a[:-1], a[1:])), (a[-1], a[0])]
-    edges_b = [*list(zip(b[:-1], b[1:])), (b[-1], b[0])]
+    edges_a = [*list(itertools.pairwise(a)), (a[-1], a[0])]
+    edges_b = [*list(itertools.pairwise(b)), (b[-1], b[0])]
     edges_a = sorted(edges_a)
     edges_b = sorted(edges_b)
     return edges_a == edges_b
@@ -191,12 +209,12 @@ def __paths_to_assignment_binary(paths: list[list[int]], n_vertices: int, max_pa
     return dict(result)
 
 
-def check_equal(a: pf.PathFindingQUBOGenerator, b: pf.PathFindingQUBOGenerator) -> None:
-    """Check if two PathFindingQUBOGenerators are equal.
+def check_equal(a: pf.PathFindingQuboGenerator, b: pf.PathFindingQuboGenerator) -> None:
+    """Check if two PathFindingQuboGenerators are equal.
 
     Args:
-        a (pf.PathFindingQUBOGenerator): The first generator to be compared.
-        b (pf.PathFindingQUBOGenerator): The second generator to be compared.
+        a (pf.PathFindingQuboGenerator): The first generator to be compared.
+        b (pf.PathFindingQuboGenerator): The second generator to be compared.
     """
     assert a.objective_function == b.objective_function
     assert a.graph == b.graph

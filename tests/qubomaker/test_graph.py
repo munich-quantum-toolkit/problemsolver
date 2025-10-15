@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from tempfile import NamedTemporaryFile
 
 import numpy as np
 
@@ -29,18 +30,21 @@ def test_read_write() -> None:
     """Tests the read and write operations of the `Graph` class."""
     g = Graph(5, [(1, 2, 4), (3, 5, 2), (1, 3, 2), (4, 5, 5), (2, 4, 3), (5, 1)])
 
-    with Path.open(Path("tests") / "resources" / "graph" / "graph", "w") as file:
+    with NamedTemporaryFile("w+", delete=False, encoding="utf-8") as temp_file:
+        temp_file_path = temp_file.name
+
+    with Path(str(temp_file_path)).open("w", encoding="utf-8") as file:
         g.store(file)
 
-    with Path.open(Path("tests") / "resources" / "graph" / "graph", "r") as file:
+    with Path(str(temp_file_path)).open("r", encoding="utf-8") as file:
         g2 = Graph.read(file)
 
     assert g == g2
 
-    with Path.open(Path("tests") / "resources" / "graph" / "graph", "w") as file:
+    with Path(str(temp_file_path)).open("w", encoding="utf-8") as file:
         file.write(g.serialize())
 
-    with Path.open(Path("tests") / "resources" / "graph" / "graph", "r") as file:
+    with Path(str(temp_file_path)).open("r", encoding="utf-8") as file:
         g2 = Graph.deserialize(file.read())
 
     assert g == g2

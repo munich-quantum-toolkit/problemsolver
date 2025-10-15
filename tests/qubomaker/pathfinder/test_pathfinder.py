@@ -58,13 +58,13 @@ def test_decoding(encoding_type: pf.EncodingType) -> None:
 )
 def test_tsp(encoding_type: pf.EncodingType) -> None:
     """Test the module with a TSP problem."""
-    settings = pf.PathFindingQUBOGeneratorSettings(
+    settings = pf.PathFindingQuboGeneratorSettings(
         encoding_type=encoding_type,
         n_paths=1,
         max_path_length=4,
         loops=True,
     )
-    generator = pf.PathFindingQUBOGenerator(
+    generator = pf.PathFindingQuboGenerator(
         objective_function=cf.MinimizePathLength([1]),
         graph=TEST_GRAPH,
         settings=settings,
@@ -83,7 +83,7 @@ def test_tsp(encoding_type: pf.EncodingType) -> None:
         assert generator.get_cost(optimal_solution) == 20.0
 
         # Test if constructing the Quantum Circuit works without a problem.
-        generator.construct_qaoa(seed=0)
+        generator.construct_qaoa_circuit()
 
     solution = paths_to_assignment_list([[4, 1, 2, 3]], 4, 4, encoding_type)
     assert generator.get_cost(solution) == 20.0
@@ -99,13 +99,13 @@ def test_tsp(encoding_type: pf.EncodingType) -> None:
 )
 def test_2dpp(encoding_type: pf.EncodingType) -> None:
     """Test the module with a 2DPP problem."""
-    settings = pf.PathFindingQUBOGeneratorSettings(
+    settings = pf.PathFindingQuboGeneratorSettings(
         encoding_type=encoding_type,
         n_paths=2,
         max_path_length=2,
         loops=False,
     )
-    generator = pf.PathFindingQUBOGenerator(
+    generator = pf.PathFindingQuboGenerator(
         objective_function=cf.MinimizePathLength([1, 2]),
         graph=TEST_GRAPH,
         settings=settings,
@@ -121,15 +121,15 @@ def test_2dpp(encoding_type: pf.EncodingType) -> None:
     assert generator.get_cost(solution) == 9.0
 
 
-def setup_tsp() -> pf.PathFindingQUBOGenerator:
-    """Set up a `PathFindingQUBOGenerator` for a TSP problem."""
-    settings = pf.PathFindingQUBOGeneratorSettings(
+def setup_tsp() -> pf.PathFindingQuboGenerator:
+    """Set up a `PathFindingQuboGenerator` for a TSP problem."""
+    settings = pf.PathFindingQuboGeneratorSettings(
         encoding_type=pf.EncodingType.ONE_HOT,
         n_paths=1,
         max_path_length=4,
         loops=True,
     )
-    generator = pf.PathFindingQUBOGenerator(
+    generator = pf.PathFindingQuboGenerator(
         objective_function=cf.MinimizePathLength([1]),
         graph=TEST_GRAPH,
         settings=settings,

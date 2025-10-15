@@ -14,30 +14,30 @@ from .utils_test import check_equal, get_test_graph
 TEST_GRAPH = get_test_graph()
 
 
-def read_from_path(path: str) -> pf.PathFindingQUBOGenerator:
-    """Reads a JSON input file and returns the corresponding `PathFindingQUBOGenerator`.
+def read_from_path(path: str) -> pf.PathFindingQuboGenerator:
+    """Reads a JSON input file and returns the corresponding `PathFindingQuboGenerator`.
 
     Args:
         path (str): The path to the JSON input file.
 
     Returns:
-        pf.PathFindingQUBOGenerator: The corresponding `PathFindingQUBOGenerator`.
+        pf.PathFindingQuboGenerator: The corresponding `PathFindingQuboGenerator`.
     """
     with Path.open(Path("tests") / "pathfinder" / "resources" / "json" / path) as file:
-        return pf.PathFindingQUBOGenerator.from_json(file.read(), TEST_GRAPH)
+        return pf.PathFindingQuboGenerator.from_json(file.read(), TEST_GRAPH)
 
 
 def test_all_constraints() -> None:
     """Tests a JSON input file that includes all constraints."""
     json_generator = read_from_path("all.json")
 
-    settings = pf.PathFindingQUBOGeneratorSettings(
+    settings = pf.PathFindingQuboGeneratorSettings(
         encoding_type=pf.EncodingType.ONE_HOT,
         n_paths=3,
         max_path_length=4,
         loops=True,
     )
-    manual_generator = pf.PathFindingQUBOGenerator(
+    manual_generator = pf.PathFindingQuboGenerator(
         objective_function=cf.MinimizePathLength([1]), graph=TEST_GRAPH, settings=settings
     )
 
@@ -66,13 +66,13 @@ def test_alternative_options() -> None:
     """Tests a JSON input file that includes alternative (non-default) options."""
     json_generator = read_from_path("alternative_options.json")
 
-    settings = pf.PathFindingQUBOGeneratorSettings(
+    settings = pf.PathFindingQuboGeneratorSettings(
         encoding_type=pf.EncodingType.BINARY,
         n_paths=2,
         max_path_length=5,
         loops=False,
     )
-    manual_generator = pf.PathFindingQUBOGenerator(objective_function=None, graph=TEST_GRAPH, settings=settings)
+    manual_generator = pf.PathFindingQuboGenerator(objective_function=None, graph=TEST_GRAPH, settings=settings)
 
     manual_generator.add_constraint(cf.PathContainsVerticesExactlyOnce(TEST_GRAPH.all_vertices, [1]))
     manual_generator.add_constraint(cf.PathContainsVerticesAtLeastOnce([1, 2], [1]))
@@ -87,20 +87,20 @@ def test_suggest_encoding() -> None:
     """Tests the encoding suggestion feature for a JSON input file."""
     with Path.open(Path("tests") / "pathfinder" / "resources" / "json" / "with_weight.json") as file:
         j = file.read()
-    assert pf.PathFindingQUBOGenerator.suggest_encoding(j, TEST_GRAPH) == pf.EncodingType.ONE_HOT
+    assert pf.PathFindingQuboGenerator.suggest_encoding(j, TEST_GRAPH) == pf.EncodingType.ONE_HOT
 
 
 def test_with_weight() -> None:
     """Tests a JSON input file that includes weights for some constraints."""
     json_generator = read_from_path("with_weight.json")
 
-    settings = pf.PathFindingQUBOGeneratorSettings(
+    settings = pf.PathFindingQuboGeneratorSettings(
         encoding_type=pf.EncodingType.DOMAIN_WALL,
         n_paths=1,
         max_path_length=5,
         loops=False,
     )
-    manual_generator = pf.PathFindingQUBOGenerator(
+    manual_generator = pf.PathFindingQuboGenerator(
         objective_function=cf.MaximizePathLength([1]), graph=TEST_GRAPH, settings=settings
     )
 
