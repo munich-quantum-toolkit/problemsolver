@@ -27,9 +27,8 @@ If you are interested in the theory behind MQT QUBOMaker, have a look at the pub
    :caption: User Guide
    :glob:
 
-   Quickstart
    Installation
-   QUBOGenerator
+   QuboGenerator
    pathfinder/index
    References
 

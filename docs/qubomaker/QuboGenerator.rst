@@ -1,13 +1,13 @@
-QUBOGenerator
+QuboGenerator
 ================
 
-The :code:`QUBOGenerator` class is the main concept of the package. It provides methods for the
+The :code:`QuboGenerator` class is the main concept of the package. It provides methods for the
 automatic construction of QUBO formulations, including the computation of penalty factors for individual
 cost functions, the creation of auxiliary variables to reduce cost functions to quadratic order, and the
 translation into different output formats.
 
-A :code:`QUBOGenerator` object represents a single problem instance and collects constraints and cost functions related to it.
-It is an abstract base class for specialized QUBO generators, such as the :code:`PathFindingQUBOGenerator` to extend.
+A :code:`QuboGenerator` object represents a single problem instance and collects constraints and cost functions related to it.
+It is an abstract base class for specialized QUBO generators, such as the :code:`PathFindingQuboGenerator` to extend.
 
 It provides the following output formats:
 

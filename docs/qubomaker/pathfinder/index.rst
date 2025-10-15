@@ -1,7 +1,7 @@
 Pathfinder Submodule
 ====================
 
-This module implements MQT QUBOMaker for pathfinding problems on directed and undirected graphs in the form of the :code:`PathFindingQUBOGenerator` class, a specialization of the general :code:`QUBOGenerator` class.
+This module implements MQT QUBOMaker for pathfinding problems on directed and undirected graphs in the form of the :code:`PathFindingQuboGenerator` class, a specialization of the general :code:`QuboGenerator` class.
 
 It supports a set of various :doc:`constraints <Constraints>` that can be used to model a variety of different pathfinding problems.
 
@@ -11,7 +11,7 @@ Finally, the :doc:`GUI <GUI>` provides a graphical user interface for the module
 
 In addition to that, the submodule accepts several input formats for the problem instance. A :doc:`JSON format <JSON>` can be used to define problem constraints and settings. Furthermore, the established :doc:`TSPLib format<TSPLib>` can be passed to the framework directly, generating the required constraints from the problem instance.
 
-The :code:`PathFindingQUBOGenerator` class can be instantiated like this:
+The :code:`PathFindingQuboGenerator` class can be instantiated like this:
 
 .. code-block:: python
 
@@ -19,13 +19,13 @@ The :code:`PathFindingQUBOGenerator` class can be instantiated like this:
 
    ...
 
-   generator = pf.PathFindingQUBOGenerator(
+   generator = pf.PathFindingQuboGenerator(
        objective_function=pf.MinimizePathLength(path_ids=[1]),
        graph=graph,
        settings=settings,
    )
 
-Here, the :code:`objective_function` parameter can represent any objective function for the optimization procedure (:code:`MinimizePathLength` or :code:`MaximizePathLength`). The :code:`graph` parameter is the graph on which the problem is defined. Finally the :code:`settings` parameter is a :code:`PathFindingQUBOGeneratorSettings` object that defines settings for the QUBO generator:
+Here, the :code:`objective_function` parameter can represent any objective function for the optimization procedure (:code:`MinimizePathLength` or :code:`MaximizePathLength`). The :code:`graph` parameter is the graph on which the problem is defined. Finally the :code:`settings` parameter is a :code:`PathFindingQuboGeneratorSettings` object that defines settings for the QUBO generator:
 
 - :code:`encoding_type`: The encoding scheme to use for the QUBO formulation.
 - :code:`n_paths`: The number of paths to be searched for.
@@ -38,7 +38,7 @@ An example settings definition may look like:
 
    import mqt.qubomaker.pathfinder as pf
 
-   settings = pf.PathFindingQUBOGeneratorSettings(
+   settings = pf.PathFindingQuboGeneratorSettings(
        encoding_type=pf.EncodingType.BINARY,
        n_paths=1,
        max_path_length=4,

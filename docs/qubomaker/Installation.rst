@@ -22,8 +22,6 @@ Similarly, the :code:`pathfinder` submodule can be imported as:
 
    import mqt.qubomaker.pathfinder as pf
 
-An example of using the package is provided in the :doc:`quickstart <Quickstart>` jupyter notebook.
-
 Installation via source code
 ----------------------------
 

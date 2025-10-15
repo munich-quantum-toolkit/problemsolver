@@ -55,9 +55,7 @@ extensions = [
     "sphinx.ext.githubpages",
     "sphinxcontrib.bibtex",
     "sphinx_copybutton",
-    "nbsphinx",
     "sphinxext.opengraph",
-    "sphinx_autodoc_typehints",
 ]
 
 pygments_style = "colorful"
@@ -73,13 +71,7 @@ intersphinx_mapping = {
     "mqt": ("https://mqt.readthedocs.io/en/latest/", None),
 }
 
-nbsphinx_execute = "auto"
 highlight_language = "python3"
-nbsphinx_execute_arguments = [
-    "--InlineBackend.figure_formats={'svg', 'pdf'}",
-    "--InlineBackend.rc=figure.dpi=200",
-]
-nbsphinx_kernel_name = "python3"
 
 autosectionlabel_prefix_document = True
 
