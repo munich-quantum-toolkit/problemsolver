@@ -1,7 +1,8 @@
-"""Provides support for the TSPLib format as input for the pathfinding QUBOMaker."""
+"""Provides support for the TSPLib format as input for the pathfinding QuboMaker."""
 
 from __future__ import annotations
 
+import importlib.util
 from typing import TYPE_CHECKING
 
 import mqt.qubomaker
@@ -9,8 +10,12 @@ import mqt.qubomaker.pathfinder
 from mqt.qubomaker.pathfinder import cost_functions
 
 if TYPE_CHECKING:
+    import contextlib
+
     import networkx as nx
-    from tsplib95.models import StandardProblem
+
+    with contextlib.suppress(ImportError):
+        from tsplib95.models import StandardProblem
 
 
 def __check_forced_edges(problem: StandardProblem) -> cost_functions.CostFunction | None:
@@ -36,7 +41,7 @@ def to_graph(g: nx.Graph) -> mqt.qubomaker.Graph:
 
 def __tsp(
     problem: StandardProblem, encoding_type: cost_functions.EncodingType
-) -> mqt.qubomaker.pathfinder.PathFindingQUBOGenerator:
+) -> mqt.qubomaker.pathfinder.PathFindingQuboGenerator:
     """Constructs a QUBO generator for a TSP problem.
 
     Args:
@@ -44,11 +49,11 @@ def __tsp(
         encoding_type (cost_functions.EncodingType): The desired encoding type.
 
     Returns:
-        PathFindingQUBOGenerator: The constructed QUBO generator.
+        PathFindingQuboGenerator: The constructed QUBO generator.
     """
     g = to_graph(problem.get_graph())
-    settings = mqt.qubomaker.pathfinder.PathFindingQUBOGeneratorSettings(encoding_type, 1, g.n_vertices, True)
-    generator = mqt.qubomaker.pathfinder.PathFindingQUBOGenerator(cost_functions.MinimizePathLength([1]), g, settings)
+    settings = mqt.qubomaker.pathfinder.PathFindingQuboGeneratorSettings(encoding_type, 1, g.n_vertices, True)
+    generator = mqt.qubomaker.pathfinder.PathFindingQuboGenerator(cost_functions.MinimizePathLength([1]), g, settings)
 
     generator.add_constraint(cost_functions.PathIsValid([1]))
     generator.add_constraint(cost_functions.PathContainsVerticesExactlyOnce(g.all_vertices, [1]))
@@ -60,7 +65,7 @@ def __tsp(
 
 def __hcp(
     problem: StandardProblem, encoding_type: cost_functions.EncodingType
-) -> mqt.qubomaker.pathfinder.PathFindingQUBOGenerator:
+) -> mqt.qubomaker.pathfinder.PathFindingQuboGenerator:
     """Constructs a QUBO generator for a HCP problem.
 
     Args:
@@ -68,11 +73,11 @@ def __hcp(
         encoding_type (cost_functions.EncodingType): The desired encoding type.
 
     Returns:
-        PathFindingQUBOGenerator: The constructed QUBO generator.
+        PathFindingQuboGenerator: The constructed QUBO generator.
     """
     g = to_graph(problem.get_graph())
-    settings = mqt.qubomaker.pathfinder.PathFindingQUBOGeneratorSettings(encoding_type, 1, g.n_vertices, True)
-    generator = mqt.qubomaker.pathfinder.PathFindingQUBOGenerator(None, g, settings)
+    settings = mqt.qubomaker.pathfinder.PathFindingQuboGeneratorSettings(encoding_type, 1, g.n_vertices, True)
+    generator = mqt.qubomaker.pathfinder.PathFindingQuboGenerator(None, g, settings)
 
     generator.add_constraint(cost_functions.PathIsValid([1]))
     generator.add_constraint(cost_functions.PathContainsVerticesExactlyOnce(g.all_vertices, [1]))
@@ -84,7 +89,7 @@ def __hcp(
 
 def __sop(
     problem: StandardProblem, encoding_type: cost_functions.EncodingType
-) -> mqt.qubomaker.pathfinder.PathFindingQUBOGenerator:
+) -> mqt.qubomaker.pathfinder.PathFindingQuboGenerator:
     """Constructs a QUBO generator for a SOP problem.
 
     Args:
@@ -92,11 +97,11 @@ def __sop(
         encoding_type (cost_functions.EncodingType): The desired encoding type.
 
     Returns:
-        PathFindingQUBOGenerator: The constructed QUBO generator.
+        PathFindingQuboGenerator: The constructed QUBO generator.
     """
     g = to_graph(problem.get_graph())
-    settings = mqt.qubomaker.pathfinder.PathFindingQUBOGeneratorSettings(encoding_type, 1, g.n_vertices, False)
-    generator = mqt.qubomaker.pathfinder.PathFindingQUBOGenerator(cost_functions.MinimizePathLength([1]), g, settings)
+    settings = mqt.qubomaker.pathfinder.PathFindingQuboGeneratorSettings(encoding_type, 1, g.n_vertices, False)
+    generator = mqt.qubomaker.pathfinder.PathFindingQuboGenerator(cost_functions.MinimizePathLength([1]), g, settings)
     generator.add_constraint(cost_functions.PathIsValid([1]))
     generator.add_constraint(cost_functions.PathContainsVerticesExactlyOnce(g.all_vertices, [1]))
     sop_pairs = []
@@ -113,7 +118,7 @@ def __sop(
 
 def from_tsplib_problem(
     problem: StandardProblem, encoding_type: cost_functions.EncodingType
-) -> mqt.qubomaker.pathfinder.PathFindingQUBOGenerator:
+) -> mqt.qubomaker.pathfinder.PathFindingQuboGenerator:
     """Constructs a QUBO generator for a given problem in TSPLib format.
 
     Args:
@@ -125,8 +130,14 @@ def from_tsplib_problem(
         ValueError: If an unknown problem type is given.
 
     Returns:
-        PathFindingQUBOGenerator: The constructed QUBO generator.
+        PathFindingQuboGenerator: The constructed QUBO generator.
     """
+    try:
+        importlib.util.find_spec("tsplib95")
+    except ImportError:
+        msg = "The 'tsplib95' package is required to use this function."
+        raise RuntimeError(msg) from None
+
     if problem.type in {"TSP", "ATSP"}:
         return __tsp(problem, encoding_type)
     if problem.type == "HCP":

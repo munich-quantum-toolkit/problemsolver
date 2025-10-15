@@ -1,4 +1,4 @@
-"""This module implements the pathfinding functionalities of the QUBOMaker.
+"""This module implements the pathfinding functionalities of the QuboMaker.
 
 This, in particular, includes all pathfinding-related cost functions and the specialized QUBO generator for pathfinding problems.
 
@@ -8,8 +8,8 @@ Typical usage example:
     import mqt.qubomaker.pathfinder as pf
 
     graph = pf.Graph(5, [(1, 2, 5), (2, 3, 3), (3, 4, 9), (4, 5, 8), (5, 1, 6)])
-    settings = pf.PathFindingQUBOGeneratorSettings(pf.EncodingType.ONE_HOT, 1, 5, True)
-    generator = pf.PathFindingQUBOGenerator(pf.MinimizePathLength([1]), graph, settings)
+    settings = pf.PathFindingQuboGeneratorSettings(pf.EncodingType.ONE_HOT, 1, 5, True)
+    generator = pf.PathFindingQuboGenerator(pf.MinimizePathLength([1]), graph, settings)
     generator.add_constraint(pf.PathIsValid([1]))
     generator.add_constraint(pf.PathContainsVerticesExactlyOnce(graph.all_vertices, [1]))
 
@@ -44,7 +44,7 @@ from .cost_functions import (
     PathStartsAt,
     PrecedenceConstraint,
 )
-from .pathfinder import PathFindingQUBOGenerator, PathFindingQUBOGeneratorSettings
+from .pathfinder import PathFindingQuboGenerator, PathFindingQuboGeneratorSettings
 from .tsplib import from_tsplib_problem
 
 __all__ = [
@@ -64,8 +64,8 @@ __all__ = [
     "PathContainsVerticesAtMostOnce",
     "PathContainsVerticesExactlyOnce",
     "PathEndsAt",
-    "PathFindingQUBOGenerator",
-    "PathFindingQUBOGeneratorSettings",
+    "PathFindingQuboGenerator",
+    "PathFindingQuboGeneratorSettings",
     "PathIsValid",
     "PathPositionIs",
     "PathStartsAt",

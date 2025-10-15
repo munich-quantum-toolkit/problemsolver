@@ -1,22 +1,20 @@
-"""Provides a simple implementation for graphs to be used with QUBOMaker."""
+"""Provides a simple implementation for graphs to be used with QuboMaker."""
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Union, cast
+from typing import TYPE_CHECKING, cast
 
-import networkx as nx
 import numpy as np
 import numpy.typing as npt
-from matplotlib import pyplot as plt
 
 if TYPE_CHECKING:
     from io import TextIOWrapper
 
-    Edge = Union[tuple[int, int], tuple[int, int, int], tuple[int, int, float]]
+    Edge = tuple[int, int] | tuple[int, int, int] | tuple[int, int, float]
 
 
 class Graph:
-    """Represents a graph to be used with QUBOMaker.
+    """Represents a graph to be used with QuboMaker.
 
     Attributes:
         n_vertices (int): The number of vertices in the graph.
@@ -128,28 +126,6 @@ class Graph:
             str: The serialized graph as a string.
         """
         return str(self.adjacency_matrix).replace("]", "").replace("[", "").replace("\n ", "\n")
-
-    def plot(self) -> None:
-        """Draws the graph using matplotlib and networkx."""
-        g: nx.Graph = nx.from_numpy_matrix(self.adjacency_matrix, create_using=nx.DiGraph)
-        pos = nx.spring_layout(g, seed=20)
-        ax = plt.gca()
-        nx.draw(
-            g,
-            pos,
-            ax,
-            arrows=True,
-            with_labels=True,
-            labels={i: i + 1 for i in range(self.n_vertices)},
-        )
-        nx.draw_networkx_edge_labels(
-            g,
-            pos,
-            font_size=7,
-            edge_labels={e: self.adjacency_matrix[int(e[0]), int(e[1])] for e in g.edges},
-        )
-        ax.set_axis_off()
-        plt.show()
 
     def __eq__(self, value: object) -> bool:
         """Checks if two graphs are equal.

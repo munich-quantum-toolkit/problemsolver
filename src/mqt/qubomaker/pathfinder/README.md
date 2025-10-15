@@ -2,7 +2,7 @@ This submodule of MQT QUBOMaker is responsible for the QUBO formulation of pathf
 
 ### Settings
 
-Constructing QUBO formulation for pathfinding problems requires a `PathfindingQUBOGenerator` instance with the corresponding settings:
+Constructing QUBO formulation for pathfinding problems requires a `PathfindingQuboGenerator` instance with the corresponding settings:
 
 - `encoding_type`: An element of the `EncodingTypes` enum that represents the variable encoding scheme to be used. One of `ONE_HOT`, `DOMAIN_WALL`, or `BINARY`.
 - `n_paths`: The number of paths to be found. For most problem instances, this value will be `1`.
@@ -14,26 +14,26 @@ An example settings instance can be constructed as follows:
 ```python3
 import mqt.qubomaker.pathfinder as pf
 
-settings = pf.PathFindingQUBOGeneratorSettings(
+settings = pf.PathFindingQuboGeneratorSettings(
     encoding_type=pf.EncodingType.ONE_HOT, n_paths=1, max_path_length=4, loops=True
 )
 ```
 
-### PathFindingQUBOGenerator
+### PathFindingQuboGenerator
 
-The `PathFindingQUBOGenerator` class represents the main QUBO factory for pathfinding problems. It can be set up with predefined settings and populated with problem-specific constraints.
+The `PathFindingQuboGenerator` class represents the main QUBO factory for pathfinding problems. It can be set up with predefined settings and populated with problem-specific constraints.
 
-To create a `PathFindingQUBOGenerator`, a `Graph` instance further has to be provided, representing the graph to be investigated for the problem instance.
+To create a `PathFindingQuboGenerator`, a `Graph` instance further has to be provided, representing the graph to be investigated for the problem instance.
 
 ```python3
 ...
 
-qubo_generator = pf.PathFindingQUBOGenerator(
+qubo_generator = pf.PathFindingQuboGenerator(
     objective_function=None, graph=my_graph, settings=settings
 )
 ```
 
-When creating a `PathFindingQUBOGenerator` instance, an objective function, as discussed below, can be added to add an optimization criterion.
+When creating a `PathFindingQuboGenerator` instance, an objective function, as discussed below, can be added to add an optimization criterion.
 
 ### Cost Functions
 
@@ -58,7 +58,7 @@ Furthermore, the `pathfinder` module also provides two objective functions:
 - `MinimizePathLength`: Adds a cost to the total cost function that penalizes paths with a higher total weight.
 - `MaximizePathLength`: Adds a cost to the total cost function that penalizes paths with a lower total weight.
 
-These constraints are represented by classes, and instances of the classes can be created to define the specific constraint and added to the QUBOGenerator.
+These constraints are represented by classes, and instances of the classes can be created to define the specific constraint and added to the QuboGenerator.
 
 ```python3
 ...

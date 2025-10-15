@@ -1,10 +1,11 @@
-"""This module is responsible for the pathfinding version of the QUBOGenerator."""
+"""This module is responsible for the pathfinding version of the QuboGenerator."""
 
 from __future__ import annotations
 
 import json
 import operator
 from dataclasses import dataclass
+from importlib import resources
 from typing import TYPE_CHECKING, Any, cast
 
 import numpy as np
@@ -17,14 +18,12 @@ from typing_extensions import override
 from mqt.qubomaker import qubo_generator
 from mqt.qubomaker.pathfinder import cost_functions as cf
 
-from .._compat.importlib import resources
-
 if TYPE_CHECKING:
     from mqt.qubomaker.graph import Graph
 
 
 @dataclass
-class PathFindingQUBOGeneratorSettings:
+class PathFindingQuboGeneratorSettings:
     """A dataclass containing the settings for the pathfinding QUBO generator."""
 
     encoding_type: cf.EncodingType
@@ -33,31 +32,31 @@ class PathFindingQUBOGeneratorSettings:
     loops: bool = False
 
 
-class PathFindingQUBOGenerator(qubo_generator.QUBOGenerator):
+class PathFindingQuboGenerator(qubo_generator.QuboGenerator):
     """A class for generating QUBOs for pathfinding problems.
 
-    Extends the QUBOGenerator class with methods for generating QUBOs for pathfinding problems.
+    Extends the QuboGenerator class with methods for generating QUBOs for pathfinding problems.
 
     Attributes:
         graph (Graph): The graph on which the pathfinding problem is defined.
-        settings (PathFindingQUBOGeneratorSettings): The settings for the QUBO generator.
+        settings (PathFindingQuboGeneratorSettings): The settings for the QUBO generator.
     """
 
     graph: Graph
-    settings: PathFindingQUBOGeneratorSettings
+    settings: PathFindingQuboGeneratorSettings
 
     def __init__(
         self,
         objective_function: cf.CostFunction | None,
         graph: Graph,
-        settings: PathFindingQUBOGeneratorSettings,
+        settings: PathFindingQuboGeneratorSettings,
     ) -> None:
-        """Initialises a PathFindingQUBOGenerator object.
+        """Initialises a PathFindingQuboGenerator object.
 
         Args:
             objective_function (cf.CostFunction | None): The objective function of the pathfinding problem.
             graph (Graph): The graph on which the pathfinding problem is defined.
-            settings (PathFindingQUBOGeneratorSettings): The settings for the QUBO generator.
+            settings (PathFindingQuboGeneratorSettings): The settings for the QUBO generator.
         """
         super().__init__(objective_function.get_formula(graph, settings) if objective_function is not None else None)
         self.graph = graph
@@ -78,28 +77,28 @@ class PathFindingQUBOGenerator(qubo_generator.QUBOGenerator):
         """
         results: list[tuple[cf.EncodingType, int]] = []
         for encoding in [cf.EncodingType.ONE_HOT, cf.EncodingType.DOMAIN_WALL, cf.EncodingType.BINARY]:
-            generator = PathFindingQUBOGenerator.__from_json(json_string, graph, override_encoding=encoding)
+            generator = PathFindingQuboGenerator.__from_json(json_string, graph, override_encoding=encoding)
             results.append((encoding, generator.count_required_variables()))
         return next(encoding for (encoding, size) in results if size == min(size for (_, size) in results))
 
     @staticmethod
-    def from_json(json_string: str, graph: Graph) -> PathFindingQUBOGenerator:
-        """Creates a PathFindingQUBOGenerator object from its JSON format.
+    def from_json(json_string: str, graph: Graph) -> PathFindingQuboGenerator:
+        """Creates a PathFindingQuboGenerator object from its JSON format.
 
         Args:
             json_string (str): The JSON string describing the pathfinding problem.
             graph (Graph): The graph on which the pathfinding problem is defined.
 
         Returns:
-            PathFindingQUBOGenerator: The constructed QUBO generator.
+            PathFindingQuboGenerator: The constructed QUBO generator.
         """
-        return PathFindingQUBOGenerator.__from_json(json_string, graph)
+        return PathFindingQuboGenerator.__from_json(json_string, graph)
 
     @staticmethod
     def __from_json(
         json_string: str, graph: Graph, override_encoding: cf.EncodingType | None = None
-    ) -> PathFindingQUBOGenerator:
-        """Creates a PathFindingQUBOGenerator object from its JSON format.
+    ) -> PathFindingQuboGenerator:
+        """Creates a PathFindingQuboGenerator object from its JSON format.
 
         The override_encoding parameter can be used to override the encoding type specified in the JSON string.
 
@@ -112,7 +111,7 @@ class PathFindingQUBOGenerator(qubo_generator.QUBOGenerator):
             ValueError: If any of the constraints in the JSON string is not supported.
 
         Returns:
-            PathFindingQUBOGenerator: The constructed QUBO generator.
+            PathFindingQuboGenerator: The constructed QUBO generator.
         """
         with (resources.files(__package__) / "resources" / "input-format.json").open("r") as f:
             main_schema = json.load(f)
@@ -147,7 +146,7 @@ class PathFindingQUBOGenerator(qubo_generator.QUBOGenerator):
         else:
             encoding_type = override_encoding
 
-        settings = PathFindingQUBOGeneratorSettings(
+        settings = PathFindingQuboGeneratorSettings(
             encoding_type,
             json_object["settings"].get("n_paths", 1),
             json_object["settings"].get("max_path_length", 0),
@@ -213,7 +212,7 @@ class PathFindingQUBOGenerator(qubo_generator.QUBOGenerator):
             msg = f"Constraint {constraint['type']} not supported."
             raise ValueError(msg)
 
-        generator = PathFindingQUBOGenerator(
+        generator = PathFindingQuboGenerator(
             get_constraint(json_object["objective_function"])[0] if "objective_function" in json_object else None,
             graph,
             settings,
@@ -226,7 +225,7 @@ class PathFindingQUBOGenerator(qubo_generator.QUBOGenerator):
 
         return generator
 
-    def add_constraint(self, constraint: cf.CostFunction, weight: float | None = None) -> PathFindingQUBOGenerator:
+    def add_constraint(self, constraint: cf.CostFunction, weight: float | None = None) -> PathFindingQuboGenerator:
         """Add a pathfinding constraint to the QUBO generator.
 
         Args:
@@ -234,14 +233,14 @@ class PathFindingQUBOGenerator(qubo_generator.QUBOGenerator):
             weight (float | None, optional): The desired weight of the constraint. Defaults to None.
 
         Returns:
-            PathFindingQUBOGenerator: The current instance of the QUBO generator.
+            PathFindingQuboGenerator: The current instance of the QUBO generator.
         """
         self.add_penalty(constraint.get_formula(self.graph, self.settings), lam=weight)
         return self
 
     def add_constraint_if_exists(
         self, constraint: cf.CostFunction | None, weight: float | None = None
-    ) -> PathFindingQUBOGenerator:
+    ) -> PathFindingQuboGenerator:
         """Add a pathfinding constraint to the QUBO generator.
 
         Args:
@@ -249,7 +248,7 @@ class PathFindingQUBOGenerator(qubo_generator.QUBOGenerator):
             weight (float | None, optional): The desired weight of the constraint. Defaults to None.
 
         Returns:
-            PathFindingQUBOGenerator: The current instance of the QUBO generator.
+            PathFindingQuboGenerator: The current instance of the QUBO generator.
         """
         if constraint is None:
             return self
