@@ -13,8 +13,9 @@ import sympy as sp
 from typing_extensions import override
 
 if TYPE_CHECKING:
-    from mqt.qubomaker import Graph
-    from mqt.qubomaker.pathfinder import pathfinder
+    from mqt.problemsolver.qubomaker import Graph
+
+    from . import pathfinder
 
     GetVariableFunction = Callable[[Any, Any, Any, int], sp.Expr]
 

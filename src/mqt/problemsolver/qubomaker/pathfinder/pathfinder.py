@@ -15,11 +15,12 @@ from referencing import Registry, Resource
 from referencing.jsonschema import DRAFT7
 from typing_extensions import override
 
-from mqt.qubomaker import qubo_generator
-from mqt.qubomaker.pathfinder import cost_functions as cf
+from mqt.problemsolver.qubomaker import QuboGenerator
+
+from . import cost_functions as cf
 
 if TYPE_CHECKING:
-    from mqt.qubomaker.graph import Graph
+    from mqt.problemsolver.qubomaker import Graph
 
 
 @dataclass
@@ -32,7 +33,7 @@ class PathFindingQuboGeneratorSettings:
     loops: bool = False
 
 
-class PathFindingQuboGenerator(qubo_generator.QuboGenerator):
+class PathFindingQuboGenerator(QuboGenerator):
     """A class for generating QUBOs for pathfinding problems.
 
     Extends the QuboGenerator class with methods for generating QUBOs for pathfinding problems.

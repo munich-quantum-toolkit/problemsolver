@@ -16,7 +16,7 @@ if TYPE_CHECKING:
 
     import numpy.typing as npt
 
-    from mqt.qubomaker.device import Calibration
+    from .device import Calibration
 
 
 class SlackChainAssignment:
