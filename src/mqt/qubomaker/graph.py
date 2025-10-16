@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, cast
+from typing import TYPE_CHECKING
 
 import numpy as np
-import numpy.typing as npt
 
 if TYPE_CHECKING:
     from io import TextIOWrapper
+
+    import numpy.typing as npt
 
     Edge = tuple[int, int] | tuple[int, int, int] | tuple[int, int, float]
 
@@ -138,7 +139,7 @@ class Graph:
         """
         if not isinstance(value, Graph):
             return False
-        return cast("bool", np.array_equal(self.adjacency_matrix, value.adjacency_matrix))
+        return np.array_equal(self.adjacency_matrix, value.adjacency_matrix)
 
     def __hash__(self) -> int:
         """Returns the hash of the graph.

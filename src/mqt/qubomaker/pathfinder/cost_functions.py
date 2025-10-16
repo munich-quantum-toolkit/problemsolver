@@ -35,7 +35,8 @@ class A(sp.Function):
     `A(v, w)` represents the weight of edge (v, w).
     """
 
-    def _latex(self, printer: sp.StrPrinter, *args: Any, **kwargs: Any) -> str:  # noqa: ARG002
+    @override
+    def _latex(self, printer: sp.StrPrinter, *args: Any, **kwargs: Any) -> str:
         """Returns the latex representation of the expression.
 
         Args:
@@ -56,7 +57,8 @@ class X(sp.Function):
     `x(p, v, i)` represents a single binary variable. Its meaning depends on the encoding type.
     """
 
-    def _latex(self, printer: sp.StrPrinter, *args: Any, **kwargs: Any) -> str:  # noqa: ARG002
+    @override
+    def _latex(self, printer: sp.StrPrinter, *args: Any, **kwargs: Any) -> str:
         """Returns the latex representation of the expression.
 
         Args:
@@ -78,7 +80,8 @@ class Decompose(sp.Function):
         `Decompose(5, 1)` represents digit 1 of the binary string `101`, i.e., 1.
     """
 
-    def _latex(self, printer: sp.StrPrinter, *args: Any, **kwargs: Any) -> str:  # noqa: ARG002
+    @override
+    def _latex(self, printer: sp.StrPrinter, *args: Any, **kwargs: Any) -> str:
         """Returns the latex representation of the expression.
 
         Args:
@@ -199,7 +202,8 @@ class SumSet(sp.Expr):
         self.latex = latex
         self.element_expr = element_expr
 
-    def _latex(self, printer: sp.StrPrinter, *args: Any, **kwargs: Any) -> str:  # noqa: ARG002
+    @override
+    def _latex(self, printer: sp.StrPrinter, *args: Any, **kwargs: Any) -> str:
         """Returns the latex representation of the expression.
 
         Args:
@@ -333,7 +337,9 @@ class FormulaHelpers:
         return sp.Symbol(name)
 
     @staticmethod
-    def get_encoding_variable_one_hot(path: Any, vertex: Any, position: Any, _num_vertices: int = 0) -> sp.Expr:
+    def get_encoding_variable_one_hot(
+        path: str | int | sp.Expr, vertex: str | int | sp.Expr, position: str | int | sp.Expr, _num_vertices: int = 0
+    ) -> sp.Expr:
         """Returns an access to the binary variable `x_{path, vertex, position}` that represents the statement "Vertex `vertex` is located at position `position` in path `path`" for One-Hot encoding.
 
         All indices can be integers, strings, or sympy expressions.
@@ -357,7 +363,9 @@ class FormulaHelpers:
         return cast("sp.Expr", X(path, vertex, position))
 
     @staticmethod
-    def get_encoding_variable_domain_wall(path: Any, vertex: Any, position: Any, _num_vertices: int = 0) -> sp.Expr:
+    def get_encoding_variable_domain_wall(
+        path: str | int | sp.Expr, vertex: str | int | sp.Expr, position: str | int | sp.Expr, _num_vertices: int = 0
+    ) -> sp.Expr:
         """Returns an expression representing the statement "Vertex `vertex` is located at position `position` in path `path`" for Domain-Wall encoding.
 
         All indices can be integers, strings, or sympy expressions.
@@ -383,7 +391,9 @@ class FormulaHelpers:
         ) - FormulaHelpers.get_encoding_variable_one_hot(path, vertex + 1, position)
 
     @staticmethod
-    def get_encoding_variable_binary(path: Any, vertex: Any, position: Any, num_vertices: int = 0) -> sp.Expr:
+    def get_encoding_variable_binary(
+        path: str | int | sp.Expr, vertex: str | int | sp.Expr, position: str | int | sp.Expr, num_vertices: int = 0
+    ) -> sp.Expr:
         """Returns an expression representing the statement "Vertex `vertex` is located at position `position` in path `path`" for Binary encoding.
 
         All indices can be integers, strings, or sympy expressions.
@@ -1268,7 +1278,7 @@ class PathIsValid(PathBound):
 
     @override
     def get_formula_one_hot(self, graph: Graph, settings: pathfinder.PathFindingQuboGeneratorSettings) -> sp.Expr:
-        def get_variable_function(p: Any, v: Any, i: Any, _n: int = 0) -> sp.Expr:
+        def get_variable_function(p: str | sp.Expr, v: str | sp.Expr, i: str | sp.Expr, _n: int = 0) -> sp.Expr:
             return FormulaHelpers.get_encoding_variable_one_hot(p, v, i)
 
         general = self.get_formula_general(graph, settings, get_variable_function)
@@ -1285,7 +1295,7 @@ class PathIsValid(PathBound):
     @override
     def get_formula_domain_wall(self, graph: Graph, settings: pathfinder.PathFindingQuboGeneratorSettings) -> sp.Expr:
         general = self.get_formula_general(graph, settings, FormulaHelpers.get_encoding_variable_domain_wall)
-        enforce_domain_wall_penalty: sp.Expr = (
+        enforce_domain_wall_penalty: sp.Expr = sp.Float(
             2 * settings.max_path_length * np.max(graph.adjacency_matrix) + graph.n_vertices**2
         )
         # This ensures that the domain wall condition (x_i = 0 -> x_{i+1} = 0) is not broken to achieve better cost in other cost functions.

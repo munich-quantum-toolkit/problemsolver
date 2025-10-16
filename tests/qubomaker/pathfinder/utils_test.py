@@ -225,3 +225,34 @@ def check_equal(a: pf.PathFindingQuboGenerator, b: pf.PathFindingQuboGenerator) 
 
     for expr, weight in b.penalties:
         assert len([w for (e, w) in a.penalties if e == expr and w == weight]) == 1
+
+
+def optimize_classically(qubo: np.typing.NDArray[np.int_ | np.float64]) -> tuple[list[int], float]:
+    """Classically optimizes a given QUBO problem of the form x^TQx.
+
+    Args:
+        qubo (npt.NDArray[np.int_  |  np.float64]): A matrix representing the QUBO problem.
+        show_progress_bar (bool, optional): If True, shows a progress bar in jupyter notebooks during calculation. Defaults to False.
+
+    Returns:
+        tuple[list[int], float]: The optimal solution and its corresponding score.
+    """
+
+    def int_to_fixed_length_binary(number: int, length: int) -> list[int]:
+        binary_string = f"{number:b}"
+        padding_zeros = max(0, length - len(binary_string))
+        binary_string = "0" * padding_zeros + binary_string
+        return [int(bit) for bit in binary_string]
+
+    all_tests = [int_to_fixed_length_binary(i, qubo.shape[0]) for i in range(2 ** qubo.shape[0])]
+
+    best_test: list[int] = []
+    best_score = 999999999999
+
+    for test in all_tests:
+        x = np.array(test)
+        score = np.matmul(x.T, np.matmul(qubo, x))
+        if best_score > score:
+            best_score = score
+            best_test = test
+    return (best_test, best_score)

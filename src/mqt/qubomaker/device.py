@@ -124,7 +124,7 @@ class Calibration:
         )
         start = min(potential_starts)
 
-        # To check if `start` is connected to a heavy node, we check whether its successsor has more than two connections.
+        # To check if `start` is connected to a heavy node, we check whether its successor has more than two connections.
         # Otherwise, we proceed to the successor.
         def get_next(current: int, previous: int) -> int:
             """Compute the next qubit in the chain.

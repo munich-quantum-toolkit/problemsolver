@@ -4,11 +4,10 @@ from __future__ import annotations
 
 import pytest
 
-import mqt.qubomaker as qm
 import mqt.qubomaker.pathfinder as pf
 import mqt.qubomaker.pathfinder.cost_functions as cf
 
-from .utils_test import get_test_graph_small, paths_equal_with_loops, paths_to_assignment_list
+from .utils_test import get_test_graph_small, optimize_classically, paths_equal_with_loops, paths_to_assignment_list
 
 TEST_GRAPH = get_test_graph_small()
 
@@ -75,7 +74,7 @@ def test_tsp(encoding_type: pf.EncodingType) -> None:
     if encoding_type != cf.EncodingType.BINARY:
         # Binary encoding is too complex for evaluation in this test.
         qubo_matrix = generator.construct_qubo_matrix()
-        optimal_solution, _ = qm.optimize_classically(qubo_matrix)
+        optimal_solution, _ = optimize_classically(qubo_matrix)
 
         path_representation = generator.decode_bit_array(optimal_solution)
 

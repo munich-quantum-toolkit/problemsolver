@@ -7,13 +7,14 @@ from itertools import pairwise, starmap
 from typing import TYPE_CHECKING, Any, cast
 
 import numpy as np
-import numpy.typing as npt
 import qiskit
 import qiskit.circuit
 import sympy as sp
 
 if TYPE_CHECKING:
     from collections.abc import Collection
+
+    import numpy.typing as npt
 
     from mqt.qubomaker.device import Calibration
 
@@ -424,7 +425,7 @@ class QuboGenerator:
             return [expression]
         return []
 
-    def _construct_expansion(self, expression: sp.Expr) -> sp.Expr:  # noqa: PLR6301
+    def _construct_expansion(self, expression: sp.Expr) -> sp.Expr:
         """A method that can be extended by classes that inherit from QuboGenerator to transform the QUBO formulation into expanded form, if that process requires additional steps.
 
         Args:
@@ -623,7 +624,7 @@ class QuboGenerator:
             return encoding_variables.index(variable) + 1
         return -1
 
-    def decode_bit_array(self, _array: list[int]) -> Any:  # noqa: PLR6301, ANN401
+    def decode_bit_array(self, _array: list[int]) -> Any:  # noqa: ANN401
         """Given an assignment, decodes it into a meaningful result. May be extended by subclasses.
 
         Args:
