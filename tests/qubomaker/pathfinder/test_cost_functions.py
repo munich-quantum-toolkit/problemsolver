@@ -4,11 +4,10 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-import pytest
-import sympy as sp
-
 import mqt.qubomaker.pathfinder as pf
 import mqt.qubomaker.pathfinder.cost_functions as cf
+import pytest
+import sympy as sp
 
 from .utils_test import get_test_graph, get_test_graph_small, get_test_graph_tiny, paths_to_assignment
 

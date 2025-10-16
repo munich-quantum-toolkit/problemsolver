@@ -2,10 +2,9 @@
 
 from __future__ import annotations
 
-import pytest
-
 import mqt.qubomaker.pathfinder as pf
 import mqt.qubomaker.pathfinder.cost_functions as cf
+import pytest
 
 from .utils_test import get_test_graph_small, optimize_classically, paths_equal_with_loops, paths_to_assignment_list
 

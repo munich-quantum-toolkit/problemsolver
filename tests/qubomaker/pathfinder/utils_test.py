@@ -5,10 +5,9 @@ from __future__ import annotations
 import itertools
 from typing import TYPE_CHECKING
 
-import numpy as np
-
 import mqt.qubomaker.pathfinder as pf
 import mqt.qubomaker.pathfinder.cost_functions as cf
+import numpy as np
 from mqt.qubomaker import Graph
 
 if TYPE_CHECKING:

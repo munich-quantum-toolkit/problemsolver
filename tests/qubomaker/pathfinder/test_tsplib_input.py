@@ -10,10 +10,9 @@ import pytest
 if sys.version_info >= (3, 13):
     pytest.skip("This module requires Python 3.12 or lower", allow_module_level=True)
 
-import tsplib95
-
 import mqt.qubomaker.pathfinder as pf
 import mqt.qubomaker.pathfinder.cost_functions as cf
+import tsplib95
 
 from .utils_test import check_equal, get_test_graph
 

@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import pytest
 import sympy as sp
-
 from mqt.qubomaker import Calibration, QuboGenerator
 
 
