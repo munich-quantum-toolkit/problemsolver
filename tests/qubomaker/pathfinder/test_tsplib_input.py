@@ -30,7 +30,7 @@ def read_from_path(path: str, encoding: pf.EncodingType = pf.EncodingType.ONE_HO
     Returns:
         The corresponding `PathFindingQuboGenerator`.
     """
-    pth = Path("tests") / "pathfinder" / "resources" / "tsplib" / path
+    pth = Path("tests") / "qubomaker" / "pathfinder" / "resources" / "tsplib" / path
     problem = tsplib95.load(str(pth))
 
     return pf.from_tsplib_problem(problem, encoding)
