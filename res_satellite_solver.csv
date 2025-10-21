@@ -1,0 +1,2 @@
+num_qubits,calculation_time_qaoa,calculation_time_vqe,success_rate_qaoa,success_rate_vqe
+3,10.697314500808716,22.825047969818115,0.5,1.0

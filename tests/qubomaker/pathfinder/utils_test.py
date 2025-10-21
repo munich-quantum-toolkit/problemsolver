@@ -9,7 +9,7 @@ import numpy as np
 
 import mqt.problemsolver.qubomaker.pathfinder as pf
 import mqt.problemsolver.qubomaker.pathfinder.cost_functions as cf
-from mqt.problemsolver.qubomaker import Graph
+from mqt.problemsolver.qubomaker.pathfinder import Graph
 
 if TYPE_CHECKING:
     import sympy as sp

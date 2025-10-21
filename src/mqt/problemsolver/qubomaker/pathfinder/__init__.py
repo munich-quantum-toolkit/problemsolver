@@ -44,6 +44,7 @@ from .cost_functions import (
     PathStartsAt,
     PrecedenceConstraint,
 )
+from .graph import Graph
 from .pathfinder import PathFindingQuboGenerator, PathFindingQuboGeneratorSettings
 from .tsplib import from_tsplib_problem
 
@@ -51,6 +52,7 @@ __all__ = [
     "CompositeCostFunction",
     "CostFunction",
     "EncodingType",
+    "Graph",
     "MaximizePathLength",
     "MinimizePathLength",
     "PathBound",

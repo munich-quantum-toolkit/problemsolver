@@ -7,7 +7,7 @@ from tempfile import NamedTemporaryFile
 
 import numpy as np
 
-from mqt.problemsolver.qubomaker import Graph
+from mqt.problemsolver.qubomaker.pathfinder import Graph
 
 
 def test_init_with_edge_list() -> None:

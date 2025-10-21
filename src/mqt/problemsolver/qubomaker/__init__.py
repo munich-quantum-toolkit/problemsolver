@@ -9,14 +9,15 @@ When done, the object can be used to construct a QUBO formulation of the project
 
 from __future__ import annotations
 
-from . import pathfinder
+# Submodule imports.
 from .device import Calibration
-from .graph import Graph
 from .qubo_generator import QuboGenerator
+
+# Base imports.
+from . import pathfinder  # isort: skip
 
 __all__ = [
     "Calibration",
-    "Graph",
     "QuboGenerator",
     "pathfinder",
 ]

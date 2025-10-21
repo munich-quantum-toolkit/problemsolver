@@ -5,9 +5,7 @@ from __future__ import annotations
 import importlib.util
 from typing import TYPE_CHECKING
 
-from mqt.problemsolver.qubomaker import Graph
-
-from . import PathFindingQuboGenerator, PathFindingQuboGeneratorSettings, cost_functions
+from . import Graph, PathFindingQuboGenerator, PathFindingQuboGeneratorSettings, cost_functions
 
 if TYPE_CHECKING:
     import contextlib

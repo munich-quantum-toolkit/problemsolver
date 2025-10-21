@@ -20,7 +20,7 @@ from mqt.problemsolver.qubomaker import QuboGenerator
 from . import cost_functions as cf
 
 if TYPE_CHECKING:
-    from mqt.problemsolver.qubomaker import Graph
+    from . import Graph
 
 
 @dataclass
