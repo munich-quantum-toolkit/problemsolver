@@ -12,7 +12,7 @@ Constructing QUBO formulation for pathfinding problems requires a `PathfindingQu
 An example settings instance can be constructed as follows:
 
 ```python3
-import mqt.qubomaker.pathfinder as pf
+import mqt.problemsolver.qubomaker.pathfinder as pf
 
 settings = pf.PathFindingQuboGeneratorSettings(
     encoding_type=pf.EncodingType.ONE_HOT, n_paths=1, max_path_length=4, loops=True

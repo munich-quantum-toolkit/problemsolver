@@ -4,9 +4,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import mqt.qubomaker.pathfinder as pf
-import mqt.qubomaker.pathfinder.cost_functions as cf
 import pytest
+
+import mqt.problemsolver.qubomaker.pathfinder as pf
+import mqt.problemsolver.qubomaker.pathfinder.cost_functions as cf
 
 from .utils_test import check_equal, get_test_graph
 

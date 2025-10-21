@@ -9,7 +9,7 @@ the corresponding constraints.
 
 .. code-block:: python
 
-    from mqt.qubomaker.pathfinder import EncodingType, from_tsplib_problem
+    from mqt.problemsolver.qubomaker.pathfinder import EncodingType, from_tsplib_problem
     import tsplib95
 
     problem = tsplib95.load("tsp_lib_file.tsp")

@@ -15,7 +15,7 @@ The :code:`PathFindingQuboGenerator` class can be instantiated like this:
 
 .. code-block:: python
 
-   import mqt.qubomaker.pathfinder as pf
+   import mqt.problemsolver.qubomaker.pathfinder as pf
 
    ...
 
@@ -36,7 +36,7 @@ An example settings definition may look like:
 
 .. code-block:: python
 
-   import mqt.qubomaker.pathfinder as pf
+   import mqt.problemsolver.qubomaker.pathfinder as pf
 
    settings = pf.PathFindingQuboGeneratorSettings(
        encoding_type=pf.EncodingType.BINARY,

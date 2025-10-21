@@ -15,7 +15,7 @@ ROOT = Path(__file__).parent.parent.resolve()
 
 
 try:
-    version = metadata.version("mqt.qubomaker")
+    version = metadata.version("mqt.problemsolver.qubomaker")
 except ModuleNotFoundError:
     msg = (
         "Package should be installed to produce documentation! "
@@ -62,7 +62,7 @@ pygments_style = "colorful"
 
 add_module_names = False
 
-modindex_common_prefix = ["mqt.qubomaker."]
+modindex_common_prefix = ["mqt.problemsolver.qubomaker."]
 
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),

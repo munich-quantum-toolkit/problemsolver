@@ -5,10 +5,11 @@ from __future__ import annotations
 import itertools
 from typing import TYPE_CHECKING
 
-import mqt.qubomaker.pathfinder as pf
-import mqt.qubomaker.pathfinder.cost_functions as cf
 import numpy as np
-from mqt.qubomaker import Graph
+
+import mqt.problemsolver.qubomaker.pathfinder as pf
+import mqt.problemsolver.qubomaker.pathfinder.cost_functions as cf
+from mqt.problemsolver.qubomaker import Graph
 
 if TYPE_CHECKING:
     import sympy as sp

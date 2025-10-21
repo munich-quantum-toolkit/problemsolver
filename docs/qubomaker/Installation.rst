@@ -4,23 +4,23 @@ Installation
 Installation via pip package
 ----------------------------
 
-MQT QUBOMaker is available via `PyPI <https://pypi.org/project/mqt.qubomaker/>`_
+MQT QUBOMaker is available via `PyPI <https://pypi.org/project/mqt.problemsolver.qubomaker/>`_
 
 .. code-block:: console
 
-   (venv) $ pip install mqt.qubomaker
+   (venv) $ pip install mqt.problemsolver.qubomaker
 
 After installation, the package can be imported:
 
 .. code-block:: python
 
-   import mqt.qubomaker as qm
+   import mqt.problemsolver.qubomaker as qm
 
 Similarly, the :code:`pathfinder` submodule can be imported as:
 
 .. code-block:: python
 
-   import mqt.qubomaker.pathfinder as pf
+   import mqt.problemsolver.qubomaker.pathfinder as pf
 
 Installation via source code
 ----------------------------

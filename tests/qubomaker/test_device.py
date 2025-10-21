@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 import pytest
-from mqt.qubomaker import Calibration
+
+from mqt.problemsolver.qubomaker import Calibration
 
 
 @pytest.fixture
