@@ -13,7 +13,7 @@ import mqt.problemsolver.qubomaker.pathfinder.cost_functions as cf
 from .utils_test import get_test_graph, get_test_graph_small, get_test_graph_tiny, paths_to_assignment
 
 if TYPE_CHECKING:
-    from mqt.problemsolver.qubomaker import Graph
+    from mqt.problemsolver.qubomaker.pathfinder import Graph
 
 TEST_GRAPH = get_test_graph()
 TEST_GRAPH_SMALL = get_test_graph_small()
