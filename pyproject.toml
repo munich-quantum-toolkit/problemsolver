@@ -24,14 +24,16 @@ dependencies = [
     "mqt.core>=3.0.2",
     "qiskit>=2.0.3,<2.2.0",
     "qiskit_aer>=0.16.4",
-    "numpy>=2.1; python_version >= '3.13'",
-    "numpy>=1.26; python_version >= '3.12'",
-    "numpy>=1.24; python_version >= '3.11'",
     "numpy>=1.22",
-    "scipy>=1.14.1; python_version >= '3.13'",
+    "numpy>=1.24; python_version >= '3.11'",
+    "numpy>=1.26; python_version >= '3.12'",
+    "numpy>=2.1; python_version >= '3.13'",
     "scipy>=1.13.1",
+    "scipy>=1.14.1; python_version >= '3.13'",
+    "scipy>=1.16.1; python_version >= '3.14'",
     "pandas>=2.1.2",
     "pandas>=2.2.3; python_version >= '3.13'",
+    "pandas>=2.3.3; python_version >= '3.14'",
     "matplotlib>=3.9.4",
     "networkx>=2.8.8",
     "python_tsp>=0.5.0",
@@ -40,8 +42,10 @@ dependencies = [
     "qsharp>=1.20.0",
     "mqt-bench>=2.0.1",
     "pytket>=1.29.0",
+    "pytket>=2.4.0; python_version >= '3.14'",
     "pytket-qiskit>=0.67.0",
     "qiskit-ibm-runtime>=0.38.0,<0.42.0",
+    "pydantic-core>=2.35.0; python_version >= '3.14'",
     "z3-solver>=4.15.3.0",
     "openpyxl>=3.1.5",
 ]
@@ -57,6 +61,7 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Intended Audience :: Science/Research",
     "Natural Language :: English",
     "Topic :: Scientific/Engineering :: Electronic Design Automation (EDA)",
@@ -229,12 +234,22 @@ known-first-party = ["mqt.problemsolver"]
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
+
+[tool.uv]
+# symengine>=0.11,<0.14 (optional dependency of qiskit) is incompatible with Python 3.14
+override-dependencies = [
+    "symengine>=0.11,<0.14",
+    "symengine>=0.14.1; python_version >= '3.14'",
+]
+
+
 [tool.typos]
 default.extend-ignore-re = [
     '"id": ".*",',
     "(?Rm)^.*(#|//)\\s*spellchecker:disable-line$",  # ignore line
     "(?s)(#|//)\\s*spellchecker:off.*?\\n\\s*(#|//)\\s*spellchecker:on" # ignore block
 ]
+
 [tool.typos.default.extend-words]
 wille = "wille"
 anc = "anc"
