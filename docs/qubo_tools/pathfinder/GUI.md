@@ -8,7 +8,7 @@ mystnb:
 
 # Graphical User Interface
 
-A web-based GUI for the Pathfinder submodule can be accessed through [GitHub pages](https://cda-tum.github.io/mqt-qubomaker/).
+A web-based GUI for the Pathfinder submodule can be accessed through [GitHub pages](https://munich-quantum-toolkit.github.io/problemsolver/).
 The GUI is a simple interface that allows users to define their problem graph through its adjacency matrix,
 and then select a set of constraints to define a problem instance.
 

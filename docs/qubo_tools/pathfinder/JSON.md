@@ -34,4 +34,4 @@ The format for the JSON input is defined as:
 }
 ```
 
-Individual constraints are defined based on their JSON definitions provided [here](https://github.com/cda-tum/mqt-qubomaker/tree/main/src/mqt/qubomaker/pathfinder/resources/constraints).
+Individual constraints are defined based on their JSON definitions provided [here](https://github.com/munich-quantum-toolkit/problemsolver/blob/main/src/mqt/problemsolver/qubo_tools/pathfinder/resources/constraints).
