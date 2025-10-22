@@ -16,7 +16,7 @@ Currently, the `qubo_tools` support the following optimization problem types:
 
 - [Pathfinding Problems](pathfinder/index)
 
-In addition to a semantic selection of problem constraints, we also provide a [graphical user interface](pathfinder/GUI.html) for the Pathfinding submodule, which allows users to interactively define pathfinding problems to be passed to the framework.
+In addition to a semantic selection of problem constraints, we also provide a [graphical user interface](pathfinder/GUI) for the Pathfinding submodule, which allows users to interactively define pathfinding problems to be passed to the framework.
 
 The `qubo_tools` support several encoding schemes, allowing end users to easily compare and evaluate different encodings without the need for manual rewriting of the problems.
 
