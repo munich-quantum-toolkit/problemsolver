@@ -7,13 +7,13 @@ from typing import TYPE_CHECKING
 import pytest
 import sympy as sp
 
-import mqt.problemsolver.qubomaker.pathfinder as pf
-import mqt.problemsolver.qubomaker.pathfinder.cost_functions as cf
+import mqt.problemsolver.qubo_tools.pathfinder as pf
+import mqt.problemsolver.qubo_tools.pathfinder.cost_functions as cf
 
 from .utils_test import get_test_graph, get_test_graph_small, get_test_graph_tiny, paths_to_assignment
 
 if TYPE_CHECKING:
-    from mqt.problemsolver.qubomaker.pathfinder import Graph
+    from mqt.problemsolver.qubo_tools.pathfinder import Graph
 
 TEST_GRAPH = get_test_graph()
 TEST_GRAPH_SMALL = get_test_graph_small()

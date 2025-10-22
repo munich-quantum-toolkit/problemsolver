@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from mqt.problemsolver.qubomaker import Calibration
+from mqt.problemsolver.qubo_tools import Calibration
 
 
 @pytest.fixture

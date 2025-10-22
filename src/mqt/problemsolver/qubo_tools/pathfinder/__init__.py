@@ -1,11 +1,11 @@
-"""This module implements the pathfinding functionalities of the QuboMaker.
+"""This module implements the pathfinding functionalities of the `qubo_tools`.
 
 This, in particular, includes all pathfinding-related cost functions and the specialized QUBO generator for pathfinding problems.
 
 Typical usage example:
 
     ```python
-    import mqt.problemsolver.qubomaker.pathfinder as pf
+    import mqt.problemsolver.qubo_tools.pathfinder as pf
 
     graph = pf.Graph(5, [(1, 2, 5), (2, 3, 3), (3, 4, 9), (4, 5, 8), (5, 1, 6)])
     settings = pf.PathFindingQuboGeneratorSettings(pf.EncodingType.ONE_HOT, 1, 5, True)

@@ -1,4 +1,4 @@
-"""Provides support for the TSPLib format as input for the pathfinding QuboMaker."""
+"""Provides support for the TSPLib format as input for the pathfinding `QuboGenerator`."""
 
 from __future__ import annotations
 

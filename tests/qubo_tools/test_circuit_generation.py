@@ -5,7 +5,7 @@ from __future__ import annotations
 import pytest
 import sympy as sp
 
-from mqt.problemsolver.qubomaker import Calibration, QuboGenerator
+from mqt.problemsolver.qubo_tools import Calibration, QuboGenerator
 
 
 @pytest.fixture

@@ -4,7 +4,7 @@ It allows users to create a `QuboGenerator` object, and gradually add penalty te
 When done, the object can be used to construct a QUBO formulation of the project on multiple granularity levels.
 
 ## Available Subpackages
-- `pathfinder`: This module implements the pathfinding functionalities of the QuboMaker.
+- `pathfinder`: This module implements the pathfinding functionalities of the `qubo_tools`.
 """
 
 from __future__ import annotations

@@ -15,7 +15,7 @@ from referencing import Registry, Resource
 from referencing.jsonschema import DRAFT7
 from typing_extensions import override
 
-from mqt.problemsolver.qubomaker import QuboGenerator
+from mqt.problemsolver.qubo_tools import QuboGenerator
 
 from . import cost_functions as cf
 

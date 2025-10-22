@@ -7,9 +7,9 @@ from typing import TYPE_CHECKING
 
 import numpy as np
 
-import mqt.problemsolver.qubomaker.pathfinder as pf
-import mqt.problemsolver.qubomaker.pathfinder.cost_functions as cf
-from mqt.problemsolver.qubomaker.pathfinder import Graph
+import mqt.problemsolver.qubo_tools.pathfinder as pf
+import mqt.problemsolver.qubo_tools.pathfinder.cost_functions as cf
+from mqt.problemsolver.qubo_tools.pathfinder import Graph
 
 if TYPE_CHECKING:
     import sympy as sp

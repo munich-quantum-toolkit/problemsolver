@@ -12,8 +12,8 @@ if sys.version_info >= (3, 13):
 
 import tsplib95
 
-import mqt.problemsolver.qubomaker.pathfinder as pf
-import mqt.problemsolver.qubomaker.pathfinder.cost_functions as cf
+import mqt.problemsolver.qubo_tools.pathfinder as pf
+import mqt.problemsolver.qubo_tools.pathfinder.cost_functions as cf
 
 from .utils_test import check_equal, get_test_graph
 
@@ -30,7 +30,7 @@ def read_from_path(path: str, encoding: pf.EncodingType = pf.EncodingType.ONE_HO
     Returns:
         The corresponding `PathFindingQuboGenerator`.
     """
-    pth = Path("tests") / "qubomaker" / "pathfinder" / "resources" / "tsplib" / path
+    pth = Path("tests") / "qubo_tools" / "pathfinder" / "resources" / "tsplib" / path
     problem = tsplib95.load(str(pth))
 
     return pf.from_tsplib_problem(problem, encoding)

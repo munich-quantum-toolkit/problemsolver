@@ -6,8 +6,8 @@ from pathlib import Path
 
 import pytest
 
-import mqt.problemsolver.qubomaker.pathfinder as pf
-import mqt.problemsolver.qubomaker.pathfinder.cost_functions as cf
+import mqt.problemsolver.qubo_tools.pathfinder as pf
+import mqt.problemsolver.qubo_tools.pathfinder.cost_functions as cf
 
 from .utils_test import check_equal, get_test_graph
 
@@ -23,7 +23,7 @@ def read_from_path(path: str) -> pf.PathFindingQuboGenerator:
     Returns:
         pf.PathFindingQuboGenerator: The corresponding `PathFindingQuboGenerator`.
     """
-    with Path.open(Path("tests") / "qubomaker" / "pathfinder" / "resources" / "json" / path) as file:
+    with Path.open(Path("tests") / "qubo_tools" / "pathfinder" / "resources" / "json" / path) as file:
         return pf.PathFindingQuboGenerator.from_json(file.read(), TEST_GRAPH)
 
 
@@ -85,7 +85,7 @@ def test_alternative_options() -> None:
 
 def test_suggest_encoding() -> None:
     """Tests the encoding suggestion feature for a JSON input file."""
-    with Path.open(Path("tests") / "qubomaker" / "pathfinder" / "resources" / "json" / "with_weight.json") as file:
+    with Path.open(Path("tests") / "qubo_tools" / "pathfinder" / "resources" / "json" / "with_weight.json") as file:
         j = file.read()
     assert pf.PathFindingQuboGenerator.suggest_encoding(j, TEST_GRAPH) == pf.EncodingType.ONE_HOT
 

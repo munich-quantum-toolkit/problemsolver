@@ -15,7 +15,7 @@ This module provides ways of reading TSPLib input files using the [`tsplib95` py
 the corresponding constraints.
 
 ```python
-from mqt.problemsolver.qubomaker.pathfinder import EncodingType, from_tsplib_problem
+from mqt.problemsolver.qubo_tools.pathfinder import EncodingType, from_tsplib_problem
 import tsplib95
 
 problem = tsplib95.load("tsp_lib_file.tsp")
