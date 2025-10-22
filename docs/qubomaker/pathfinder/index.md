@@ -1,5 +1,12 @@
-Pathfinder Submodule
-====================
+---
+file_format: mystnb
+kernelspec:
+  name: python3
+mystnb:
+  number_source_lines: true
+---
+
+# Pathfinder Submodule
 
 This module implements MQT QUBOMaker for pathfinding problems on directed and undirected graphs in the form of the :code:`PathFindingQuboGenerator` class, a specialization of the general :code:`QuboGenerator` class.
 
@@ -15,15 +22,15 @@ The :code:`PathFindingQuboGenerator` class can be instantiated like this:
 
 .. code-block:: python
 
-   import mqt.problemsolver.qubomaker.pathfinder as pf
+import mqt.problemsolver.qubomaker.pathfinder as pf
 
-   ...
+...
 
-   generator = pf.PathFindingQuboGenerator(
-       objective_function=pf.MinimizePathLength(path_ids=[1]),
-       graph=graph,
-       settings=settings,
-   )
+generator = pf.PathFindingQuboGenerator(
+objective_function=pf.MinimizePathLength(path_ids=[1]),
+graph=graph,
+settings=settings,
+)
 
 Here, the :code:`objective_function` parameter can represent any objective function for the optimization procedure (:code:`MinimizePathLength` or :code:`MaximizePathLength`). The :code:`graph` parameter is the graph on which the problem is defined. Finally the :code:`settings` parameter is a :code:`PathFindingQuboGeneratorSettings` object that defines settings for the QUBO generator:
 
@@ -36,22 +43,23 @@ An example settings definition may look like:
 
 .. code-block:: python
 
-   import mqt.problemsolver.qubomaker.pathfinder as pf
+import mqt.problemsolver.qubomaker.pathfinder as pf
 
-   settings = pf.PathFindingQuboGeneratorSettings(
-       encoding_type=pf.EncodingType.BINARY,
-       n_paths=1,
-       max_path_length=4,
-       loops=False,
-   )
+settings = pf.PathFindingQuboGeneratorSettings(
+encoding_type=pf.EncodingType.BINARY,
+n_paths=1,
+max_path_length=4,
+loops=False,
+)
 
+```{toctree}
+:caption: Pathfinder
+:hidden:
+:maxdepth: 1
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Pathfinder Features
-
-   Constraints
-   Encodings
-   GUI
-   JSON
-   TSPLib
+GUI
+JSON
+TSPLib
+Encodings
+Constraints
+```
