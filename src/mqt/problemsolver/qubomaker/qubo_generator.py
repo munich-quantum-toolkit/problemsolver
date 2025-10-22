@@ -133,12 +133,16 @@ class QuboGenerator:
         )
 
     def construct_expansion(
-        self, include_slack_information: bool = False, for_embedding: bool = True
+        self, include_slack_information: bool = False, for_embedding: bool = False
     ) -> sp.Expr | tuple[sp.Expr, SlackChainAssignment]:
         """Constructs a mathematical representation of the QUBO formulation and expands it.
 
         This will expand sum and product terms into full sums and products of each of their elements.
         The final result will be a sum of terms where each term is a product of variables and scalars.
+
+        Args:
+            include_slack_information (bool, optional): Whether to include information about slack variables in the result. Defaults to False.
+            for_embedding (bool, optional): Whether to prepare the QUBO for embedding on a quantum device. Defaults to False.
 
         Raises:
             TypeError: If the constructed QUBO formulation is not a sympy expression.
@@ -520,7 +524,7 @@ class QuboGenerator:
 
         if len(assignment) == self.get_encoding_variable_count():
             auxiliary_assignment = self.__get_auxiliary_assignment(assignment, auxiliary_expansions)
-        elif len(assignment) != self.count_required_variables():
+        elif len(assignment) != self.count_required_variables(for_embedding=for_embedding):
             msg = "Invalid assignment length."
             raise ValueError(msg)
 
@@ -591,13 +595,16 @@ class QuboGenerator:
         """
         return [(expr, weight) if weight is not None else (expr, 1.0) for (expr, weight) in self.penalties]
 
-    def count_required_variables(self) -> int:
+    def count_required_variables(self, for_embedding: bool = False) -> int:
         """Returns the total number of variables required to represent the QUBO problem.
+
+        Args:
+            for_embedding (bool, optional): Whether to prepare the QUBO for embedding on a quantum device. Defaults to False.
 
         Returns:
             int: The number of required variables.
         """
-        expansion: sp.Expr = self.construct_expansion()  # type: ignore[assignment]
+        expansion: sp.Expr = self.construct_expansion(for_embedding=for_embedding)  # type: ignore[assignment]
         coefficients = dict(expansion.as_coefficients_dict())
         auxiliary_variables = list({var for arg in coefficients for var in self.__get_auxiliary_variables(arg)})
         return len(self._get_encoding_variables()) + len(auxiliary_variables)
@@ -636,13 +643,13 @@ class QuboGenerator:
         return ""
 
     def construct_qaoa_circuit(
-        self, n_qubits: int = -1, do_reuse: bool = True, include_barriers: bool = False
+        self, n_qubits: int = -1, do_reuse: bool = False, include_barriers: bool = False
     ) -> qiskit.QuantumCircuit:
         """Constructs a QAOA circuit for the QUBO problem.
 
         Args:
             n_qubits (int, optional): If given, sets the number of qubits for the full circuit.
-            do_reuse (bool, optional): Attempt to reuse qubits to limit the number of variables. Defaults to True.
+            do_reuse (bool, optional): Attempt to reuse qubits to limit the number of variables. Defaults to False.
             include_barriers (bool, optional): Whether to include barriers in the circuit. Defaults to False.
 
         Returns:

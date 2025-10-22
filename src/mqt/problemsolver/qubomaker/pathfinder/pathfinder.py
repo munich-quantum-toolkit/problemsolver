@@ -79,7 +79,7 @@ class PathFindingQuboGenerator(QuboGenerator):
         results: list[tuple[cf.EncodingType, int]] = []
         for encoding in [cf.EncodingType.ONE_HOT, cf.EncodingType.DOMAIN_WALL, cf.EncodingType.BINARY]:
             generator = PathFindingQuboGenerator.__from_json(json_string, graph, override_encoding=encoding)
-            results.append((encoding, generator.count_required_variables()))
+            results.append((encoding, generator.count_required_variables(for_embedding=False)))
         return next(encoding for (encoding, size) in results if size == min(size for (_, size) in results))
 
     @staticmethod
