@@ -238,7 +238,7 @@ class Settings {
                     "vertices": map.get(entry)!.map(vertex => parseInt(vertex)),
                     "path_id": parseInt(entry_array[0])
                 });
-                
+
             }
         }
         if(this.precedences.length > 0) {
