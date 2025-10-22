@@ -781,20 +781,9 @@ class QuboGenerator:
             nonlocal qc, gamma, substitution
             qc.rz(gamma * 2 * angle, substitution[q])
 
-        def add_swap(q1: str, q2: str, decomposed: bool) -> None:
+        def add_swap(q1: str, q2: str) -> None:
             nonlocal qc, gamma, substitution
-            if decomposed:
-                qc.sx(substitution[q1])
-                qc.sx(substitution[q2])
-                qc.cz(substitution[q1], substitution[q2])
-                qc.sx(substitution[q1])
-                qc.sx(substitution[q2])
-                qc.cz(substitution[q1], substitution[q2])
-                qc.sx(substitution[q1])
-                qc.sx(substitution[q2])
-                qc.cz(substitution[q1], substitution[q2])
-            else:
-                qc.swap(substitution[q1], substitution[q2])
+            qc.swap(substitution[q1], substitution[q2])
 
         def get_next_substitution(q: str) -> int:
             nonlocal substitution, nn_qubit_queue
@@ -853,13 +842,13 @@ class QuboGenerator:
         incomplete_swaps = {}
         for groups in chain_groups:
             for g1, g2 in zip(groups[::2], groups[1::2], strict=False):
-                add_swap(g1[0], g1[1], False)
+                add_swap(g1[0], g1[1])
                 add_rzz(g1[1], g2[0])
-                add_swap(g1[0], g1[1], False)
+                add_swap(g1[0], g1[1])
             for g1, g2 in zip(groups[1::2], groups[2::2], strict=False):
                 incomplete_swaps[g1[0]] = g1[1]
                 incomplete_swaps[g1[1]] = g1[0]
-                add_swap(g1[0], g1[1], False)
+                add_swap(g1[0], g1[1])
                 add_rzz(g1[1], g2[0])
 
         for q in expression.free_symbols:  # type: ignore[attr-defined]
