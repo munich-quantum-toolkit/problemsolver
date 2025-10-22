@@ -723,7 +723,7 @@ class QuboGenerator:
                 free_qubits.insert(0, substitution[next_qubit])
 
         if do_reuse and len(used_qubits) < len(circuit.qubits):
-            return self.construct_qaoa_circuit(n_qubits=len(used_qubits))
+            return self.construct_qaoa_circuit(n_qubits=len(used_qubits), do_reuse=True)
         return circuit
 
     def construct_interaction_graph(self, offset: int = 0, for_embedding: bool = False) -> list[tuple[int, int]]:
