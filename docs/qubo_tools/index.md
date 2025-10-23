@@ -20,7 +20,7 @@ In addition to a semantic selection of problem constraints, we also provide a [g
 
 The `qubo_tools` support several encoding schemes, allowing end users to easily compare and evaluate different encodings without the need for manual rewriting of the problems.
 
-If you are interested in the theory behind our `qubo_tools`, have a look at the related publication {cite:p}`rovara2024pathfindingframework`.
+If you are interested in the theory behind our `qubo_tools`, take a look at the related publication {cite:p}`rovara2024pathfindingframework`.
 
 ```{toctree}
 :caption: qubo_tools API

@@ -1,3 +1,5 @@
+# Pathfinder Submodule
+
 This submodule of the `qubo_tools` is responsible for the QUBO formulation of pathfinding problems.
 
 ### Settings

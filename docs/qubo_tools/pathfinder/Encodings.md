@@ -34,7 +34,7 @@ are invalid.
 
 This encoding scheme is very expressive, but also uses a large amount of binary variables. It is also
 very sparse, meaning that there exists a large number of invalid assignments. Moving from one valid assignment
-to another requires at least two bitflips.
+to another requires at least two bit flips.
 
 $$\delta(x, \pi^{(i)}, v, j) = x_{v, j, \pi^{(i)}}$$
 
@@ -47,7 +47,7 @@ For each position $j$ and path $\pi^{(i)}$, the variables $x_{v,j,\pi^{(i)}}$ ar
 $\overline{x_{j,\pi^{(i)}}}$ of length $|V|$. If the first $n$ bits of this bitstring are 1, this indicates that
 vertex $v_n$ is located at position $j$ in path $\pi^{(i)}$.
 
-Compared to the one-hot encoding, it is easier to move from one valid assignment to another, as only one bitflip
+Compared to the one-hot encoding, it is easier to move from one valid assignment to another, as only one bit flip
 is required for that. However, there exist just as many invalid encodings.
 
 $$\delta(x, \pi^{(i)}, v, j) = x_{v, j, \pi^{(i)}} - x_{v + 1, j, \pi^{(i)}}$$

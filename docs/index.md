@@ -101,7 +101,7 @@ However, deriving QUBO formulations for combinatorial optimization problems is a
 The `qubo_tools` sub-module of this repository provides an automated framework to generate QUBO formulations from an objective function and a set of constraints. From these building blocks, a QUBO formulation is constructed, either as a human-readable formula, as a QUBO matrix, or a quantum circuit that can be directly executed.
 
 <p align="center">
-<img src="_static/qubo_tools/workflow.png">
+<img src="_static/qubo_tools/workflow.png" alt="QuboGenerator workflow for pathfinding problems">
 </p>
 
 For graph-based shortest path problems, the `qubo_tools.pathfinder` module further provides predefined constraints and cost functions that can be combined to generate QUBO formulations for various problem variants.
