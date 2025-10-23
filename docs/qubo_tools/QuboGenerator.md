@@ -32,7 +32,7 @@ This expression also includes additional auxiliary variables, if necessary, to r
 
 The QUBO as a triangular matrix $Q$, such that the QUBO problem can be represented as
 
-$$\mathbf{x}* = \text{argmin}_{\mathbf{x}} \mathbf{x}^T Q \mathbf{x}$$
+$$\mathbf{x}^* = \text{argmin}_{\mathbf{x}} \mathbf{x}^T Q \mathbf{x}$$
 
 Entry $Q_{ij}$ of the matrix represents the coefficient of the quadratic term $x_i * x_j$ in the expanded QUBO expression.
 
