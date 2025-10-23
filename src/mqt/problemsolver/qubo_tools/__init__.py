@@ -1,4 +1,4 @@
-"""A package for generating QUBO formulations automatically from a set of constraints QUBOs for different problem classes.
+"""A package for generating QUBO formulations automatically from a set of constraints for different problem classes.
 
 It allows users to create a `QuboGenerator` object, and gradually add penalty terms and constraints to it.
 When done, the object can be used to construct a QUBO formulation of the project on multiple granularity levels.

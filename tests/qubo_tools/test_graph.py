@@ -33,21 +33,24 @@ def test_read_write() -> None:
     with NamedTemporaryFile("w+", delete=False, encoding="utf-8") as temp_file:
         temp_file_path = temp_file.name
 
-    with Path(str(temp_file_path)).open("w", encoding="utf-8") as file:
-        g.store(file)
+    try:
+        with Path(str(temp_file_path)).open("w", encoding="utf-8") as file:
+            g.store(file)
 
-    with Path(str(temp_file_path)).open("r", encoding="utf-8") as file:
-        g2 = Graph.read(file)
+        with Path(str(temp_file_path)).open("r", encoding="utf-8") as file:
+            g2 = Graph.read(file)
 
-    assert g == g2
+        assert g == g2
 
-    with Path(str(temp_file_path)).open("w", encoding="utf-8") as file:
-        file.write(g.serialize())
+        with Path(str(temp_file_path)).open("w", encoding="utf-8") as file:
+            file.write(g.serialize())
 
-    with Path(str(temp_file_path)).open("r", encoding="utf-8") as file:
-        g2 = Graph.deserialize(file.read())
+        with Path(str(temp_file_path)).open("r", encoding="utf-8") as file:
+            g2 = Graph.deserialize(file.read())
 
-    assert g == g2
+        assert g == g2
+    finally:
+        Path(str(temp_file_path)).unlink(missing_ok=True)
 
 
 def test_eq() -> None:
