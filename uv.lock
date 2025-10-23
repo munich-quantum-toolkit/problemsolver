@@ -1688,7 +1688,7 @@ requires-dist = [
     { name = "pytket-qiskit", specifier = ">=0.67.0" },
     { name = "qiskit", specifier = ">=2.0.3,<2.2.0" },
     { name = "qiskit-aer", specifier = ">=0.16.4" },
-    { name = "qiskit-ibm-runtime", specifier = ">=0.38.0,<0.42.0" },
+    { name = "qiskit-ibm-runtime", specifier = ">=0.43.1,<0.44.0" },
     { name = "qsharp", specifier = ">=1.20.0" },
     { name = "scipy", specifier = ">=1.13.1" },
     { name = "scipy", marker = "python_full_version >= '3.13'", specifier = ">=1.14.1" },
@@ -2822,7 +2822,7 @@ wheels = [
 
 [[package]]
 name = "qiskit-ibm-runtime"
-version = "0.41.1"
+version = "0.43.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "ibm-platform-services" },
@@ -2836,9 +2836,9 @@ dependencies = [
     { name = "requests-ntlm" },
     { name = "urllib3" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/32/c9/3ac506ad9d157d2ec3f3c548cee61645d6cf8d73d404cf7a2db18534dd4c/qiskit_ibm_runtime-0.41.1.tar.gz", hash = "sha256:e9831956d316a7bd589f4a7a1a0da1e76c95083fbc38746884c3598443babacb", size = 1472381, upload-time = "2025-08-19T18:59:28.776Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/42/ab/0fb220423ded04af3ac6a9d463d25c779d037b89930117873103bee59915/qiskit_ibm_runtime-0.43.1.tar.gz", hash = "sha256:73852ffd3e72562a13f19507f1c548473a4a0a1d7a18a1f365d79d754838d4fe", size = 1492889, upload-time = "2025-10-23T17:05:50.654Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ed/33/fb0ef7140d15f28cc3246a26e8c9d0c9016c3c7c6f400b1579fd41e2ec35/qiskit_ibm_runtime-0.41.1-py3-none-any.whl", hash = "sha256:30673c532324b343924e860b2b67ea39f2cf26bff15a552ac5ff6cc3fdb5f296", size = 1418753, upload-time = "2025-08-19T18:59:26.489Z" },
+    { url = "https://files.pythonhosted.org/packages/20/37/765ca468d0a242eb3806c08421e009712d6487857d1b1821633ac92aaef1/qiskit_ibm_runtime-0.43.1-py3-none-any.whl", hash = "sha256:7448bb808589686079c50b097c804bbac738ad6a7ba30f8939164dcc99b4f625", size = 1424850, upload-time = "2025-10-23T17:05:48.556Z" },
 ]
 
 [[package]]

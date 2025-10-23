@@ -41,7 +41,7 @@ dependencies = [
     "mqt-bench>=2.0.1",
     "pytket>=1.29.0",
     "pytket-qiskit>=0.67.0",
-    "qiskit-ibm-runtime>=0.38.0,<0.42.0",
+    "qiskit-ibm-runtime>=0.43.1,<0.44.0",
     "z3-solver>=4.15.3.0",
     "openpyxl>=3.1.5",
 ]
