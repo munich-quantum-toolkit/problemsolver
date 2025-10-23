@@ -182,6 +182,6 @@ Enforces that the length of a given path is maximized.
 
 Properties
 
-- `path_ids: list[int]`: The ID of the paths this constraint should be applied to.
+- `path_ids: list[int]`: The IDs of the paths this constraint should be applied to.
 
 $$- \sum_{(u  \rightarrow v)  \in E}  \sum_{i = 1}^{N} A_{uv} \delta(x,  \pi, u, i) \delta(x,  \pi, v, i+1)$$
