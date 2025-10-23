@@ -262,7 +262,7 @@ class PathFindingQuboGenerator(QuboGenerator):
         Returns:
             list[tuple[sp.Expr, float]]: A list of tuples containing the penalty expressions and their suggested lambda values.
         """
-        return [(expr, lam or self.__optimal_lambda()) for (expr, lam) in self.penalties]
+        return [(expr, lam if lam is not None else self.__optimal_lambda()) for (expr, lam) in self.penalties]
 
     def __optimal_lambda(self) -> float:
         """Compute the optimal lambda value for all penalties."""
@@ -306,7 +306,7 @@ class PathFindingQuboGenerator(QuboGenerator):
     def get_variable_index(self, var: sp.Expr) -> int:
         parts = var.args
 
-        if any(not isinstance(part, sp.core.Integer) for part in parts):
+        if any(not isinstance(part, sp.Integer) for part in parts):
             msg = "Variable subscripts must be integers."
             raise ValueError(msg)
 
@@ -373,7 +373,7 @@ class PathFindingQuboGenerator(QuboGenerator):
         paths: list[list[int]] = []
         path: list[tuple[int, int]] = []
         for i, bit in enumerate(array):
-            if i % (len(array) / self.settings.n_paths) == 0 and i != 0:
+            if i % (len(array) // self.settings.n_paths) == 0 and i != 0:
                 path.sort(key=operator.itemgetter(1))
                 paths.append([entry[0] + 1 for entry in path])
                 path = []

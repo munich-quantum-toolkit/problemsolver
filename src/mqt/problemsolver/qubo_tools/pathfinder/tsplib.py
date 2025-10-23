@@ -34,7 +34,13 @@ def to_graph(g: nx.Graph) -> Graph:
     Returns:
         Graph: The transformed graph.
     """
-    return Graph(g.number_of_nodes(), g.edges.data("weight"))
+    edges: list[tuple[int, int] | tuple[int, int, float]] = []
+    for u, v, w in g.edges.data("weight", default=1.0):
+        if w is None:
+            edges.append((u, v))  # default to 1.0 inside Graph
+        else:
+            edges.append((u, v, float(w)))
+    return Graph(g.number_of_nodes(), edges)
 
 
 def __tsp(problem: StandardProblem, encoding_type: cost_functions.EncodingType) -> PathFindingQuboGenerator:
@@ -48,7 +54,7 @@ def __tsp(problem: StandardProblem, encoding_type: cost_functions.EncodingType) 
         PathFindingQuboGenerator: The constructed QUBO generator.
     """
     g = to_graph(problem.get_graph())
-    settings = PathFindingQuboGeneratorSettings(encoding_type, 1, g.n_vertices, True)
+    settings = PathFindingQuboGeneratorSettings(encoding_type, 1, g.n_vertices, loops=True)
     generator = PathFindingQuboGenerator(cost_functions.MinimizePathLength([1]), g, settings)
 
     generator.add_constraint(cost_functions.PathIsValid([1]))
@@ -118,14 +124,15 @@ def from_tsplib_problem(
         encoding_type (cost_functions.EncodingType): The desired encoding type.
 
     Raises:
-        NotImplementedError: If a CVRP problem is given, as this problem type cannot be solved by the pathfinder.
-        ValueError: If an unknown problem type is given.
+        ValueError: If a CVRP problem is given, as this problem type cannot be solved by the pathfinder or an unknown problem type is given.
 
     Returns:
         PathFindingQuboGenerator: The constructed QUBO generator.
     """
     try:
-        importlib.util.find_spec("tsplib95")
+        if importlib.util.find_spec("tsplib95") is None:
+            msg = "The 'tsplib95' package is required to use this function."
+            raise RuntimeError(msg) from None
     except ImportError:
         msg = "The 'tsplib95' package is required to use this function."
         raise RuntimeError(msg) from None

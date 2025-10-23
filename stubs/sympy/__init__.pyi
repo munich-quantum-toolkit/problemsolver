@@ -2,8 +2,6 @@ from typing import Any
 
 import typing_extensions
 
-from . import core  # noqa: F401
-
 AnyExpression: typing_extensions.TypeAlias = Basic | float | object
 
 class Basic:

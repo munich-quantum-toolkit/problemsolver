@@ -13,7 +13,7 @@ Typical usage example:
     generator.add_constraint(pf.PathIsValid([1]))
     generator.add_constraint(pf.PathContainsVerticesExactlyOnce(graph.all_vertices, [1]))
 
-    A = generator_new.construct_qubo_matrix()
+    A = generator.construct_qubo_matrix()
     print(A)
     ```
 """

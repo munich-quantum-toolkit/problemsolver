@@ -147,4 +147,4 @@ class Graph:
         Returns:
             int: The hash of the graph.
         """
-        return hash(self.adjacency_matrix)
+        return hash(self.adjacency_matrix.tobytes())

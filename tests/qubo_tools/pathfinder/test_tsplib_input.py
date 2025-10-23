@@ -15,9 +15,7 @@ import tsplib95
 import mqt.problemsolver.qubo_tools.pathfinder as pf
 import mqt.problemsolver.qubo_tools.pathfinder.cost_functions as cf
 
-from .utils_test import check_equal, get_test_graph
-
-TEST_GRAPH = get_test_graph()
+from .utils_test import check_equal
 
 
 def read_from_path(path: str, encoding: pf.EncodingType = pf.EncodingType.ONE_HOT) -> pf.PathFindingQuboGenerator:

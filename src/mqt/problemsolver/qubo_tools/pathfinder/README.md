@@ -2,7 +2,7 @@
 
 This submodule of the `qubo_tools` is responsible for the QUBO formulation of pathfinding problems.
 
-### Settings
+## Settings
 
 Constructing QUBO formulation for pathfinding problems requires a `PathfindingQuboGenerator` instance with the corresponding settings:
 
@@ -21,7 +21,7 @@ settings = pf.PathFindingQuboGeneratorSettings(
 )
 ```
 
-### PathFindingQuboGenerator
+## PathFindingQuboGenerator
 
 The `PathFindingQuboGenerator` class represents the main QUBO factory for pathfinding problems. It can be set up with predefined settings and populated with problem-specific constraints.
 
@@ -37,7 +37,7 @@ qubo_generator = pf.PathFindingQuboGenerator(
 
 When creating a `PathFindingQuboGenerator` instance, an objective function, as discussed below, can be added to add an optimization criterion.
 
-### Cost Functions
+## Cost Functions
 
 The `pathfinder` module provides cost functions representing various constraints related to pathfinding problems. The following constraints are supported:
 

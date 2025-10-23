@@ -24,7 +24,7 @@ def simple_generator() -> QuboGenerator:
 
 @pytest.fixture
 def simple_device() -> Calibration:
-    """Provides a test device calibration with 500 qubits and nearest-neighbor connectivity."""
+    """Provides a test device calibration with heavy-hex-style connectivity."""
     heavy_hex_coupling = []
 
     def get_qubit_index(row: int, cell: int, off: bool) -> int:

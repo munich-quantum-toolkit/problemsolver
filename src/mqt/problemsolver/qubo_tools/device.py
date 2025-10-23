@@ -104,8 +104,8 @@ class Calibration:
         Returns:
             int: The shared neighbor qubit, or -1 if none exists.
         """
-        for x in self.connections_dict[q1]:
-            if x in self.connections_dict[q2]:
+        for x in self.connections_dict.get(q1, []):
+            if x in self.connections_dict.get(q2, []):
                 return x
         return -1
 
@@ -115,12 +115,12 @@ class Calibration:
         Returns:
             list[int]: The longest Hamiltonian path through the qubit connectivity graph.
         """
-        # To compute the start that leasts to the longest Hamiltonian path, we look for qubits with only one connection.
+        # To compute the start that leads to the longest Hamiltonian path, we look for qubits with only one connection.
         # Sometimes, these might not be directly connected to a heavy node, so we keep traversing until we find one that is.
         # That qubit is then the start of the longest Hamiltonian path.
         potential_starts = [x for x in self.connections_dict if len(self.connections_dict[x]) == 1]
         assert len(potential_starts) >= 2, (
-            f"There should be exactly two potential starts for the connected qubit chain. ({potential_starts})"
+            f"There should be at least two potential starts for the connected qubit chain. ({potential_starts})"
         )
         start = min(potential_starts)
 

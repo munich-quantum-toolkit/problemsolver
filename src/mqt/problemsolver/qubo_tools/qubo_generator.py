@@ -233,7 +233,7 @@ class QuboGenerator:
                 current = sp.Symbol(f"{current}'")
             selected_variables[1] = current
             equality_penalty += (
-                old_var + selected_variables[1] - old_var * selected_variables[1]
+                old_var + selected_variables[1] - 2 * old_var * selected_variables[1]
             )  # introduce (x - x')^2 as penalty.
 
         y = sp.Symbol(f"y_{chain_index}_1")
@@ -305,7 +305,7 @@ class QuboGenerator:
             while any(str(selected_replacement) in x for x in assignment.slack_dict.values()):
                 selected_replacement = sp.Symbol(f"{selected_replacement}'")
             equality_penalty += (
-                100 * highest_key + 100 * selected_replacement - 100 * highest_key * selected_replacement
+                100 * highest_key + 100 * selected_replacement - 200 * highest_key * selected_replacement
             )  # introduce (x - x')^2 as penalty.
         y = sp.Symbol(f"y_{chain_index}_{index + 1}")
         assignment.add_slack_variable(str(y), str(last_slack), str(selected_replacement))

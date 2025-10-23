@@ -232,7 +232,6 @@ def optimize_classically(qubo: np.typing.NDArray[np.int_ | np.float64]) -> tuple
 
     Args:
         qubo (npt.NDArray[np.int_  |  np.float64]): A matrix representing the QUBO problem.
-        show_progress_bar (bool, optional): If True, shows a progress bar in jupyter notebooks during calculation. Defaults to False.
 
     Returns:
         tuple[list[int], float]: The optimal solution and its corresponding score.
