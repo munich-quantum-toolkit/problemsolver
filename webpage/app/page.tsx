@@ -59,7 +59,7 @@ export default function Home() {
     <main className="flex h-screen flex-col items-center font-sans">
       <nav className="flex items-center justify-between w-screen bg-slate-100 p-5">
         <a href="#" className="text-gray-900 font-medium flex flex-row gap-2 items-center"><Image alt="TUM" src={"tum_logo.svg"} width={60} height={1}></Image>MQT QUBOMaker: Pathfinder</a>
-        <a target="_blank" href="https://www.cda.cit.tum.de/research/quantum/" className="text-gray-900 font-medium hidden md:block"><Image alt="MQT" src={"https://github.com/munich-quantum-toolkit/problemsolver/blob/main/docs/_static/mqt_dark.png"} width={120} height={1} unoptimized></Image></a>
+        <a target="_blank" href="https://www.cda.cit.tum.de/research/quantum/" className="text-gray-900 font-medium hidden md:block"><Image alt="MQT" src={"https://raw.githubusercontent.com/munich-quantum-toolkit/.github/refs/heads/main/docs/_static/logo-mqt-dark.svg"} width={120} height={1} unoptimized></Image></a>
         <a href="legal" className="text-gray-900 font-medium hidden md:block">Legal Information</a>
         <a href="legal" className="text-gray-900 font-medium block md:hidden"><Image alt="i" src={"info.png"} width={20} height={1}></Image></a>
       </nav>
