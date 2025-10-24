@@ -148,7 +148,7 @@ $$ \sum*{i=1}^N \delta(x, \pi, v,i) \prod*{j=1}^{i-1}(1- \delta(x, \pi, u,j))$$
 
 Enforces that two given paths share no vertices.
 
-Properties
+Properties:
 
 - `path_one: int`: The ID of the first path.
 - `path_two: int`: The ID of the second path.
@@ -159,7 +159,7 @@ $$ \sum*{v \in V} \left[ \left( \sum*{i=1}^N \delta(x, \pi^{(1)}, v, i) \right) 
 
 Enforces that two given paths share no edges.
 
-Properties
+Properties:
 
 - `path_one: int`: The ID of the first path.
 - `path_two: int`: The ID of the second path.
@@ -170,7 +170,7 @@ $$ \sum*{(u \rightarrow v) \in E} \left[ \left( \sum*{i=1}^{N} \delta(x, \pi^{(1
 
 Enforces that the length of a given path is minimized.
 
-Properties
+Properties:
 
 - `path_ids: list[int]`: The IDs of the paths this constraint should be applied to.
 
@@ -180,7 +180,7 @@ $$ \sum*{(u \rightarrow v) \in E} \sum*{i = 1}^{N} A\_{uv} \delta(x, \pi, u, i) 
 
 Enforces that the length of a given path is maximized.
 
-Properties
+Properties:
 
 - `path_ids: list[int]`: The IDs of the paths this constraint should be applied to.
 
