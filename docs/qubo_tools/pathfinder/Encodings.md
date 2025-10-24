@@ -7,7 +7,7 @@ interpreted.
 An example of the same path represented in each of the three encoding schemes is shown below.
 
 <p align="center">
-<img src="_static/qubo_tools/encodings.png" height=150px alt="Encoding schemes">
+<img src="../../_static/qubo_tools/encodings.png" height=150px alt="Encoding schemes">
 </p>
 
 For each encoding scheme, the function $\delta(x, \pi^{(i)}, v, j)$ is defined, returning 1 if vertex $v$ is located at position $j$ in path $\pi^{(i)}$, and 0 otherwise.
