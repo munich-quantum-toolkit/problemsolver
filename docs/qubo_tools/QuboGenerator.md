@@ -1,11 +1,3 @@
----
-file_format: mystnb
-kernelspec:
-  name: python3
-mystnb:
-  number_source_lines: true
----
-
 # QuboGenerator
 
 The `QuboGenerator` class is the main concept of the package. It provides methods for the

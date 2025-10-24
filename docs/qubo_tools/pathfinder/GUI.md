@@ -1,11 +1,3 @@
----
-file_format: mystnb
-kernelspec:
-  name: python3
-mystnb:
-  number_source_lines: true
----
-
 # Graphical User Interface
 
 A web-based GUI for the Pathfinder submodule can be accessed through [GitHub pages](https://munich-quantum-toolkit.github.io/problemsolver/).

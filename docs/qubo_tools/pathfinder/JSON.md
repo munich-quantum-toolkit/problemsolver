@@ -1,11 +1,3 @@
----
-file_format: mystnb
-kernelspec:
-  name: python3
-mystnb:
-  number_source_lines: true
----
-
 # JSON Encoding
 
 Instead of using the programming interface for creating a QuboGenerator, the _Pathfinder_ submodule also supports a JSON format.

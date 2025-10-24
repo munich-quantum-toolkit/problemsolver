@@ -1,11 +1,3 @@
----
-file_format: mystnb
-kernelspec:
-  name: python3
-mystnb:
-  number_source_lines: true
----
-
 # TSPLib Input
 
 [`TSPLib`](http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/) provides a library of sample

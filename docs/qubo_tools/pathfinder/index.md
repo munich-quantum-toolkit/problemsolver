@@ -1,11 +1,3 @@
----
-file_format: mystnb
-kernelspec:
-  name: python3
-mystnb:
-  number_source_lines: true
----
-
 # Pathfinder Submodule
 
 This module implements a `QuboGenerator` for pathfinding problems on directed and undirected graphs in the form of the `PathFindingQuboGenerator` class, a specialization of the general `QuboGenerator` class.

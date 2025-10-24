@@ -1,11 +1,3 @@
----
-file_format: mystnb
-kernelspec:
-  name: python3
-mystnb:
-  number_source_lines: true
----
-
 # QUBO Tools
 
 `qubo_tools` provides a framework for creating QUBO formulations for diverse optimization problems. These formulations can be used with a wide range of quantum algorithms to find approximate solutions to the problems.

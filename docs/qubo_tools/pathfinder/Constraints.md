@@ -1,11 +1,3 @@
----
-file_format: mystnb
-kernelspec:
-  name: python3
-mystnb:
-  number_source_lines: true
----
-
 # Constraints
 
 The _Pathfinder_ submodule supports a total of 13 constraints. These constraints are translated

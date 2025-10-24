@@ -1,11 +1,3 @@
----
-file_format: mystnb
-kernelspec:
-  name: python3
-mystnb:
-  number_source_lines: true
----
-
 # Encoding Schemes
 
 The _Pathfinder_ submodule provides three different encoding schemes. The encoding scheme determines, how
