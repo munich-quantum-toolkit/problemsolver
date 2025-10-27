@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 2
 requires-python = ">=3.10"
 resolution-markers = [
     "python_full_version >= '3.14'",
@@ -1608,6 +1608,7 @@ source = { editable = "." }
 dependencies = [
     { name = "docplex" },
     { name = "joblib" },
+    { name = "jsonschema" },
     { name = "matplotlib" },
     { name = "mqt-bench" },
     { name = "mqt-core" },
@@ -1623,6 +1624,7 @@ dependencies = [
     { name = "qiskit-aer" },
     { name = "qiskit-ibm-runtime" },
     { name = "qsharp" },
+    { name = "referencing" },
     { name = "scipy", version = "1.15.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "scipy", version = "1.16.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "z3-solver" },
@@ -1672,6 +1674,7 @@ test = [
 requires-dist = [
     { name = "docplex", specifier = ">=2.28.240" },
     { name = "joblib", specifier = ">=1.4.2" },
+    { name = "jsonschema", specifier = ">=4.20.0" },
     { name = "matplotlib", specifier = ">=3.9.4" },
     { name = "mqt-bench", specifier = ">=2.0.1" },
     { name = "mqt-core", specifier = ">=3.0.2" },
@@ -1690,6 +1693,7 @@ requires-dist = [
     { name = "qiskit-aer", specifier = ">=0.16.4" },
     { name = "qiskit-ibm-runtime", specifier = ">=0.38.0,<0.42.0" },
     { name = "qsharp", specifier = ">=1.20.0" },
+    { name = "referencing", specifier = ">=0.37.0" },
     { name = "scipy", specifier = ">=1.13.1" },
     { name = "scipy", marker = "python_full_version >= '3.13'", specifier = ">=1.14.1" },
     { name = "z3-solver", specifier = ">=4.15.3.0" },

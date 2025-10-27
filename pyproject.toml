@@ -44,6 +44,8 @@ dependencies = [
     "qiskit-ibm-runtime>=0.38.0,<0.42.0",
     "z3-solver>=4.15.3.0",
     "openpyxl>=3.1.5",
+    "jsonschema>=4.20.0",
+    "referencing>=0.37.0",
 ]
 
 classifiers = [
@@ -142,7 +144,7 @@ precision = 1
 
 
 [tool.mypy]
-mypy_path = "$MYPY_CONFIG_FILE_DIR/src"
+mypy_path = "$MYPY_CONFIG_FILE_DIR/src,$MYPY_CONFIG_FILE_DIR/stubs"
 files = ["src", "tests"]
 python_version = "3.10"
 strict = true
@@ -152,7 +154,7 @@ explicit_package_bases = true
 pretty = true
 
 [[tool.mypy.overrides]]
-module = ["qiskit.*",  "matplotlib.*", "python_tsp.*", "networkx.*", "joblib.*", "docplex.*", "qiskit_aer.*", "qsharp.*", "sklearn.*", "pytket.*"]
+module = ["qiskit.*",  "matplotlib.*", "python_tsp.*", "networkx.*", "joblib.*", "docplex.*", "qiskit_aer.*", "qsharp.*", "sklearn.*", "pytket.*", "jsonschema.*", "tsplib95.*", "referencing.*"]
 ignore_missing_imports = true
 
 
@@ -235,6 +237,13 @@ default.extend-ignore-re = [
     "(?Rm)^.*(#|//)\\s*spellchecker:disable-line$",  # ignore line
     "(?s)(#|//)\\s*spellchecker:off.*?\\n\\s*(#|//)\\s*spellchecker:on" # ignore block
 ]
+
+[tool.typos.files]
+extend-exclude = [
+    "*.tsx",
+    "package-lock.json"
+]
+
 [tool.typos.default.extend-words]
 wille = "wille"
 anc = "anc"
