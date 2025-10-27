@@ -21,7 +21,7 @@ In the one-hot encoding scheme, $N \cdot |V| \cdot |\Pi|$ binary variables $x_{v
 used to represent the problem.
 
 An individual variable with value 1 indicates that the corresponding vertex $v$ is located at position
-$j$ in path $\pi^{(i)}$. Assignments such that $x_{v,j,\pi^{(i)}} = 1$ for more than one $v$ and the same $j$ and $\pi^{(i)}$ are invalid.
+$j$ in path $\pi^{(i)}$. Assignments where multiple vertices $v$ have $x_{v,j,\pi^{(i)}} = 1$ for the same position $j$ and path $\pi^{(i)}$ are invalid.
 
 This encoding scheme is very expressive, but also uses a large amount of binary variables. It is also
 very sparse, meaning that there exists a large number of invalid assignments. Moving from one valid assignment
