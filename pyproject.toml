@@ -22,7 +22,7 @@ dynamic = ["version"]
 
 dependencies = [
     "mqt.core>=3.0.2",
-    "qiskit>=2.0.3,<2.2.0",
+    "qiskit>=2.0.3",
     "qiskit_aer>=0.16.4",
     "numpy>=2.1; python_version >= '3.13'",
     "numpy>=1.26; python_version >= '3.12'",
@@ -41,7 +41,6 @@ dependencies = [
     "mqt-bench>=2.0.1",
     "pytket>=1.29.0",
     "pytket-qiskit>=0.67.0",
-    "qiskit-ibm-runtime>=0.43.1,<0.44.0",
     "z3-solver>=4.15.3.0",
     "openpyxl>=3.1.5",
 ]
