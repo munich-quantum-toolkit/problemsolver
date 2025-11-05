@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.10"
 resolution-markers = [
     "python_full_version >= '3.14'",
@@ -1632,6 +1632,7 @@ dependencies = [
     { name = "pytket-qiskit" },
     { name = "qiskit" },
     { name = "qiskit-aer" },
+    { name = "qiskit-ibm-runtime" },
     { name = "qsharp" },
     { name = "referencing" },
     { name = "scipy", version = "1.15.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
@@ -1700,6 +1701,7 @@ requires-dist = [
     { name = "pytket-qiskit", specifier = ">=0.67.0" },
     { name = "qiskit", specifier = ">=2.0.3" },
     { name = "qiskit-aer", specifier = ">=0.16.4" },
+    { name = "qiskit-ibm-runtime", specifier = ">=0.30.0" },
     { name = "qsharp", specifier = ">=1.20.0" },
     { name = "referencing", specifier = ">=0.37.0" },
     { name = "scipy", specifier = ">=1.13.1" },
