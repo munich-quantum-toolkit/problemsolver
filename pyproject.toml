@@ -119,7 +119,11 @@ xfail_strict = true
 filterwarnings = [
     "error",
     # Qiskit 2.1 internal deprecations
-    'ignore:.*The class .* is deprecated as of Qiskit 2.1.*:DeprecationWarning:qiskit.*',
+    'ignore:.*``qiskit.circuit.library.blueprintcircuit.BlueprintCircuit`` is deprecated as of Qiskit 2.1.*:DeprecationWarning:qiskit.*',
+    'ignore:.*``qiskit.circuit.library.n_local.n_local.NLocal`` is deprecated as of Qiskit 2.1.*:DeprecationWarning:qiskit.*',
+    # Qiskit 2.2 internal deprecations
+    'ignore:.*``qiskit.circuit.library.phase_oracle.PhaseOracle`` is deprecated as of Qiskit 2.2.*:DeprecationWarning',
+    'ignore:.*Trying to add QuantumRegister to a QuantumCircuit having a layout.*:UserWarning:qiskit.*',
 ]
 
 
