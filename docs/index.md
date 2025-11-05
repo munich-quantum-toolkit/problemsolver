@@ -93,6 +93,22 @@ Following this approach, we provide a pre-compilation module that can be used to
 
 For more details, see {cite:p}`quetschlich2023precompilation`.
 
+## Automated Generation of QUBO Formulations
+
+Many quantum optimization algorithms, such as QAOA or quantum annealing, require the problem to be solved to be formulated as a Quadratic Unconstrained Binary Optimization (QUBO) problem.
+However, deriving QUBO formulations for combinatorial optimization problems is a challenging and time-consuming task that requires expert knowledge and can easily lead to errors.
+
+The `qubo_tools` sub-module of this repository provides an automated framework to generate QUBO formulations from an objective function and a set of constraints. From these building blocks, a QUBO formulation is constructed, either as a human-readable formula, as a QUBO matrix, or a quantum circuit that can be directly executed.
+
+<p align="center">
+<img src="_static/qubo_tools/workflow.png" alt="QuboGenerator workflow for pathfinding problems">
+</p>
+
+For graph-based shortest path problems, the `qubo_tools.pathfinder` module further provides predefined constraints and cost functions that can be combined to generate QUBO formulations for various problem variants.
+This allows developers to define the problem to be fed into the `QuboGenerator` without requiring any additional code.
+
+For more details, see {cite:p}`rovara2024pathfindingframework`.
+
 ## Utilizing Resource Estimation for the Development of Quantum Computing Applications
 
 Resource estimation is a promising alternative to actually execute quantum circuits on real quantum hardware which is currently restricted by the number of qubits and the error rates. By estimating the resources needed for a quantum circuit,
@@ -205,6 +221,7 @@ self
 :maxdepth: 1
 
 installation
+qubo_tools/index
 references
 ```
 
