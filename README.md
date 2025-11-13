@@ -13,7 +13,7 @@
 
 # MQT ProblemSolver
 
-MQT ProblemSolver provides a framework to utilize quantum computing as a technology for users with little to no quantum computing knowledge
+MQT ProblemSolver provides a framework to utilize quantum computing as a technology for users with little to no quantum computing knowledge.
 It is developed as part of the [_Munich Quantum Toolkit (MQT)_](https://mqt.readthedocs.io).
 
 <p align="center">
