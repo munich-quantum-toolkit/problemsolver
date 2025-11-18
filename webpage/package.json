@@ -13,7 +13,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-graph-vis": "^1.0.7",
-    "vis-network": "^9.1.9"
+    "vis-network": "^10.0.0"
   },
   "devDependencies": {
     "@types/node": "20.19.25",
