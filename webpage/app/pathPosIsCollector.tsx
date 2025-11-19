@@ -43,7 +43,7 @@ const PathPosIsCollector: React.FC<PathPosIsCollectorProps> = ({ title, cols = 2
             <h1>{title}</h1>
             <div className='flex flex-row gap-4 mb-2'>
                 <span className="pb-1 pt-1">Path</span>
-                <select ref={pathRef} className="border-2 rounded p-1">
+                <select ref={pathRef} className="border-2 rounded-sm p-1">
                     {
                         (new Array(nPaths).fill(0)).map((_, index) => (
                             <option key={index}>{index + 1}</option>
@@ -51,7 +51,7 @@ const PathPosIsCollector: React.FC<PathPosIsCollectorProps> = ({ title, cols = 2
                     }
                 </select>
                 <span className="pb-1 pt-1">position</span>
-                <select ref={posRef} className="border-2 rounded p-1">
+                <select ref={posRef} className="border-2 rounded-sm p-1">
                     {
                         (new Array(pathLength).fill(0)).map((_, index) => (
                             <option key={index}>{index + 1}</option>
@@ -59,14 +59,14 @@ const PathPosIsCollector: React.FC<PathPosIsCollectorProps> = ({ title, cols = 2
                     }
                 </select>
                 <span className="pb-1 pt-1">is</span>
-                <select ref={vertexRef} className="border-2 rounded p-1">
+                <select ref={vertexRef} className="border-2 rounded-sm p-1">
                     {
                         allVertices.map((vertex, index) => (
                             <option key={index}>{vertex}</option>
                         ))
                     }
                 </select>
-                <button className='border-2 rounded bg-slate-100 p-1 hover:bg-slate-200 active:bg-slate-300'
+                <button className='border-2 rounded-sm bg-slate-100 p-1 hover:bg-slate-200 active:bg-slate-300'
                     onClick={() => itemAdded(pathRef.current?.value ?? "", posRef.current?.value ?? "", vertexRef.current?.value ?? "")}>Add</button>
             </div>
             <div className={`grid grid-cols-${cols} gap-4`}>

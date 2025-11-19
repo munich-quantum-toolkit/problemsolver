@@ -21,7 +21,7 @@ const Toggle: React.FC<ToggleProps> = ({ children, state, onUpdate }) => {
     };
 
     return (
-        <button onClick={handleToggle} className={`rounded border-2 p-1 text-center cursor-pointer bg-${getIsToggled() ? "slate-100" : "white"}`}>
+        <button onClick={handleToggle} className={`rounded-sm border-2 p-1 text-center cursor-pointer bg-${getIsToggled() ? "slate-100" : "white"}`}>
             {children}
         </button>
     );

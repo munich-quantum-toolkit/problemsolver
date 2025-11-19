@@ -10,7 +10,7 @@ interface PathPosIsProps {
 
 const PathPosIs: React.FC<PathPosIsProps> = ({ path, position, vertex, onClick }) => {
     return (
-        <div onClick={() => onClick?.(path, position, vertex)} className={`justify-around inline-flex flex-wrap-nowrap text-center border-2 rounded p-1 ${onClick !== undefined ? "cursor-pointer" : ""}`}>
+        <div onClick={() => onClick?.(path, position, vertex)} className={`justify-around inline-flex flex-wrap-nowrap text-center border-2 rounded-sm p-1 ${onClick !== undefined ? "cursor-pointer" : ""}`}>
             <span>Path</span>
             <span>{path}</span>
             <span>position</span>
