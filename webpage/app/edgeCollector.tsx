@@ -39,7 +39,7 @@ const EdgeCollector: React.FC<EdgeCollectorProps> = ({ title, cols = 4, allVerti
         <div>
             <h1>{title}</h1>
             <div className='flex flex-row gap-4 mb-2'>
-                <select ref={fromRef} className="border-2 rounded p-1">
+                <select ref={fromRef} className="border-2 rounded-sm p-1">
                     {
                         allVertices.map((vertex, index) => (
                             <option key={index}>{vertex}</option>
@@ -47,14 +47,14 @@ const EdgeCollector: React.FC<EdgeCollectorProps> = ({ title, cols = 4, allVerti
                     }
                 </select>
                 <span className="pb-1 pt-1">➔</span>
-                <select ref={toRef} className="border-2 rounded p-1">
+                <select ref={toRef} className="border-2 rounded-sm p-1">
                     {
                         allVertices.map((vertex, index) => (
                             <option key={index}>{vertex}</option>
                         ))
                     }
                 </select>
-                <button className='border-2 rounded bg-slate-100 p-1 hover:bg-slate-200 active:bg-slate-300'
+                <button className='border-2 rounded-sm bg-slate-100 p-1 hover:bg-slate-200 active:bg-slate-300'
                     onClick={() => itemAdded(fromRef.current?.value ?? "", toRef.current?.value ?? "")}>Add</button>
             </div>
             <div className={`grid grid-cols-${cols} gap-4`}>

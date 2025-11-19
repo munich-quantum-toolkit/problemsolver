@@ -112,8 +112,8 @@ const GraphView: React.FC<GraphViewProps> = ({ upload, updateAdjacencyMatrix, in
                                 <div className="w-full h-full flex flex-col gap-2">
                                         <textarea defaultValue={adjacencyMatrixToString(adjacencyMatrix)} ref={textareaRef} className="w-full p-2 flex-1 font-mono"></textarea>
                                         <div className="w-full flex flex-row justify-around mb-1">
-                                                <button onClick={doCancel} className="border-2 rounded bg-slate-100 p-2 hover:bg-slate-200 active:bg-slate-300">Cancel</button>
-                                                <button onClick={doOk} className="border-2 rounded bg-slate-100 p-2 hover:bg-slate-200 active:bg-slate-300">OK</button>
+                                                <button onClick={doCancel} className="border-2 rounded-sm bg-slate-100 p-2 hover:bg-slate-200 active:bg-slate-300">Cancel</button>
+                                                <button onClick={doOk} className="border-2 rounded-sm bg-slate-100 p-2 hover:bg-slate-200 active:bg-slate-300">OK</button>
                                         </div>
                                 </div>
                         ) : (

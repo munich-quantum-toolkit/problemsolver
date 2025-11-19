@@ -69,9 +69,9 @@ export default function Home() {
             showInfo ? <InfoScreen></InfoScreen> : <GraphView updateAdjacencyMatrix={updateAdjacencyMatrix} upload={doUpload} initialAdjacencyMatrix={adjacencyMatrix}></GraphView>
           }
           <div className="flex flex-row justify-around w-full lg:w-auto">
-            <button onClick={() => setShowInfo(!showInfo)} className="border-2 rounded bg-slate-100 p-2 hover:bg-slate-200 active:bg-slate-300">{showInfo ? "Back" : "Help"}</button>
-            <button onClick={() => setDoUpload(true)} className="border-2 rounded bg-slate-100 p-2 hover:bg-slate-200 active:bg-slate-300">Change Graph</button>
-            <button onClick={() => download("generator.json", settings.encoding !== -1 ? settings.toJson() : "")} className="border-2 rounded bg-slate-100 p-2 hover:bg-slate-200 active:bg-slate-300">Generate</button>
+            <button onClick={() => setShowInfo(!showInfo)} className="border-2 rounded-sm bg-slate-100 p-2 hover:bg-slate-200 active:bg-slate-300">{showInfo ? "Back" : "Help"}</button>
+            <button onClick={() => setDoUpload(true)} className="border-2 rounded-sm bg-slate-100 p-2 hover:bg-slate-200 active:bg-slate-300">Change Graph</button>
+            <button onClick={() => download("generator.json", settings.encoding !== -1 ? settings.toJson() : "")} className="border-2 rounded-sm bg-slate-100 p-2 hover:bg-slate-200 active:bg-slate-300">Generate</button>
           </div>
           <ToggleBag cols={3} all={false} title='Encoding' items={[
             "One-Hot",
