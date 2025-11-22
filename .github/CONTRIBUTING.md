@@ -4,4 +4,4 @@
 # Contributing
 
 Thank you for your interest in contributing to MQT ProblemSolver!
-An extensive contribution guide is available in our [documentation](https://mqt.readthedocs.io/projects/problemsolver/en/latest/CONTRIBUTING.html).
+An extensive contribution guide is available in our [documentation](https://mqt.readthedocs.io/projects/problemsolver/en/latest/contributing.html).
