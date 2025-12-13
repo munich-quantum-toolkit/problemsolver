@@ -257,3 +257,7 @@ aer = "aer"
 
 [tool.repo-review]
 ignore = ["GH200"]
+
+
+[tool.check-sdist]
+sdist-only = ["src/mqt/problemsolver/_version.py"]
