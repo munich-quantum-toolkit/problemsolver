@@ -58,6 +58,12 @@ repos:
       - id: rst-directive-colons
       - id: rst-inline-touching-normal
 
+  # Check for license headers
+  - repo: https://github.com/emzeat/mz-lictools
+    rev: v2.9.0
+    hooks:
+      - id: license-tools
+
   # Ensure uv lock file is up-to-date
   - repo: https://github.com/astral-sh/uv-pre-commit
     rev: 0.9.24
@@ -102,7 +108,7 @@ repos:
           - mqt-bench>=2.0.1
 
   # Check for spelling
-  - repo: https://github.com/crate-ci/typos
+  - repo: https://github.com/adhtruong/mirrors-typos
     rev: v1.42.0
     hooks:
       - id: typos
