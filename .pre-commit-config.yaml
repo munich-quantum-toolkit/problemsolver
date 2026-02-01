@@ -51,7 +51,7 @@ repos:
         name: Disallow improper capitalization
         language: pygrep
         entry: Numpy|Github|PyTest|Mqt|Tum
-        exclude: .pre-commit-config.yaml
+        exclude: ^(.pre-commit-config.yaml|webpage/package-lock.json|.*.zip)
         priority: 0
 
   ## Check for spelling
@@ -109,7 +109,7 @@ repos:
     rev: v3.8.1
     hooks:
       - id: prettier
-        types_or: [yaml, markdown, html, css, scss, javascript, json]
+        types_or: [yaml, markdown, html, css, scss, javascript, json, ts, tsx]
         priority: 1
 
   ## Python linting using ruff

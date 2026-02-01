@@ -8,6 +8,6 @@
  * Licensed under the MIT License
  */
 
-declare module 'react-graph-vis' {
-    export default class Graph extends React.Component<any, any> {};
+declare module "react-graph-vis" {
+  export default class Graph extends React.Component<any, any> {}
 }
