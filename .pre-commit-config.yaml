@@ -51,7 +51,7 @@ repos:
         name: Disallow improper capitalization
         language: pygrep
         entry: '\b(?:Numpy|Github|PyTest|Mqt|Tum)\b'
-        exclude: ^(.pre-commit-config.yaml|webpage/package-lock.json|.*.zip)
+        exclude: ^(.pre-commit-config.yaml|webpage/package-lock.json|.*\.zip)
         priority: 0
 
   ## Check for spelling
