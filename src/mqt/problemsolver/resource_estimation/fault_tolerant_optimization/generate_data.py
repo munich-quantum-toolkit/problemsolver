@@ -8,6 +8,7 @@
 
 from __future__ import annotations
 
+import math
 import pathlib
 from typing import TYPE_CHECKING
 
@@ -82,7 +83,7 @@ def _tk1_to_rzry(a: float, b: float, c: float) -> Circuit:
         A Circuit object representing the equivalent rotation sequence.
     """
     circ = Circuit(1)
-    if a == 0.5 and b == 0.5 and c == 0.5:
+    if math.isclose(a, 1 / 2) and math.isclose(b, 1 / 2) and math.isclose(c, 1 / 2):
         circ.H(0)
     elif a == 0 and b == 1 and c == 0:
         circ.X(0)
@@ -90,21 +91,21 @@ def _tk1_to_rzry(a: float, b: float, c: float) -> Circuit:
         circ.Y(0)
     elif a == 0 and b == 0 and c == 1:
         circ.Z(0)
-    elif a == 0 and b == 0 and c == 0.5:
+    elif a == 0 and b == 0 and math.isclose(c, 1 / 2):
         circ.S(0)
-    elif a == 0 and b == 0 and c == 3 / 2:
+    elif a == 0 and b == 0 and math.isclose(c, 3 / 2):
         circ.Sdg(0)
-    elif a == 0 and b == 0 and c == 1 / 4:
+    elif a == 0 and b == 0 and math.isclose(c, 1 / 4):
         circ.T(0)
-    elif a == 0 and b == 0 and c == -1 / 4:
+    elif a == 0 and b == 0 and math.isclose(c, -1 / 4):
         circ.Tdg(0)
-    elif a == 0 and b == 1 / 2 and c == 0:
+    elif a == 0 and math.isclose(b, 1 / 2) and c == 0:
         circ.V(0)
-    elif a == 0 and b == 3 / 2 and c == 0:
+    elif a == 0 and math.isclose(b, 3 / 2) and c == 0:
         circ.Vdg(0)
     elif a == 0 and c == 0:
         circ.Rx(b, 0)
-    elif a == 1 / 2 and c == -1 / 2:
+    elif math.isclose(a, 1 / 2) and math.isclose(c, -1 / 2):
         circ.Ry(b, 0)
     elif a == 0 and b == 0:
         circ.Rz(c, 0)
