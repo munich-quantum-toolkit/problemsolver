@@ -9,6 +9,7 @@
 from __future__ import annotations
 
 import copy
+import logging
 import math
 import os
 import zipfile
@@ -21,6 +22,8 @@ from mqt.bench import BenchmarkLevel, get_benchmark
 from qiskit import qasm2, transpile
 from qsharp.estimator import ErrorBudgetPartition, EstimatorParams, LogicalCounts
 from qsharp.interop.qiskit import estimate
+
+logger = logging.getLogger(__name__)
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
@@ -238,8 +241,8 @@ def generate_data(
                     "rotations": combinations[2],
                 })
                 results.append(specific_data)
-            except Exception as e:
-                print(f"Error processing circuit {qc.name}: {e}")
+            except Exception:
+                logger.exception(f"Error processing circuit {qc.name}.")
 
     elif logical_counts:
         results = []
@@ -261,7 +264,7 @@ def generate_data(
                     "rotations": combinations[2],
                 })
                 results.append(specific_data)
-            except Exception as e:
-                print(f"Error processing logical counts entry {c}: {e}")
+            except Exception:
+                logger.exception(f"Error processing logical counts entry {c}.")
 
     return results
