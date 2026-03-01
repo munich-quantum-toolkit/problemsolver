@@ -44,9 +44,9 @@ class SlackChainAssignment:
         """Adds a new auxiliary variable to the assignment, replacing the two given existing variables.
 
         Args:
-            new_slack (str): The new auxiliary variable.
-            replace_1 (str): The first variable to be replaced.
-            replace_2 (str): The second variable to be replaced.
+            new_slack: The new auxiliary variable.
+            replace_1: The first variable to be replaced.
+            replace_2: The second variable to be replaced.
         """
         self.slack_dict[new_slack] = (replace_1, replace_2)
         parts = new_slack.split("_")
@@ -59,8 +59,8 @@ class SlackChainAssignment:
         """Computes the indices of all variables in the assignment based on their names and stores them as a side-effect.
 
         Args:
-            expr (sp.Expr): The expression to analyze.
-            offset (int, optional): The starting offset. Defaults to 0.
+            expr: The expression to analyze.
+            offset: The starting offset. Defaults to 0.
         """
         symbols = [str(s) for s in expr.free_symbols]  # type: ignore[attr-defined]
         prime_symbols = [s for s in symbols if s.endswith("'")]
@@ -83,8 +83,8 @@ class QuboGenerator:
     Collects constraints and penalties and provides methods for constructing the QUBO representation of a problem.
 
     Attributes:
-        objective_function (sp.Expr | None): The objective function of the problem.
-        penalties (list[tuple[sp.Expr, float | None]]): The constraints and corresponding penalties.
+        objective_function: The objective function of the problem.
+        penalties: The constraints and corresponding penalties.
     """
 
     objective_function: sp.Expr | None
@@ -103,7 +103,7 @@ class QuboGenerator:
         """Initializes a new QuboGenerator instance.
 
         Args:
-            objective_function (sp.Expr | None): The objective function to be used by the QUBO generator.
+            objective_function: The objective function to be used by the QUBO generator.
         """
         self.objective_function = objective_function
         self.penalties = []
@@ -116,8 +116,8 @@ class QuboGenerator:
         estimated automatically.
 
         Args:
-            penalty_function (sp.Expr): A cost function that represents a constraint.
-            lam (int | None, optional): The penalty scaling factor. Defaults to None.
+            penalty_function: A cost function that represents a constraint.
+            lam: The penalty scaling factor. Defaults to None.
         """
         self.expansion_cache = None
         self.auxiliary_cache = {}
@@ -129,7 +129,7 @@ class QuboGenerator:
         This representation is in its simplest form, including sum and product terms.
 
         Returns:
-            sp.Expr: The mathematical representation of the QUBO formulation.
+            The mathematical representation of the QUBO formulation.
         """
         return cast(
             "sp.Expr",
@@ -149,14 +149,14 @@ class QuboGenerator:
         The final result will be a sum of terms where each term is a product of variables and scalars.
 
         Args:
-            include_slack_information (bool, optional): Whether to include information about slack variables in the result. Defaults to False.
-            for_embedding (bool, optional): Whether to prepare the QUBO for embedding on a quantum device. Defaults to False.
+            include_slack_information: Whether to include information about slack variables in the result. Defaults to False.
+            for_embedding: Whether to prepare the QUBO for embedding on a quantum device. Defaults to False.
+
+        Returns:
+            A mathematical representation of the QUBO formulation in expanded form.
 
         Raises:
             TypeError: If the constructed QUBO formulation is not a sympy expression.
-
-        Returns:
-            sp.Expr: A mathematical representation of the QUBO formulation in expanded form.
         """
         if self.expansion_cache is not None and not include_slack_information and not self.disable_caching:
             return self.expansion_cache
@@ -186,12 +186,12 @@ class QuboGenerator:
         """Expands higher order terms in a cost function to reduce the order.
 
         Args:
-            expression (sp.Expr): The expression to transform.
-            assignment (SlackChainAssignment): The assignment to store information about the slack variables.
-            chain_index (int, optional): The index of the current chain of auxiliary variables. Defaults to 1.
+            expression: The expression to transform.
+            assignment: The assignment to store information about the slack variables.
+            chain_index: The index of the current chain of auxiliary variables. Defaults to 1.
 
         Returns:
-            sp.Expr: The transformed expression.
+            The transformed expression.
         """
         assert isinstance(expression, (sp.Add, sp.Mul)), (  # type: ignore[attr-defined]
             f"We expect a sum of products or a single product as input but got {expression}"
@@ -257,12 +257,12 @@ class QuboGenerator:
         """Computes the slack penalty for a given pair of variables and an auxiliary variable.
 
         Args:
-            x1 (sp.Expr): The first variable.
-            x2 (sp.Expr): The second variable.
-            y (sp.Symbol): The auxiliary variable.
+            x1: The first variable.
+            x2: The second variable.
+            y: The auxiliary variable.
 
         Returns:
-            sp.Expr: The slack penalty expression.
+            The slack penalty expression.
         """
         return 100 * x1 * x2 - 200 * y * x1 - 200 * y * x2 + 300 * y
 
@@ -332,11 +332,11 @@ class QuboGenerator:
         products of variables to replace first.
 
         Args:
-            expression (sp.Expr): The expression to transform.
-            assignment (SlackChainAssignment): The assignment to store information about the slack variables.
+            expression: The expression to transform.
+            assignment: The assignment to store information about the slack variables.
 
         Returns:
-            sp.Expr: The transformed expression.
+            The transformed expression.
         """
         assert isinstance(expression, (sp.Add, sp.Mul)), (  # type: ignore[attr-defined]
             f"We expect a sum of products or a single product as input but got {expression}"
@@ -391,10 +391,10 @@ class QuboGenerator:
         """Computes the order of a product of variables.
 
         Args:
-            expression (sp.Expr): The expression to check.
+            expression: The expression to check.
 
         Returns:
-            int: The order of the expression. If the expression is not a product, 1 is returned.
+            The order of the expression. If the expression is not a product, 1 is returned.
         """
         if isinstance(expression, sp.Mul):
             return sum(self.__get_order(arg) for arg in expression.args)
@@ -409,10 +409,10 @@ class QuboGenerator:
         term more easily.
 
         Args:
-            expression (sp.Expr): The expression to transform.
+            expression: The expression to transform.
 
         Returns:
-            sp.Expr: The transformed expression.
+            The transformed expression.
         """
         if isinstance(expression, sp.Pow):
             return expression.args[0]
@@ -426,10 +426,10 @@ class QuboGenerator:
         Auxiliary variables will start with "y_" by definition.
 
         Args:
-            expression (sp.Expr): The expression to check.
+            expression: The expression to check.
 
         Returns:
-            list[sp.Symbol]: The list of employed auxiliary variables.
+            The list of employed auxiliary variables.
         """
         if isinstance(expression, sp.Mul):
             return list({var for arg in expression.args for var in self.__get_auxiliary_variables(arg)})
@@ -441,10 +441,10 @@ class QuboGenerator:
         """A method that can be extended by classes that inherit from QuboGenerator to transform the QUBO formulation into expanded form, if that process requires additional steps.
 
         Args:
-            expression (sp.Expr): The expression to transform.
+            expression: The expression to transform.
 
         Returns:
-            sp.Expr: The transformed expression.
+            The transformed expression.
         """
         return expression
 
@@ -454,7 +454,7 @@ class QuboGenerator:
         This is achieved by first creating the expanded QUBO formula, and then taking the coefficients of each term.
 
         Returns:
-            npt.NDArray[np.int_ | np.float64]: The matrix representation of the QUBO problem.
+            The matrix representation of the QUBO problem.
         """
         if not for_embedding:
             expansion = self.construct_expansion(for_embedding=for_embedding)
@@ -514,11 +514,11 @@ class QuboGenerator:
         or encoding + auxiliary variables. In the former case, the auxiliary values are computed automatically.
 
         Args:
-            assignment (list[int]): The assignment for each variable (either 0 or 1).
-            for_embedding (bool, optional): Whether to prepare the QUBO for embedding on a quantum device. Defaults to False.
+            assignment: The assignment for each variable (either 0 or 1).
+            for_embedding: Whether to prepare the QUBO for embedding on a quantum device. Defaults to False.
 
         Returns:
-            float: The cost value for the assignment.
+            The cost value for the assignment.
         """
         if any(x not in {0, 1} for x in assignment):
             msg = "Provided values are not binary (1/0)"
@@ -551,11 +551,11 @@ class QuboGenerator:
         compute the cost for a given QUBO encoding without requiring the user to define all auxiliary variables.
 
         Args:
-            assignment (list[int]): The assignment for the encoding variables `x_i`.
-            auxiliary_expansions (SlackChainAssignment): Information about the auxiliary variable expansions.
+            assignment: The assignment for the encoding variables `x_i`.
+            auxiliary_expansions: Information about the auxiliary variable expansions.
 
         Returns:
-            dict[sp.Expr, int]: An assignment dictionary, mapping each `y_k` to its value in {0, 1}.
+            An assignment dictionary, mapping each `y_k` to its value in {0, 1}.
         """
         auxiliary_values: dict[str, int] = {}
         encoding_variables = {str(key): value for key, value in self._get_encoding_variables()}
@@ -586,7 +586,7 @@ class QuboGenerator:
         """Returns all non-auxiliary variables used in the QUBO formulation.
 
         Returns:
-            list[tuple[sp.Expr, int]]: A list of tuples containing the variable and its index.
+            A list of tuples containing the variable and its index.
         """
         all_expressions: list[sp.Expr] = [self.objective_function] + [penalty[0] for penalty in self.penalties]  # type: ignore[assignment]
         variables = set()
@@ -599,7 +599,7 @@ class QuboGenerator:
         """Computes the penalty factors for each constraint. May be extended by subclasses.
 
         Returns:
-            list[tuple[sp.Expr, float]]: A list of tuples containing the individual cost functions and their constraints.
+            A list of tuples containing the individual cost functions and their constraints.
         """
         return [(expr, weight) if weight is not None else (expr, 1.0) for (expr, weight) in self.penalties]
 
@@ -607,10 +607,10 @@ class QuboGenerator:
         """Returns the total number of variables required to represent the QUBO problem.
 
         Args:
-            for_embedding (bool, optional): Whether to prepare the QUBO for embedding on a quantum device. Defaults to False.
+            for_embedding: Whether to prepare the QUBO for embedding on a quantum device. Defaults to False.
 
         Returns:
-            int: The number of required variables.
+            The number of required variables.
         """
         expansion: sp.Expr = self.construct_expansion(for_embedding=for_embedding)  # type: ignore[assignment]
         coefficients = dict(expansion.as_coefficients_dict())
@@ -621,7 +621,7 @@ class QuboGenerator:
         """Returns the number of non-auxiliary binary variables required to represent the QUBO problem.
 
         Returns:
-            int: The number of required binary variables.
+            The number of required binary variables.
         """
         return len(self._get_encoding_variables())
 
@@ -629,10 +629,10 @@ class QuboGenerator:
         """For a given variable, returns its index in the QUBO matrix.
 
         Args:
-            variable (sp.Expr): The variable to investigate.
+            variable: The variable to investigate.
 
         Returns:
-            int: The index of the variable.
+            The index of the variable.
         """
         encoding_variables = [x[0] for x in self._get_encoding_variables()]
         if variable in encoding_variables:
@@ -643,10 +643,10 @@ class QuboGenerator:
         """Given an assignment, decodes it into a meaningful result. May be extended by subclasses.
 
         Args:
-            _array (list[int]): The binary assignment.
+            _array: The binary assignment.
 
         Returns:
-            Any: The decoded result.
+            The decoded result.
         """
         return ""
 
@@ -656,12 +656,12 @@ class QuboGenerator:
         """Constructs a QAOA circuit for the QUBO problem.
 
         Args:
-            n_qubits (int, optional): If given, sets the number of qubits for the full circuit.
-            do_reuse (bool, optional): Attempt to reuse qubits to limit the number of variables. Defaults to False.
-            include_barriers (bool, optional): Whether to include barriers in the circuit. Defaults to False.
+            n_qubits: If given, sets the number of qubits for the full circuit.
+            do_reuse: Attempt to reuse qubits to limit the number of variables. Defaults to False.
+            include_barriers: Whether to include barriers in the circuit. Defaults to False.
 
         Returns:
-            qiskit.QuantumCircuit: The constructed QAOA circuit.
+            The constructed QAOA circuit.
         """
         interactions = self.construct_interaction_graph(for_embedding=False)
         qubits = max(starmap(max, interactions)) + 1
@@ -738,7 +738,7 @@ class QuboGenerator:
         """Constructs the interaction graph of the QUBO problem.
 
         Returns:
-            list[tuple[int, int]]: The interaction graph of the QUBO problem.
+            The interaction graph of the QUBO problem.
         """
         qubo = self.construct_qubo_matrix(for_embedding=for_embedding)
         return [(i + offset, j + offset) for i in range(len(qubo)) for j in range(i + 1, len(qubo)) if qubo[i][j] != 0]
@@ -747,10 +747,10 @@ class QuboGenerator:
         """Constructs a QAOA circuit for the QUBO problem that is embedded on the given device.
 
         Args:
-            device (Calibration): The device to embed the QAOA circuit on.
+            device: The device to embed the QAOA circuit on.
 
         Returns:
-            qiskit.QuantumCircuit: The constructed QAOA circuit.
+            The constructed QAOA circuit.
         """
         expansion: tuple[sp.Expr, SlackChainAssignment] = self.construct_expansion(
             include_slack_information=True, for_embedding=True

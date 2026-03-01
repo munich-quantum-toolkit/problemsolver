@@ -47,8 +47,8 @@ class PathFindingQuboGenerator(QuboGenerator):
     Extends the QuboGenerator class with methods for generating QUBOs for pathfinding problems.
 
     Attributes:
-        graph (Graph): The graph on which the pathfinding problem is defined.
-        settings (PathFindingQuboGeneratorSettings): The settings for the QUBO generator.
+        graph: The graph on which the pathfinding problem is defined.
+        settings: The settings for the QUBO generator.
     """
 
     graph: Graph
@@ -63,9 +63,9 @@ class PathFindingQuboGenerator(QuboGenerator):
         """Initialises a PathFindingQuboGenerator object.
 
         Args:
-            objective_function (cf.CostFunction | None): The objective function of the pathfinding problem.
-            graph (Graph): The graph on which the pathfinding problem is defined.
-            settings (PathFindingQuboGeneratorSettings): The settings for the QUBO generator.
+            objective_function: The objective function of the pathfinding problem.
+            graph: The graph on which the pathfinding problem is defined.
+            settings: The settings for the QUBO generator.
         """
         super().__init__(objective_function.get_formula(graph, settings) if objective_function is not None else None)
         self.graph = graph
@@ -78,11 +78,11 @@ class PathFindingQuboGenerator(QuboGenerator):
         The suggestion is based on the number of binary variables required for a specific problem.
 
         Args:
-            json_string (str): A JSON string describing the pathfinding problem.
-            graph (Graph): The graph on which the pathfinding problem is defined.
+            json_string: A JSON string describing the pathfinding problem.
+            graph: The graph on which the pathfinding problem is defined.
 
         Returns:
-            cf.EncodingType: The suggested encoding type.
+            The suggested encoding type.
         """
         results: list[tuple[cf.EncodingType, int]] = []
         for encoding in [cf.EncodingType.ONE_HOT, cf.EncodingType.DOMAIN_WALL, cf.EncodingType.BINARY]:
@@ -95,11 +95,11 @@ class PathFindingQuboGenerator(QuboGenerator):
         """Creates a PathFindingQuboGenerator object from its JSON format.
 
         Args:
-            json_string (str): The JSON string describing the pathfinding problem.
-            graph (Graph): The graph on which the pathfinding problem is defined.
+            json_string: The JSON string describing the pathfinding problem.
+            graph: The graph on which the pathfinding problem is defined.
 
         Returns:
-            PathFindingQuboGenerator: The constructed QUBO generator.
+            The constructed QUBO generator.
         """
         return PathFindingQuboGenerator.__from_json(json_string, graph)
 
@@ -112,15 +112,15 @@ class PathFindingQuboGenerator(QuboGenerator):
         The override_encoding parameter can be used to override the encoding type specified in the JSON string.
 
         Args:
-            json_string (str): The JSON string describing the pathfinding problem.
-            graph (Graph): The graph on which the pathfinding problem is defined.
-            override_encoding (cf.EncodingType | None, optional): Can be used to override the encoding type specified in the JSON string. Defaults to None.
+            json_string: The JSON string describing the pathfinding problem.
+            graph: The graph on which the pathfinding problem is defined.
+            override_encoding: Can be used to override the encoding type specified in the JSON string. Defaults to None.
+
+        Returns:
+            The constructed QUBO generator.
 
         Raises:
             ValueError: If any of the constraints in the JSON string is not supported.
-
-        Returns:
-            PathFindingQuboGenerator: The constructed QUBO generator.
         """
         with (resources.files(__package__) / "resources" / "input-format.json").open("r") as f:
             main_schema = json.load(f)
@@ -238,11 +238,11 @@ class PathFindingQuboGenerator(QuboGenerator):
         """Add a pathfinding constraint to the QUBO generator.
 
         Args:
-            constraint (cf.CostFunction): The constraint to be added.
-            weight (float | None, optional): The desired weight of the constraint. Defaults to None.
+            constraint: The constraint to be added.
+            weight: The desired weight of the constraint. Defaults to None.
 
         Returns:
-            PathFindingQuboGenerator: The current instance of the QUBO generator.
+            The current instance of the QUBO generator.
         """
         self.add_penalty(constraint.get_formula(self.graph, self.settings), lam=weight)
         return self
@@ -253,11 +253,11 @@ class PathFindingQuboGenerator(QuboGenerator):
         """Add a pathfinding constraint to the QUBO generator.
 
         Args:
-            constraint (cf.CostFunction): The constraint to be added.
-            weight (float | None, optional): The desired weight of the constraint. Defaults to None.
+            constraint: The constraint to be added.
+            weight: The desired weight of the constraint. Defaults to None.
 
         Returns:
-            PathFindingQuboGenerator: The current instance of the QUBO generator.
+            The current instance of the QUBO generator.
         """
         if constraint is None:
             return self
@@ -268,7 +268,7 @@ class PathFindingQuboGenerator(QuboGenerator):
         """Compute the suggested lambda values for all penalties.
 
         Returns:
-            list[tuple[sp.Expr, float]]: A list of tuples containing the penalty expressions and their suggested lambda values.
+            A list of tuples containing the penalty expressions and their suggested lambda values.
         """
         return [(expr, lam if lam is not None else self.__optimal_lambda()) for (expr, lam) in self.penalties]
 
@@ -283,10 +283,10 @@ class PathFindingQuboGenerator(QuboGenerator):
         These tasks include the assignment of specific variables, such as adjacency matrix values etc.
 
         Args:
-            expression (sp.Expr): The expression to transform.
+            expression: The expression to transform.
 
         Returns:
-        sp.Expr: The transformed expression.
+            The transformed expression.
         """
         assignment = [
             (cf.FormulaHelpers.adjacency(i + 1, j + 1), self.graph.adjacency_matrix[i, j])
@@ -333,10 +333,10 @@ class PathFindingQuboGenerator(QuboGenerator):
         """Given an assignment, decodes it into a meaningful result. May be extended by subclasses.
 
         Args:
-            _array (list[int]): The binary assignment.
+            _array: The binary assignment.
 
         Returns:
-            Any: The decoded result as a (set of) path(s).
+            The decoded result as a (set of) path(s).
         """
         if self.settings.encoding_type == cf.EncodingType.ONE_HOT:
             return self.decode_bit_array_one_hot(_array)
@@ -351,10 +351,10 @@ class PathFindingQuboGenerator(QuboGenerator):
         """Decodes an assignment for domain_wall encoding.
 
         Args:
-            array (list[int]): The assignment to decode.
+            array: The assignment to decode.
 
         Returns:
-            Any: The decoded assignment as a (set of) path(s).
+            The decoded assignment as a (set of) path(s).
         """
         paths = []
         for p in range(self.settings.n_paths):
@@ -373,10 +373,10 @@ class PathFindingQuboGenerator(QuboGenerator):
         """Decodes an assignment for One-Hot encoding.
 
         Args:
-            array (list[int]): The assignment to decode.
+            array: The assignment to decode.
 
         Returns:
-            Any: The decoded assignment as a (set of) path(s).
+            The decoded assignment as a (set of) path(s).
         """
         paths: list[list[int]] = []
         path: list[tuple[int, int]] = []
@@ -400,10 +400,10 @@ class PathFindingQuboGenerator(QuboGenerator):
         """Decodes an assignment for Binary encoding.
 
         Args:
-            array (list[int]): The assignment to decode.
+            array: The assignment to decode.
 
         Returns:
-            Any: The decoded assignment as a (set of) path(s).
+            The decoded assignment as a (set of) path(s).
         """
         paths = []
         max_v = int(np.ceil(np.log2(self.graph.n_vertices + 1)))
