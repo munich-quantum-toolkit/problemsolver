@@ -37,10 +37,10 @@ def to_graph(g: nx.Graph) -> Graph:
     """Transforms a networkx graph into a Graph object.
 
     Args:
-        g (nx.Graph): The networkx graph to be transformed.
+        g: The networkx graph to be transformed.
 
     Returns:
-        Graph: The transformed graph.
+        The transformed graph.
     """
     edges: list[tuple[int, int] | tuple[int, int, float]] = []
     for u, v, w in g.edges.data("weight", default=1.0):
@@ -55,11 +55,11 @@ def __tsp(problem: StandardProblem, encoding_type: cost_functions.EncodingType) 
     """Constructs a QUBO generator for a TSP problem.
 
     Args:
-        problem (StandardProblem): The TSP problem.
-        encoding_type (cost_functions.EncodingType): The desired encoding type.
+        problem: The TSP problem.
+        encoding_type: The desired encoding type.
 
     Returns:
-        PathFindingQuboGenerator: The constructed QUBO generator.
+        The constructed QUBO generator.
     """
     g = to_graph(problem.get_graph())
     settings = PathFindingQuboGeneratorSettings(encoding_type, 1, g.n_vertices, loops=True)
@@ -77,11 +77,11 @@ def __hcp(problem: StandardProblem, encoding_type: cost_functions.EncodingType) 
     """Constructs a QUBO generator for a HCP problem.
 
     Args:
-        problem (StandardProblem): The HCP problem.
-        encoding_type (cost_functions.EncodingType): The desired encoding type.
+        problem: The HCP problem.
+        encoding_type: The desired encoding type.
 
     Returns:
-        PathFindingQuboGenerator: The constructed QUBO generator.
+        The constructed QUBO generator.
     """
     g = to_graph(problem.get_graph())
     settings = PathFindingQuboGeneratorSettings(encoding_type, 1, g.n_vertices, True)
@@ -99,11 +99,11 @@ def __sop(problem: StandardProblem, encoding_type: cost_functions.EncodingType) 
     """Constructs a QUBO generator for a SOP problem.
 
     Args:
-        problem (StandardProblem): The SOP problem.
-        encoding_type (cost_functions.EncodingType): The desired encoding type.
+        problem: The SOP problem.
+        encoding_type: The desired encoding type.
 
     Returns:
-        PathFindingQuboGenerator: The constructed QUBO generator.
+        The constructed QUBO generator.
     """
     g = to_graph(problem.get_graph())
     settings = PathFindingQuboGeneratorSettings(encoding_type, 1, g.n_vertices, False)
@@ -128,14 +128,14 @@ def from_tsplib_problem(
     """Constructs a QUBO generator for a given problem in TSPLib format.
 
     Args:
-        problem (StandardProblem): The TSPLib problem.
-        encoding_type (cost_functions.EncodingType): The desired encoding type.
+        problem: The TSPLib problem.
+        encoding_type: The desired encoding type.
+
+    Returns:
+        The constructed QUBO generator.
 
     Raises:
         ValueError: If a CVRP problem is given, as this problem type cannot be solved by the pathfinder or an unknown problem type is given.
-
-    Returns:
-        PathFindingQuboGenerator: The constructed QUBO generator.
     """
     try:
         if importlib.util.find_spec("tsplib95") is None:
