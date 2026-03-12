@@ -232,6 +232,7 @@ references
 :maxdepth: 1
 
 contributing
+ai_usage
 tooling
 support
 ```
