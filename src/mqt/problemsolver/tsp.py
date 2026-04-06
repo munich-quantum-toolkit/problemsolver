@@ -310,8 +310,6 @@ class TSP:
         for i in range(len(eigen_register)):
             if eigenstate[i] == "1":
                 qc.x(eigen_register[i])
-            if eigenstate[i] == "0":
-                pass
         qc.barrier()
         return qc
 
