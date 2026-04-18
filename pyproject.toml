@@ -16,7 +16,7 @@ authors = [
 ]
 keywords = ["MQT", "quantum computing"]
 license = "MIT"
-license-files = ["LICENSE.md"]
+license-files = ["LICENSE"]
 requires-python = ">=3.10"
 dynamic = ["version"]
 
@@ -71,7 +71,6 @@ docs = [
     "furo>=2025.09.25",
     "graphviz>=0.21.0",
     "myst-nb>=1.3.0",
-    "setuptools-scm>=9.2.2",
     "sphinx>=8.1.3",
     "sphinx>=8.2.3; python_version >= '3.11'",
     "sphinx-autoapi>=3.6.0",
@@ -169,6 +168,7 @@ unsafe-fixes = true
 show-fixes = true
 
 [tool.ruff.format]
+preview = true
 docstring-code-format = true
 
 [tool.ruff.lint]
@@ -257,12 +257,11 @@ anc = "anc"
 aer = "aer"
 
 
-[tool.repo-review]
-ignore = [
-    "GH200", # We use Renovate instead of Dependabot
-    "PC160", # We use a mirror of crate-ci/typos
-    "PC170", # We do not use rST files anymore
-]
+[tool.repo-review.ignore]
+GH200 = "We use Renovate instead of Dependabot"
+PC111 = "We use ruff instead of blacken-docs"
+PC160 = "We use a mirror of crate-ci/typos"
+PC170 = "We do not use rST files anymore"
 
 
 [tool.check-sdist]
