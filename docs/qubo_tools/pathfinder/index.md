@@ -38,9 +38,7 @@ To create a `PathFindingQuboGenerator`, a `Graph` instance further has to be pro
 ```python3
 ...
 
-qubo_generator = pf.PathFindingQuboGenerator(
-    objective_function=None, graph=my_graph, settings=settings
-)
+qubo_generator = pf.PathFindingQuboGenerator(objective_function=None, graph=my_graph, settings=settings)
 ```
 
 When creating a `PathFindingQuboGenerator` instance, an objective function, as discussed below, can be added to add an optimization criterion.
@@ -73,9 +71,7 @@ These constraints are represented by classes, and instances of the classes can b
 ```python3
 ...
 
-contains_all_vertices = pf.PathContainsVerticesExactlyOnce(
-    vertex_ids=graph.all_vertices, path_ids=[1]
-)
+contains_all_vertices = pf.PathContainsVerticesExactlyOnce(vertex_ids=graph.all_vertices, path_ids=[1])
 starts_at_1 = pf.PathStartsAt(vertex_ids=[1], path=1)
 
 qubo_generator.add_constraint(contains_all_vertices)
