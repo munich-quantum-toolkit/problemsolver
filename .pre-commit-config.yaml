@@ -65,6 +65,7 @@ repos:
         language: pygrep
         entry: \b(Numpy|Github|PyTest|Mqt|Tum)\b
         exclude: ^(\.pre-commit-config\.yaml)$
+        exclude_types: [binary]
         priority: 0
 
   ## Check for typos
