@@ -41,6 +41,6 @@
     ".*\\.txt",
     ".*\\.sop",
     ".*\\.vrp",
-    "LICENSE"
+    "(^|/)LICENSE$"
   ]
 }
