@@ -12,7 +12,7 @@ from typing import TYPE_CHECKING
 
 import matplotlib.pyplot as plt
 import numpy as np
-from qsharp.estimator import ErrorBudgetPartition, EstimatorParams, LogicalCounts
+from qdk.estimator import ErrorBudgetPartition, EstimatorParams, LogicalCounts
 
 if TYPE_CHECKING:
     from numpy.typing import NDArray

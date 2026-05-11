@@ -16,9 +16,9 @@ import pandas as pd
 from pytket import Circuit, OpType
 from pytket.extensions.qiskit import qiskit_to_tk, tk_to_qiskit
 from pytket.passes import AutoRebase, RebaseCustom
+from qdk.qiskit import estimate
 from qiskit import QuantumCircuit, transpile
 from qiskit.transpiler.passmanager import PassManager
-from qsharp.interop.qiskit import estimate
 
 if TYPE_CHECKING:
     from pytket.passes import BasePass

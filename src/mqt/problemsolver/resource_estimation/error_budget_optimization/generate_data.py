@@ -19,9 +19,9 @@ from typing import TYPE_CHECKING
 
 import numpy as np
 from mqt.bench import BenchmarkLevel, get_benchmark
+from qdk.estimator import ErrorBudgetPartition, EstimatorParams, LogicalCounts
+from qdk.qiskit import estimate
 from qiskit import qasm2, transpile
-from qsharp.estimator import ErrorBudgetPartition, EstimatorParams, LogicalCounts
-from qsharp.interop.qiskit import estimate
 
 logger = logging.getLogger(__name__)
 
