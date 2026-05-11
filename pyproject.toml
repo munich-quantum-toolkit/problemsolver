@@ -37,7 +37,7 @@ dependencies = [
     "python_tsp>=0.5.0",
     "docplex>=2.28.240",
     "joblib>=1.4.2",
-    "qsharp>=1.20.0",
+    "qdk[qiskit]>=1.20.0",
     "mqt-bench>=2.0.1",
     "pytket>=1.29.0",
     "pytket-qiskit>=0.67.0",
@@ -125,6 +125,8 @@ filterwarnings = [
     # Qiskit 2.2 internal deprecations
     'ignore:.*``qiskit.circuit.library.phase_oracle.PhaseOracle`` is deprecated as of Qiskit 2.2.*:DeprecationWarning',
     'ignore:.*Trying to add QuantumRegister to a QuantumCircuit having a layout.*:UserWarning:qiskit.*',
+    # QDK 1.28.0 internal deprecations
+    'ignore:.*This version of QRE is deprecated and will be removed in a future release.*:DeprecationWarning',
 ]
 
 
@@ -155,7 +157,7 @@ explicit_package_bases = true
 pretty = true
 
 [[tool.mypy.overrides]]
-module = ["qiskit.*",  "matplotlib.*", "python_tsp.*", "networkx.*", "joblib.*", "docplex.*", "qiskit_aer.*", "qsharp.*", "sklearn.*", "pytket.*", "jsonschema.*", "tsplib95.*", "referencing.*"]
+module = ["qiskit.*",  "matplotlib.*", "python_tsp.*", "networkx.*", "joblib.*", "docplex.*", "qiskit_aer.*", "qdk.*", "sklearn.*", "pytket.*", "jsonschema.*", "tsplib95.*", "referencing.*"]
 ignore_missing_imports = true
 
 
