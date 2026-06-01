@@ -113,7 +113,7 @@ def sort_acquisition_requests(acqs: list[LocationRequest]) -> list[LocationReque
 
 def plot_acquisition_requests(acqs: list[LocationRequest]) -> None:
     # Plots all acquisition requests on a sphere
-    phi, theta = np.mgrid[0 : np.pi : 100j, 0 : 2 * np.pi : 100j]  # type: ignore[misc]
+    phi, theta = np.mgrid[0 : np.pi : 100j, 0 : 2 * np.pi : 100j]
     x = R_E * np.sin(phi) * np.cos(theta)
     y = R_E * np.sin(phi) * np.sin(theta)
     z = R_E * np.cos(phi)
