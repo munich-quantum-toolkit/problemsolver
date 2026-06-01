@@ -232,39 +232,40 @@ def generate_data(
                 combinations, *_ = _find_optimized_budgets(
                     total_error_budget, number_of_randomly_generated_distributions, counts
                 )
-
-                # Collect results
-                specific_data = OrderedDict(counts)
-                specific_data.update({
-                    "logical": combinations[0],
-                    "t_states": combinations[1],
-                    "rotations": combinations[2],
-                })
-                results.append(specific_data)
             except Exception:
                 logger.exception(f"Error processing circuit {qc.name}.")
+
+            # Collect results
+            specific_data = OrderedDict(counts)
+            specific_data.update({
+                "logical": combinations[0],
+                "t_states": combinations[1],
+                "rotations": combinations[2],
+            })
+            results.append(specific_data)
 
     elif logical_counts:
         results = []
         for c in logical_counts:
             counts = LogicalCounts(c)
+            if counts["rotationCount"] == 0:
+                continue  # Skip circuits without rotations, as we want to ensure distributing error budgets among all three types.
+
             try:
-                if counts["rotationCount"] == 0:
-                    continue  # Skip circuits without rotations, as we want to ensure distributing error budgets among all three types.
                 # Optimize error budgets
                 combinations, *_ = _find_optimized_budgets(
                     total_error_budget, number_of_randomly_generated_distributions, counts
                 )
-
-                # Collect results
-                specific_data = OrderedDict(counts)
-                specific_data.update({
-                    "logical": combinations[0],
-                    "t_states": combinations[1],
-                    "rotations": combinations[2],
-                })
-                results.append(specific_data)
             except Exception:
                 logger.exception(f"Error processing logical counts entry {c}.")
+
+            # Collect results
+            specific_data = OrderedDict(counts)
+            specific_data.update({
+                "logical": combinations[0],
+                "t_states": combinations[1],
+                "rotations": combinations[2],
+            })
+            results.append(specific_data)
 
     return results
