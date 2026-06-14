@@ -41,7 +41,7 @@ def test_read_write() -> None:
     with NamedTemporaryFile("w+", delete=False, encoding="utf-8") as temp_file:
         temp_file_path = temp_file.name
 
-    try:  # noqa: PLW0717
+    try:
         with Path(str(temp_file_path)).open("w", encoding="utf-8") as file:
             g.store(file)
 
