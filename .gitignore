@@ -269,3 +269,18 @@ cython_debug/
 #.idea/
 
 # End of https://www.toptal.com/developers/gitignore/api/pycharm+all,python,jupyternotebooks
+
+# Claude
+CLAUDE.md
+.claude/
+
+# OS specific stuff
+.DS_Store
+.DS_Store?
+.Spotlight-V100
+.Trashes
+._*
+Thumbs.db
+editor.swp
+editor~
+ehthumbs.db
