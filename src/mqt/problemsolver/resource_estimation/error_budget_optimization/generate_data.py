@@ -23,13 +23,12 @@ from qdk.estimator import ErrorBudgetPartition, EstimatorParams, LogicalCounts
 from qdk.qiskit import estimate
 from qiskit import qasm2, transpile
 
-logger = logging.getLogger(__name__)
-
-
 if TYPE_CHECKING:
     from collections.abc import Iterator
 
     from qiskit import QuantumCircuit
+
+logger = logging.getLogger(__name__)
 
 QISKIT_STD_GATES = [
     "p",

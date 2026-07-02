@@ -210,9 +210,10 @@ class QuboGenerator:
         highest_key: tuple[sp.Expr, sp.Expr] | None = None
         for term in problematic_terms:
             symbols = sorted(term.free_symbols, key=str, reverse=True)
-            symbols = cast("list[sp.Expr]", symbols)
             for s1 in symbols:
+                assert isinstance(s1, sp.Expr)
                 for s2 in symbols:
+                    assert isinstance(s2, sp.Expr)
                     if s1 == s2:
                         continue
                     key = (s1, s2)
@@ -296,10 +297,10 @@ class QuboGenerator:
         highest_key: sp.Expr | None = None
         for term in problematic_terms:
             symbols = sorted(term.free_symbols, key=str, reverse=True)
-            symbols = cast("list[sp.Expr]", symbols)
             if last_slack not in symbols:
                 continue
             for s in symbols:
+                assert isinstance(s, sp.Expr)
                 if s == last_slack:
                     continue
                 if s not in counts:
@@ -588,8 +589,7 @@ class QuboGenerator:
         Returns:
             A list of tuples containing the variable and its index.
         """
-        all_expressions: list[sp.Expr]
-        all_expressions = [self.objective_function] if self.objective_function is not None else []
+        all_expressions: list[sp.Expr] = [self.objective_function] if self.objective_function is not None else []
         all_expressions += [penalty[0] for penalty in self.penalties]
         variables = set()
         for expr in all_expressions:
@@ -862,11 +862,13 @@ class QuboGenerator:
                 add_rzz(g1[1], g2[0])
 
         for q in expression.free_symbols:
+            assert isinstance(q, sp.Expr)
             total_angle = coefficients.get(q, 0) * 2
             for q_2 in expression.free_symbols:
+                assert isinstance(q_2, sp.Expr)
                 if q_2 == q:
                     continue
-                total_angle += coefficients.get(cast("sp.Expr", q) * cast("sp.Expr", q_2), 0)
+                total_angle += coefficients.get(q * q_2, 0)
             if total_angle != 0:
                 add_rz(str(q), -float(total_angle))
         qc_front = qiskit.QuantumCircuit(device.num_qubits, device.num_qubits)
@@ -878,5 +880,4 @@ class QuboGenerator:
         for name, idx in substitution.items():
             measure_index = substitution[incomplete_swaps[name]] if name in incomplete_swaps else idx
             qc.measure(measure_index, assignment.indices[name])
-        qc_front.compose(qc, front=False, inplace=True)
-        return qc_front
+        return qc_front.compose(qc, front=False, inplace=False)
