@@ -25,11 +25,11 @@ class Result(TypedDict):
     time_baseline_o2: float
     time_baseline_o3: float
     time_proposed: float
-    cx_count_baseline_o0: float
-    cx_count_baseline_o1: float
-    cx_count_baseline_o2: float
-    cx_count_baseline_o3: float
-    cx_count_proposed: float
+    cx_count_baseline_o0: int | None
+    cx_count_baseline_o1: int | None
+    cx_count_baseline_o2: int | None
+    cx_count_baseline_o3: int | None
+    cx_count_proposed: int | None
     considered_following_qubits: int
 
 

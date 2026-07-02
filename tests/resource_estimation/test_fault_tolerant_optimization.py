@@ -9,6 +9,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from pytket.passes import RemoveRedundancies
 from qiskit.transpiler.passes.optimization import Optimize1qGatesDecomposition
@@ -19,10 +20,14 @@ from mqt.problemsolver.resource_estimation.fault_tolerant_optimization import (
     generate_data_tket,
 )
 
+if TYPE_CHECKING:
+    from qiskit.transpiler import TransformationPass
+
 
 def test_generate_data_qiskit() -> None:
     output = Path("tests_qiskit.xlsx")
     benchmarks = [Path(__file__).parent / "inputs" / "dj_indep_qiskit_10.qasm"]
+    transpiler_passes: list[list[TransformationPass]]
     transpiler_passes = [[Optimize1qGatesDecomposition(basis=SINGLE_QUBIT_AND_CX_QISKIT_STDGATES)]]
     generate_data_qiskit(output, benchmarks, transpiler_passes)
     output.unlink(missing_ok=True)

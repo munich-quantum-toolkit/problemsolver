@@ -43,16 +43,16 @@ class A(sp.Function):
     """
 
     @override
-    def _latex(self, printer: sp.StrPrinter, *args: Any, **kwargs: Any) -> str:
-        """Returns the latex representation of the expression.
+    def _latex(self, printer: sp.StrPrinter, *args: Any, **kwargs: Any) -> str:  # ty: ignore[invalid-explicit-override]
+        """Returns the LaTex representation of the expression.
 
         Args:
-            printer (sp.StrPrinter): The printer to use.
-            args (Any): Additional arguments.
-            kwargs (Any): Additional keyword arguments.
+            printer: The printer to use.
+            args: Additional arguments.
+            kwargs: Additional keyword arguments.
 
         Returns:
-            str: The latex representation of the expression.
+            The LaTex representation of the expression.
         """
         v, w = (self.args[0], self.args[1])
         return rf"A_{{{v},{w}}}"
@@ -65,16 +65,16 @@ class X(sp.Function):
     """
 
     @override
-    def _latex(self, printer: sp.StrPrinter, *args: Any, **kwargs: Any) -> str:
-        """Returns the latex representation of the expression.
+    def _latex(self, printer: sp.StrPrinter, *args: Any, **kwargs: Any) -> str:  # ty: ignore[invalid-explicit-override]
+        """Returns the LaTex representation of the expression.
 
         Args:
-            printer (sp.StrPrinter): The printer to use.
-            args (Any): Additional arguments.
-            kwargs (Any): Additional keyword arguments.
+            printer: The printer to use.
+            args: Additional arguments.
+            kwargs: Additional keyword arguments.
 
         Returns:
-            str: The latex representation of the expression.
+            The LaTex representation of the expression.
         """
         p, v, i = (self.args[0], self.args[1], self.args[2])
         return rf"x_{{{p},{v},{i}}}"
@@ -88,16 +88,16 @@ class Decompose(sp.Function):
     """
 
     @override
-    def _latex(self, printer: sp.StrPrinter, *args: Any, **kwargs: Any) -> str:
-        """Returns the latex representation of the expression.
+    def _latex(self, printer: sp.StrPrinter, *args: Any, **kwargs: Any) -> str:  # ty: ignore[invalid-explicit-override]
+        """Returns the LaTex representation of the expression.
 
         Args:
-            printer (sp.StrPrinter): The printer to use.
-            args (Any): Additional arguments.
-            kwargs (Any): Additional keyword arguments.
+            printer: The printer to use.
+            args: Additional arguments.
+            kwargs: Additional keyword arguments.
 
         Returns:
-            str: The latex representation of the expression.
+            The LaTex representation of the expression.
         """
         n, i = (self.args[0], self.args[1])
         return rf"\bar{{{n}}}_{{{i}}}"
@@ -133,9 +133,9 @@ class ExpandingSum(sp.Sum):
         recursively with the remaining layers.
 
         Args:
-            expr (sp.Expr | sp.Basic): The expression inside the sum.
-            remaining_limits (list[tuple[sp.Symbol, sp.Expr, sp.Expr]]): The remaining sum limits that have not been expanded yet.
-            limits (tuple[sp.Symbol, sp.Expr, sp.Expr]): The sum limits that are expanded in this step.
+            expr: The expression inside the sum.
+            remaining_limits: The remaining sum limits that have not been expanded yet.
+            limits: The sum limits that are expanded in this step.
 
         Returns:
             sp.Expr: The expanded sum of elements.
@@ -156,15 +156,13 @@ class ExpandingSum(sp.Sum):
         return result
 
 
-class _StringForSumSet:
+class _StringForSumSet(sp.Basic):
     """A string that can be stored in a SumSet object.
 
     Required, as storing just a normal `str` is not compatible with sympy.
     """
 
     string: str
-    args: list[sp.Expr]
-    free_symbols: list[sp.Symbol]
 
     def __init__(self, string: str) -> None:
         """Initialises a _StringForSumSet.
@@ -173,8 +171,7 @@ class _StringForSumSet:
             string (str): The string to store.
         """
         self.string = string
-        self.args = []
-        self.free_symbols = []
+        self._args = ()
 
     def __str__(self) -> str:
         """Returns a string representation of the expression.
@@ -186,7 +183,7 @@ class _StringForSumSet:
 
 
 class SumSet(sp.Expr):
-    """A class  that can be used to represent a sum over a set.
+    """A class that can be used to represent a sum over a set.
 
     This is just a symbolic representation for the display of the equation. In the background,
     it stores the actual expanded sum that is used for calculations.
@@ -200,9 +197,9 @@ class SumSet(sp.Expr):
         """Initialises a SumSet.
 
         Args:
-            expr (sp.Expr): The expression that is represented by the SumSet.
-            element_expr (sp.Expr): The expression of an individual sum item.
-            latex (_StringForSumSet): The latex string that represents the set over which the sum is performed.
+            expr: The expression that is represented by the SumSet.
+            element_expr: The expression of an individual sum item.
+            latex: The LaTex string that represents the set over which the sum is performed.
         """
         self._args = (expr, element_expr, latex)
         self.expr = expr
@@ -210,16 +207,16 @@ class SumSet(sp.Expr):
         self.element_expr = element_expr
 
     @override
-    def _latex(self, printer: sp.StrPrinter, *args: Any, **kwargs: Any) -> str:
-        """Returns the latex representation of the expression.
+    def _latex(self, printer: sp.StrPrinter, *args: Any, **kwargs: Any) -> str:  # ty: ignore[invalid-explicit-override]
+        """Returns the LaTex representation of the expression.
 
         Args:
-            printer (sp.StrPrinter): The printer to use.
-            args (Any): Additional arguments.
-            kwargs (Any): Additional keyword arguments.
+            printer: The printer to use.
+            args: Additional arguments.
+            kwargs: Additional keyword arguments.
 
         Returns:
-            str: The latex representation of the expression.
+            The LaTex representation of the expression.
         """
         child_latex = printer.doprint(self.element_expr)
         return f"{self.latex.string} {child_latex}"
@@ -229,7 +226,7 @@ class SumSet(sp.Expr):
         """Replaces the sum by the actual expression it represents.
 
         Returns:
-            sp.Expr: The expression that is represented by the sum.
+            The expression that is represented by the sum.
         """
         return self.expr.doit(hints=hints)
 
@@ -270,13 +267,13 @@ class FormulaHelpers:
         """Generates a product of the form `Product(expression, (var, from_number, to_number)`.
 
         Args:
-            expression (sp.Expr): The term inside the sum.
-            var (str): The iteration variable of the sum as a string.
-            from_number (sp.Expr | float): The lower bound of the sum.
-            to_number (sp.Expr | float): The upper bound of the sum.
+            expression: The term inside the sum.
+            var: The iteration variable of the sum as a string.
+            from_number: The lower bound of the sum.
+            to_number: The upper bound of the sum.
 
         Returns:
-            sp.Expr: The sympy sum term.
+            The sympy sum term.
         """
         s = sp.Symbol(var)
         return sp.Product(expression, (s, from_number, to_number))
@@ -286,13 +283,13 @@ class FormulaHelpers:
         r"""Generates a sum of the form `\sum_{[variables] \in [callback]} [expression]`.
 
         Args:
-            expression (sp.Expr): The term inside the sum.
-            variables (list[str]): A list of iteration variables of the sum as strings.
-            latex (str): The latex representation of the set expression.
-            callback (SetCallback): A callback returning the set over which the sum should iterate.
+            expression: The term inside the sum.
+            variables: A list of iteration variables of the sum as strings.
+            latex: The LaTex representation of the set expression.
+            callback: A callback returning the set over which the sum should iterate.
 
         Returns:
-            sp.Expr: The sympy sum term.
+            The sympy sum term.
         """
         variable_symbols = [FormulaHelpers.variable(v) for v in variables]
         assignments = [x if isinstance(x, tuple) else (x,) for x in callback()]
@@ -508,7 +505,7 @@ class CostFunction(ABC):
             return self.get_formula_domain_wall(graph, settings)
         if settings.encoding_type == EncodingType.BINARY:
             return self.get_formula_binary(graph, settings)
-        return None  # type: ignore[unreachable]
+        return None
 
     @abstractmethod
     def get_formula_general(
@@ -612,9 +609,9 @@ class CompositeCostFunction(CostFunction):
     @override
     def get_formula_general(
         self,
-        _graph: Graph,
-        _settings: pathfinder.PathFindingQuboGeneratorSettings,
-        _get_variable_function: GetVariableFunction,
+        graph: Graph,
+        settings: pathfinder.PathFindingQuboGeneratorSettings,
+        get_variable_function: GetVariableFunction,
     ) -> sp.Expr:
         msg = "This method should not be called for a composite cost function."
         raise RuntimeError(msg)

@@ -122,6 +122,7 @@ class PathFindingQuboGenerator(QuboGenerator):
         Raises:
             ValueError: If any of the constraints in the JSON string is not supported.
         """
+        assert __package__ is not None
         with (resources.files(__package__) / "resources" / "input-format.json").open("r") as f:
             main_schema = json.load(f)
         with (resources.files(__package__) / "resources" / "constraint.json").open("r") as f:
@@ -311,8 +312,8 @@ class PathFindingQuboGenerator(QuboGenerator):
         return expression.subs(dict(assignment))
 
     @override
-    def get_variable_index(self, var: sp.Expr) -> int:
-        parts = var.args
+    def get_variable_index(self, variable: sp.Expr) -> int:
+        parts = variable.args
 
         if any(not isinstance(part, sp.Integer) for part in parts):
             msg = "Variable subscripts must be integers."
@@ -344,7 +345,7 @@ class PathFindingQuboGenerator(QuboGenerator):
             return self.decode_bit_array_domain_wall(_array)
         if self.settings.encoding_type == cf.EncodingType.BINARY:
             return self.decode_bit_array_binary(_array)
-        msg = f"Encoding type {self.settings.encoding_type} not supported."  # type: ignore[unreachable]
+        msg = f"Encoding type {self.settings.encoding_type} not supported."
         raise ValueError(msg)
 
     def decode_bit_array_domain_wall(self, array: list[int]) -> list[list[int]]:
