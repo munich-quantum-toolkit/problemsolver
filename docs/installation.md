@@ -76,9 +76,9 @@ This prints the installed package version.
 
 ## Integrating MQT ProblemSolver into Your Project
 
-To use the MQT ProblemSolver Python package in your project, add it as a dependency
-in your {code}`pyproject.toml` or {code}`setup.py`. This ensures the package is
-installed when your project is installed.
+To use the MQT ProblemSolver Python package in your project, add it as a
+dependency in your {code}`pyproject.toml` or {code}`setup.py`. This ensures the
+package is installed when your project is installed.
 
 ::::{tab-set}
 

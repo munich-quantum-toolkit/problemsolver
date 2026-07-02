@@ -13,8 +13,10 @@
 
 # MQT ProblemSolver
 
-MQT ProblemSolver provides a framework to utilize quantum computing as a technology for users with little to no quantum computing knowledge.
-It is developed as part of the [_Munich Quantum Toolkit (MQT)_](https://mqt.readthedocs.io).
+MQT ProblemSolver provides a framework to utilize quantum computing as a
+technology for users with little to no quantum computing knowledge. It is
+developed as part of the
+[_Munich Quantum Toolkit (MQT)_](https://mqt.readthedocs.io).
 
 <p align="center">
   <a href="https://mqt.readthedocs.io/projects/problemsolver">
@@ -24,18 +26,30 @@ It is developed as part of the [_Munich Quantum Toolkit (MQT)_](https://mqt.read
 
 ## Key Features
 
-- Progress toward an automated framework for solving optimization and constraint satisfaction problems with minimal quantum expertise
-- Hybrid classical–quantum approaches for domain-specific applications such as satellite mission planning
-- Methods for reducing compilation time through pre-compilation and optimizing quantum circuits
+- Progress toward an automated framework for solving optimization and constraint
+  satisfaction problems with minimal quantum expertise
+- Hybrid classical–quantum approaches for domain-specific applications such as
+  satellite mission planning
+- Methods for reducing compilation time through pre-compilation and optimizing
+  quantum circuits
 - Equivalence checking of classical circuits with quantum computing
-- Utilizing resource estimation for evaluating and optimizing hardware requirements regarding fault-tolerant quantum computing
+- Utilizing resource estimation for evaluating and optimizing hardware
+  requirements regarding fault-tolerant quantum computing
 
-If you have any questions, feel free to create a [discussion](https://github.com/munich-quantum-toolkit/problemsolver/discussions) or an [issue](https://github.com/munich-quantum-toolkit/problemsolver/issues) on [GitHub](https://github.com/munich-quantum-toolkit/problemsolver).
+If you have any questions, feel free to create a
+[discussion](https://github.com/munich-quantum-toolkit/problemsolver/discussions)
+or an [issue](https://github.com/munich-quantum-toolkit/problemsolver/issues) on
+[GitHub](https://github.com/munich-quantum-toolkit/problemsolver).
 
 ## Contributors and Supporters
 
-The _[Munich Quantum Toolkit (MQT)](https://mqt.readthedocs.io)_ is developed by the [Chair for Design Automation](https://www.cda.cit.tum.de/) at the [Technical University of Munich](https://www.tum.de/) and supported by [MQSC](https://mq.sc).
-Among others, it is part of the [Munich Quantum Software Stack (MQSS)](https://www.munich-quantum-valley.de/research/research-areas/mqss) ecosystem, which is being developed as part of the [Munich Quantum Valley (MQV)](https://www.munich-quantum-valley.de) initiative.
+The _[Munich Quantum Toolkit (MQT)](https://mqt.readthedocs.io)_ is developed by
+the [Chair for Design Automation](https://www.cda.cit.tum.de/) at the
+[Technical University of Munich](https://www.tum.de/) and supported by
+[MQSC](https://mq.sc). Among others, it is part of the
+[Munich Quantum Software Stack (MQSS)](https://www.munich-quantum-valley.de/research/research-areas/mqss)
+ecosystem, which is being developed as part of the
+[Munich Quantum Valley (MQV)](https://www.munich-quantum-valley.de) initiative.
 
 <p align="center">
   <picture>
@@ -44,7 +58,8 @@ Among others, it is part of the [Munich Quantum Software Stack (MQSS)](https://w
   </picture>
 </p>
 
-Thank you to all the contributors who have helped make MQT ProblemSolver a reality!
+Thank you to all the contributors who have helped make MQT ProblemSolver a
+reality!
 
 <p align="center">
   <a href="https://github.com/munich-quantum-toolkit/problemsolver/graphs/contributors">
@@ -52,17 +67,21 @@ Thank you to all the contributors who have helped make MQT ProblemSolver a reali
   </a>
 </p>
 
-The MQT will remain free, open-source, and permissively licensed—now and in the future.
-We are firmly committed to keeping it open and actively maintained for the quantum computing community.
+The MQT will remain free, open-source, and permissively licensed—now and in the
+future. We are firmly committed to keeping it open and actively maintained for
+the quantum computing community.
 
 To support this endeavor, please consider:
 
-- Starring and sharing our repositories: https://github.com/munich-quantum-toolkit
-- Contributing code, documentation, tests, or examples via issues and pull requests
+- Starring and sharing our repositories:
+  <https://github.com/munich-quantum-toolkit>
+- Contributing code, documentation, tests, or examples via issues and pull
+  requests
 - Citing the MQT in your publications (see [Cite This](#cite-this))
-- Citing our research in your publications (see [References](https://mqt.readthedocs.io/projects/problemsolver/en/latest/references.html))
+- Citing our research in your publications (see
+  [References](https://mqt.readthedocs.io/projects/problemsolver/en/latest/references.html))
 - Using the MQT in research and teaching, and sharing feedback and use cases
-- Sponsoring us on GitHub: https://github.com/sponsors/munich-quantum-toolkit
+- Sponsoring us on GitHub: <https://github.com/sponsors/munich-quantum-toolkit>
 
 <p align="center">
   <a href="https://github.com/sponsors/munich-quantum-toolkit">
@@ -72,18 +91,22 @@ To support this endeavor, please consider:
 
 ## Getting Started
 
-`mqt.problemsolver` is available via [PyPI](https://pypi.org/project/mqt.problemsolver/).
+`mqt.problemsolver` is available via
+[PyPI](https://pypi.org/project/mqt.problemsolver/).
 
 ```console
 (.venv) $ pip install mqt.problemsolver
 ```
 
-**Detailed documentation and examples are available at [ReadTheDocs](https://mqt.readthedocs.io/projects/problemsolver).**
+**Detailed documentation and examples are available at
+[ReadTheDocs](https://mqt.readthedocs.io/projects/problemsolver).**
 
 ## System Requirements
 
-MQT ProblemSolver can be installed on all major operating systems with all supported Python versions.
-Building (and running) is continuously tested under Linux, macOS, and Windows using the [latest available system versions for GitHub Actions](https://github.com/actions/runner-images).
+MQT ProblemSolver can be installed on all major operating systems with all
+supported Python versions. Building (and running) is continuously tested under
+Linux, macOS, and Windows using the
+[latest available system versions for GitHub Actions](https://github.com/actions/runner-images).
 
 ## Cite This
 
@@ -91,7 +114,8 @@ Please cite the work that best fits your use case.
 
 ### MQT ProblemSolver (the tool)
 
-When citing the software itself or results produced with it, cite the MQT ProblemSolver paper:
+When citing the software itself or results produced with it, cite the MQT
+ProblemSolver paper:
 
 ```bibtex
 @inproceedings{quetschlich2023mqtproblemsolver,
@@ -124,48 +148,59 @@ When discussing the overall MQT project or its ecosystem, cite the MQT Handbook:
 
 ### Peer-Reviewed Research
 
-When citing the underlying methods and research, please reference the most relevant peer-reviewed publications from the list below:
+When citing the underlying methods and research, please reference the most
+relevant peer-reviewed publications from the list below:
 
-[[1]](https://arxiv.org/pdf/2210.14928)
-N. Quetschlich and L. Burgholzer and R. Wille.
-Towards an Automated Framework for Realizing Quantum Computing Solutions.
+[[1]](https://arxiv.org/pdf/2210.14928) N. Quetschlich and L. Burgholzer and R.
+Wille. Towards an Automated Framework for Realizing Quantum Computing Solutions.
 _International Symposium on Multiple-Valued Logic (ISMVL)_, 2023.
 
-[[2]](https://arxiv.org/pdf/2308.00029)
-N. Quetschlich, V. Koch, L. Burgholzer, and R. Wille.
-A Hybrid Classical Quantum Computing Approach to the Satellite Mission Planning Problem.
-_IEEE International Conference on Quantum Computing and Engineering (QCE)_, 2023.
+[[2]](https://arxiv.org/pdf/2308.00029) N. Quetschlich, V. Koch, L. Burgholzer,
+and R. Wille. A Hybrid Classical Quantum Computing Approach to the Satellite
+Mission Planning Problem.
+_IEEE International Conference on Quantum Computing and Engineering (QCE)_,
+2023.
 
-[[3]](https://arxiv.org/pdf/2305.04941)
-N. Quetschlich, L. Burgholzer, and R. Wille.
-Reducing the Compilation Time of Quantum Circuits Using Pre-Compilation on the Gate Level.
-_IEEE International Conference on Quantum Computing and Engineering (QCE)_, 2023.
+[[3]](https://arxiv.org/pdf/2305.04941) N. Quetschlich, L. Burgholzer, and R.
+Wille. Reducing the Compilation Time of Quantum Circuits Using Pre-Compilation
+on the Gate Level.
+_IEEE International Conference on Quantum Computing and Engineering (QCE)_,
+2023.
 
-[[4]](https://arxiv.org/pdf/2402.12434)
-N. Quetschlich, M. Soeken, P. Murali, and R. Wille.
-Utilizing Resource Estimation for the Development of Quantum Computing Applications.
-_IEEE International Conference on Quantum Computing and Engineering (QCE)_, 2024.
+[[4]](https://arxiv.org/pdf/2402.12434) N. Quetschlich, M. Soeken, P. Murali,
+and R. Wille. Utilizing Resource Estimation for the Development of Quantum
+Computing Applications.
+_IEEE International Conference on Quantum Computing and Engineering (QCE)_,
+2024.
 
-[[5]](https://arxiv.org/pdf/2408.14539)
-N. Quetschlich, T. Forster, A. Osterwind, D. Helms, and R. Wille.
-Towards Equivalence Checking of Classical Circuits Using Quantum Computing.
-_IEEE International Conference on Quantum Computing and Engineering (QCE)_, 2024.
+[[5]](https://arxiv.org/pdf/2408.14539) N. Quetschlich, T. Forster, A.
+Osterwind, D. Helms, and R. Wille. Towards Equivalence Checking of Classical
+Circuits Using Quantum Computing.
+_IEEE International Conference on Quantum Computing and Engineering (QCE)_,
+2024.
 
-[[6]](https://arxiv.org/pdf/2509.02683)
-T. Forster, N. Quetschlich, M. Soeken, and R. Wille.
-Improving Hardware Requirements for Fault-Tolerant Quantum Computing by Optimizing Error Budget Distributions.
-_IEEE International Conference on Quantum Computing and Engineering (QCE)_, 2025.
+[[6]](https://arxiv.org/pdf/2509.02683) T. Forster, N. Quetschlich, M. Soeken,
+and R. Wille. Improving Hardware Requirements for Fault-Tolerant Quantum
+Computing by Optimizing Error Budget Distributions.
+_IEEE International Conference on Quantum Computing and Engineering (QCE)_,
+2025.
 
-[[7]](https://arxiv.org/pdf/2509.02668)
-T. Forster, N. Quetschlich, and R. Wille.
-Quantum Circuit Optimization for the Fault-Tolerance Era: Do We Have to Start from Scratch?
-_IEEE International Conference on Quantum Computing and Engineering (QCE)_, 2025.
+[[7]](https://arxiv.org/pdf/2509.02668) T. Forster, N. Quetschlich, and R.
+Wille. Quantum Circuit Optimization for the Fault-Tolerance Era: Do We Have to
+Start from Scratch?
+_IEEE International Conference on Quantum Computing and Engineering (QCE)_,
+2025.
 
 ---
 
 ## Acknowledgements
 
-The Munich Quantum Toolkit has been supported by the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation program (grant agreement No. 101001318), the Bavarian State Ministry for Science and Arts through the Distinguished Professorship Program, as well as the Munich Quantum Valley, which is supported by the Bavarian state government with funds from the Hightech Agenda Bayern Plus.
+The Munich Quantum Toolkit has been supported by the European Research Council
+(ERC) under the European Union's Horizon 2020 research and innovation program
+(grant agreement No. 101001318), the Bavarian State Ministry for Science and
+Arts through the Distinguished Professorship Program, as well as the Munich
+Quantum Valley, which is supported by the Bavarian state government with funds
+from the Hightech Agenda Bayern Plus.
 
 <p align="center">
   <picture>
