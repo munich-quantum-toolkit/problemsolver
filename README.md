@@ -95,7 +95,7 @@ To support this endeavor, please consider:
 [PyPI](https://pypi.org/project/mqt.problemsolver/).
 
 ```console
-(.venv) $ pip install mqt.problemsolver
+uv pip install mqt.problemsolver
 ```
 
 **Detailed documentation and examples are available at
