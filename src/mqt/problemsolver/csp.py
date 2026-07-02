@@ -291,7 +291,7 @@ class CSP:
 
     def create_grover(
         self,
-        oracle: QuantumCircuit,
+        oracle: Instruction,
         nqubits: int,
         nancilla: int,
         ninputs: int,

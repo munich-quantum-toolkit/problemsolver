@@ -150,7 +150,7 @@ def paths_to_assignment(
         return __paths_to_assignment_domain_wall(paths, n_vertices, max_path_length)
     if encoding == pf.EncodingType.BINARY:
         return __paths_to_assignment_binary(paths, n_vertices, max_path_length)
-    msg = f"Unknown encoding type: {encoding}"  # type: ignore[unreachable]
+    msg = f"Unknown encoding type: {encoding}"
     raise ValueError(msg)
 
 

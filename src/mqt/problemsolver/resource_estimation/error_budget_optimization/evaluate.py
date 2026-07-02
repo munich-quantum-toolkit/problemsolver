@@ -123,14 +123,19 @@ def plot_results(
     # Plot histograms
     ax.hist(
         product_diffs_optimal_pct,
-        bins=bin_edges,
+        bins=list(bin_edges),
         color="steelblue",
         edgecolor="black",
         alpha=0.5,
         label="Best Distributions Determined",
     )
     ax.hist(
-        product_diffs_pct, bins=bin_edges, color="orange", edgecolor="black", alpha=0.5, label="Predicted Distributions"
+        product_diffs_pct,
+        bins=list(bin_edges),
+        color="orange",
+        edgecolor="black",
+        alpha=0.5,
+        label="Predicted Distributions",
     )
 
     # Configure plot appearance

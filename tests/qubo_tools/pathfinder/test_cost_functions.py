@@ -10,7 +10,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 import pytest
 import sympy as sp
@@ -39,12 +39,12 @@ def evaluate(
     """Computes the cost of a given path(s) assignment for a given cost function.
 
     Args:
-        cost_function (pf.CostFunction): The cost function to evaluate.
-        path (dict[sp.Expr, int]): The assignment of the path(s).
-        encoding (pf.EncodingType): The encoding type of the assignment.
-        loop (bool): Indicates if the path is a loop.
-        graph (Graph): The graph on which the path(s) are defined.
-        n_paths (int, optional): The number of paths. Defaults to 1.
+        cost_function: The cost function to evaluate.
+        path: The assignment of the path(s).
+        encoding: The encoding type of the assignment.
+        loop: Indicates if the path is a loop.
+        graph: The graph on which the path(s) are defined.
+        n_paths: The number of paths. Defaults to 1.
 
     Returns:
         int: The cost of the assignment for the given cost function.
@@ -75,7 +75,7 @@ def evaluate(
     ]
     assignment_dict = dict(assignment)
     # Substitute in initial assignment info needed e.g. for loop bounds.
-    formula = formula.subs(assignment_dict)
+    formula = formula.subs(assignment_dict)  # ty: ignore[no-matching-overload]
     # Unroll loops.
     formula = formula.doit()
     # Second call required to fully unroll all loops.
@@ -616,6 +616,7 @@ def test_latex_output() -> None:
     printer = sp.StrPrinter()
 
     s = cf.FormulaHelpers.sum_set(sp.Symbol("x"), ["x"], r"\in V", lambda: [1, 2, 3])
+    s = cast("cf.SumSet", s)
     assert s._latex(printer) == r"\sum_{x \in V} x"  # noqa: SLF001
 
     a = cf.A(1, 2)

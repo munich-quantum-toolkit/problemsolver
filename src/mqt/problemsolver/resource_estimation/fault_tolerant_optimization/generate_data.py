@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import math
 import pathlib
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 import pandas as pd
 from pytket import Circuit, OpType
@@ -18,13 +18,14 @@ from pytket.extensions.qiskit import qiskit_to_tk, tk_to_qiskit
 from pytket.passes import AutoRebase, RebaseCustom
 from qdk.qiskit import estimate
 from qiskit import QuantumCircuit, transpile
-from qiskit.transpiler.passmanager import PassManager
+from qiskit.transpiler.passmanager import PassManager, Task
 
 if TYPE_CHECKING:
+    import sympy as sp
     from pytket.passes import BasePass
     from qiskit.transpiler import TransformationPass
 
-SINGLE_QUBIT_AND_CX_QISKIT_STDGATES = [
+SINGLE_QUBIT_AND_CX_QISKIT_STDGATES: list[str] = [
     "x",
     "y",
     "z",
@@ -40,7 +41,7 @@ SINGLE_QUBIT_AND_CX_QISKIT_STDGATES = [
     "cx",
 ]
 
-SINGLE_QUBIT_AND_CX_TKET_STDGATES = {
+SINGLE_QUBIT_AND_CX_TKET_STDGATES: set[OpType] = {
     OpType.Rx,
     OpType.Ry,
     OpType.Rz,
@@ -71,7 +72,7 @@ def _estimate_resources(quantum_circuit: QuantumCircuit) -> tuple[int, int]:
     return result["physicalCounts"]["physicalQubits"], result["physicalCounts"]["runtime"]
 
 
-def _tk1_to_rzry(a: float, b: float, c: float) -> Circuit:
+def _tk1_to_rzry(a: sp.Expr | float, b: sp.Expr | float, c: sp.Expr | float) -> Circuit:
     """Converts a TK1 rotation gate into a sequence of RZ and RY rotations.
 
     Args:
@@ -123,7 +124,7 @@ def _cx_to_cx() -> Circuit:
 def generate_data_qiskit(
     csv_filename: pathlib.Path,
     benchmarks: list[pathlib.Path],
-    transpiler_passes: list[TransformationPass],
+    transpiler_passes: list[list[TransformationPass]],
 ) -> None:
     """Generates and stores resource estimation data for quantum circuits after applying transpiler passes.
 
@@ -135,7 +136,6 @@ def generate_data_qiskit(
         csv_filename: Path to the Excel file where results will be stored.
         benchmarks: List of benchmark circuit paths to process.
         transpiler_passes: List of transpiler passes to apply for optimization.
-        transpiler_passes_names: List of names corresponding to each transpiler pass.
     """
     column_order = [
         "Benchmark",
@@ -171,7 +171,7 @@ def generate_data_qiskit(
         qubits, runtime = _estimate_resources(transpiled_circuit)
 
         for transpiler_pass in transpiler_passes:
-            pass_manager = PassManager(transpiler_pass)
+            pass_manager = PassManager(cast("list[Task]", transpiler_pass))
             optimized_circuit = pass_manager.run(transpiled_circuit)
 
             if transpiled_circuit != optimized_circuit:
@@ -253,7 +253,7 @@ def generate_data_tket(
         qc = qiskit_to_tk(read_qiskit_qc)
 
         auto_rebase_pass = AutoRebase(SINGLE_QUBIT_AND_CX_TKET_STDGATES)
-        custom_rebase_pass = RebaseCustom(SINGLE_QUBIT_AND_CX_TKET_STDGATES, _cx_to_cx, _tk1_to_rzry)
+        custom_rebase_pass = RebaseCustom(SINGLE_QUBIT_AND_CX_TKET_STDGATES, _cx_to_cx(), _tk1_to_rzry)
         auto_rebase_pass.apply(qc)
 
         num_qubits = qc.n_qubits

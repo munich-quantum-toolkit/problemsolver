@@ -25,6 +25,7 @@ from qiskit import qasm2, transpile
 
 logger = logging.getLogger(__name__)
 
+
 if TYPE_CHECKING:
     from collections.abc import Iterator
 
@@ -131,6 +132,7 @@ def _find_optimized_budgets(
             best_metric = current_metric
             best_parameters = copy.deepcopy(parameters)
 
+    assert isinstance(best_parameters.error_budget, ErrorBudgetPartition)
     return (
         [
             best_parameters.error_budget.logical,

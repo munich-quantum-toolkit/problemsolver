@@ -62,7 +62,7 @@ class SlackChainAssignment:
             expr: The expression to analyze.
             offset: The starting offset. Defaults to 0.
         """
-        symbols = [str(s) for s in expr.free_symbols]  # type: ignore[attr-defined]
+        symbols = [str(s) for s in expr.free_symbols]
         prime_symbols = [s for s in symbols if s.endswith("'")]
         encoding_symbols = [s for s in symbols if not s.endswith("'") and s.startswith("x_")]
         slack_symbols = [s for s in symbols if not s.endswith("'") and s.startswith("y_")]
@@ -171,7 +171,8 @@ class QuboGenerator:
             expression = self.expand_higher_order_terms(expression, embedded_assignment)
         else:
             expression = self.expand_higher_order_terms_greedy_minimization(expression, embedded_assignment)
-            for symbol in list(expression.free_symbols) + [tup[0] for tup in self._get_encoding_variables()]:  # type: ignore[attr-defined]
+            for symbol in list(expression.free_symbols) + [tup[0] for tup in self._get_encoding_variables()]:
+                assert isinstance(symbol, (sp.Expr))
                 expression = expression.subs({symbol**2: symbol})
         self.expansion_cache = expression
 
@@ -193,22 +194,23 @@ class QuboGenerator:
         Returns:
             The transformed expression.
         """
-        assert isinstance(expression, (sp.Add, sp.Mul)), (  # type: ignore[attr-defined]
+        assert isinstance(expression, (sp.Add, sp.Mul)), (
             f"We expect a sum of products or a single product as input but got {expression}"
         )
         problematic_terms = (
-            self.__get_problematic_terms(expression.args)
-            if isinstance(expression, sp.Add)  # type: ignore[attr-defined]
+            self.__get_problematic_terms(cast("Collection[sp.Mul]", expression.args))
+            if isinstance(expression, sp.Add)
             else self.__get_problematic_terms([expression])
         )
 
         if not problematic_terms:
             return expression
 
-        counts: dict[tuple[sp.Symbol | sp.Function, sp.Symbol | sp.Function], int] = {}
-        highest_key: tuple[sp.Symbol | sp.Function, sp.Symbol | sp.Function] | None = None
+        counts: dict[tuple[sp.Expr, sp.Expr], int] = {}
+        highest_key: tuple[sp.Expr, sp.Expr] | None = None
         for term in problematic_terms:
-            symbols = sorted(term.free_symbols, key=str, reverse=True)  # type: ignore[attr-defined]
+            symbols = sorted(term.free_symbols, key=str, reverse=True)
+            symbols = cast("list[sp.Expr]", symbols)
             for s1 in symbols:
                 for s2 in symbols:
                     if s1 == s2:
@@ -290,10 +292,11 @@ class QuboGenerator:
         if not problematic_terms:
             return expression
 
-        counts: dict[sp.Symbol | sp.Function, int] = {}
-        highest_key: sp.Symbol | sp.Function | None = None
+        counts: dict[sp.Expr, int] = {}
+        highest_key: sp.Expr | None = None
         for term in problematic_terms:
-            symbols = sorted(term.free_symbols, key=str, reverse=True)  # type: ignore[attr-defined]
+            symbols = sorted(term.free_symbols, key=str, reverse=True)
+            symbols = cast("list[sp.Expr]", symbols)
             if last_slack not in symbols:
                 continue
             for s in symbols:
@@ -338,15 +341,15 @@ class QuboGenerator:
         Returns:
             The transformed expression.
         """
-        assert isinstance(expression, (sp.Add, sp.Mul)), (  # type: ignore[attr-defined]
+        assert isinstance(expression, (sp.Add, sp.Mul)), (
             f"We expect a sum of products or a single product as input but got {expression}"
         )
         slack_count = 0
 
         while True:
             problematic_terms = (
-                self.__get_problematic_terms(expression.args)
-                if isinstance(expression, sp.Add)  # type: ignore[attr-defined]
+                self.__get_problematic_terms(cast("Collection[sp.Mul]", expression.args))
+                if isinstance(expression, sp.Add)
                 else self.__get_problematic_terms([expression])
                 if isinstance(expression, sp.Mul)
                 else None
@@ -458,8 +461,7 @@ class QuboGenerator:
         """
         if not for_embedding:
             expansion = self.construct_expansion(for_embedding=for_embedding)
-            if isinstance(expansion, tuple):
-                expansion = expansion[0]
+            expansion = cast("sp.Expr", expansion)
             coefficients = dict(expansion.expand().as_coefficients_dict())
             auxiliary_variables = list({var for arg in coefficients for var in self.__get_auxiliary_variables(arg)})
             auxiliary_variables.sort(
@@ -480,16 +482,15 @@ class QuboGenerator:
                 return auxiliary_variables.index(cast("sp.Symbol", variable)) + self.get_encoding_variable_count()
 
         else:
-            expansion_result: tuple[sp.Expr, SlackChainAssignment] = self.construct_expansion(  # type: ignore[assignment]
-                include_slack_information=True, for_embedding=for_embedding
-            )
-            expr, assignment = expansion_result
+            expansion = self.construct_expansion(include_slack_information=True, for_embedding=for_embedding)
+            expansion = cast("tuple[sp.Expr, SlackChainAssignment]", expansion)
+            expression, assignment = expansion
             num_variables = len(assignment.indices)
             result = np.zeros((
                 num_variables,
                 num_variables,
             ))
-            coefficients = dict(expr.as_coefficients_dict())
+            coefficients = dict(expression.as_coefficients_dict())
 
             def get_index(variable: sp.Expr) -> int:
                 return assignment.indices[str(variable)]
@@ -524,12 +525,11 @@ class QuboGenerator:
             msg = "Provided values are not binary (1/0)"
             raise ValueError(msg)
 
-        full_expansion: tuple[sp.Expr, SlackChainAssignment] = self.construct_expansion(
-            for_embedding=for_embedding, include_slack_information=True
-        )  # type: ignore[assignment]
+        full_expansion = self.construct_expansion(include_slack_information=True, for_embedding=for_embedding)
+        full_expansion = cast("tuple[sp.Expr, SlackChainAssignment]", full_expansion)
         expansion, auxiliary_expansions = full_expansion
-        auxiliary_assignment: dict[sp.Expr, int] = {}
 
+        auxiliary_assignment: dict[sp.Expr, int] = {}
         if len(assignment) == self.get_encoding_variable_count():
             auxiliary_assignment = self.__get_auxiliary_assignment(assignment, auxiliary_expansions)
         elif len(assignment) != self.count_required_variables(for_embedding=for_embedding):
@@ -538,7 +538,7 @@ class QuboGenerator:
 
         variable_assignment = {item[0]: assignment[item[1] - 1] for item in self._get_encoding_variables()}
         variable_assignment.update(auxiliary_assignment)
-        return expansion.subs(variable_assignment).evalf()
+        return expansion.subs(variable_assignment).evalf()  # ty: ignore[no-matching-overload]
 
     def __get_auxiliary_assignment(
         self, assignment: list[int], auxiliary_expansions: SlackChainAssignment
@@ -588,10 +588,12 @@ class QuboGenerator:
         Returns:
             A list of tuples containing the variable and its index.
         """
-        all_expressions: list[sp.Expr] = [self.objective_function] + [penalty[0] for penalty in self.penalties]  # type: ignore[assignment]
+        all_expressions: list[sp.Expr]
+        all_expressions = [self.objective_function] if self.objective_function is not None else []
+        all_expressions += [penalty[0] for penalty in self.penalties]
         variables = set()
         for expr in all_expressions:
-            variables |= expr.free_symbols  # type: ignore[attr-defined]
+            variables |= expr.free_symbols
         sorted_labels = sorted(variables, key=lambda var: int(str(var)[2:]))
         return [(var, i + 1) for i, var in enumerate(sorted_labels)]
 
@@ -612,7 +614,8 @@ class QuboGenerator:
         Returns:
             The number of required variables.
         """
-        expansion: sp.Expr = self.construct_expansion(for_embedding=for_embedding)  # type: ignore[assignment]
+        expansion = self.construct_expansion(for_embedding=for_embedding)
+        expansion = cast("sp.Expr", expansion)
         coefficients = dict(expansion.as_coefficients_dict())
         auxiliary_variables = list({var for arg in coefficients for var in self.__get_auxiliary_variables(arg)})
         return len(self._get_encoding_variables()) + len(auxiliary_variables)
@@ -752,9 +755,8 @@ class QuboGenerator:
         Returns:
             The constructed QAOA circuit.
         """
-        expansion: tuple[sp.Expr, SlackChainAssignment] = self.construct_expansion(
-            include_slack_information=True, for_embedding=True
-        )  # type: ignore[assignment]
+        expansion = self.construct_expansion(include_slack_information=True, for_embedding=True)
+        expansion = cast("tuple[sp.Expr, SlackChainAssignment]", expansion)
         expression, assignment = expansion
         coefficients = dict(expression.as_coefficients_dict())
         auxiliary_variables = list({var for arg in coefficients for var in self.__get_auxiliary_variables(arg)})
@@ -859,12 +861,12 @@ class QuboGenerator:
                 add_swap(g1[0], g1[1])
                 add_rzz(g1[1], g2[0])
 
-        for q in expression.free_symbols:  # type: ignore[attr-defined]
+        for q in expression.free_symbols:
             total_angle = coefficients.get(q, 0) * 2
-            for q_2 in expression.free_symbols:  # type: ignore[attr-defined]
+            for q_2 in expression.free_symbols:
                 if q_2 == q:
                     continue
-                total_angle += coefficients.get(q * q_2, 0)
+                total_angle += coefficients.get(cast("sp.Expr", q) * cast("sp.Expr", q_2), 0)
             if total_angle != 0:
                 add_rz(str(q), -float(total_angle))
         qc_front = qiskit.QuantumCircuit(device.num_qubits, device.num_qubits)
@@ -876,4 +878,5 @@ class QuboGenerator:
         for name, idx in substitution.items():
             measure_index = substitution[incomplete_swaps[name]] if name in incomplete_swaps else idx
             qc.measure(measure_index, assignment.indices[name])
-        return qc_front.compose(qc, front=False)
+        qc_front.compose(qc, front=False, inplace=True)
+        return qc_front

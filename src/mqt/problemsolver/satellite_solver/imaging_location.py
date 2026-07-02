@@ -8,9 +8,12 @@
 
 from __future__ import annotations
 
-from typing import Any, cast
+from typing import TYPE_CHECKING, cast
 
 import numpy as np
+
+if TYPE_CHECKING:
+    from numpy.typing import NDArray
 
 ORBIT_DURATION = 6000  # ~100 min
 ROTATION_SPEED_SATELLITE = 0.00008 * np.pi
@@ -21,7 +24,7 @@ R_S: float = 7371.0  # Satellite orbit radius in km
 class LocationRequest:
     def __init__(
         self,
-        position: np.ndarray[Any, np.dtype[np.float64]],
+        position: NDArray[np.float64],
         imaging_attempt_score: float,
     ) -> None:
         self.position = position
@@ -34,9 +37,9 @@ class LocationRequest:
         t = np.arccos(orbit_position[0]) * ORBIT_DURATION / (2 * np.pi)
         return int(t)
 
-    def get_average_satellite_position(self) -> np.ndarray[Any, np.dtype[np.float64]]:
+    def get_average_satellite_position(self) -> NDArray[np.float64]:
         longitude = 2 * np.pi / ORBIT_DURATION * self.imaging_attempt
-        return cast("np.ndarray[Any, np.dtype[np.float64]]", R_S * np.array([np.cos(longitude), np.sin(longitude), 0]))
+        return cast("NDArray[np.float64]", R_S * np.array([np.cos(longitude), np.sin(longitude), 0]))
 
     def get_longitude_angle(self) -> float:
         # Returns longitude of the acquisition request

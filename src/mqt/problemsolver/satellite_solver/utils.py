@@ -200,7 +200,7 @@ def cost_op_from_qubo(q: NDArray[np.float64]) -> tuple[SparsePauliOp, float]:
 
     num_vars = q.shape[0]
     zero = np.zeros(num_vars, dtype=bool)
-    pauli_list = []
+    pauli_list: list[SparsePauliOp] = []
     offset = 0.0
 
     for i in range(num_vars):
@@ -236,7 +236,11 @@ def cost_op_from_qubo(q: NDArray[np.float64]) -> tuple[SparsePauliOp, float]:
 
             offset += weight
 
-    qubit_op = sum(pauli_list).simplify(atol=0) if pauli_list else SparsePauliOp("I" * max(1, num_vars), 0)
+    qubit_op: SparsePauliOp
+    if pauli_list:
+        qubit_op = cast("SparsePauliOp", sum(pauli_list)).simplify(atol=0)
+    else:
+        qubit_op = SparsePauliOp("I" * max(1, num_vars), coeffs=np.zeros(1))
 
     return qubit_op, offset
 

@@ -11,7 +11,7 @@
 from __future__ import annotations
 
 import importlib.util
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 from . import Graph, PathFindingQuboGenerator, PathFindingQuboGeneratorSettings, cost_functions
 
@@ -28,7 +28,7 @@ def __check_forced_edges(problem: StandardProblem) -> cost_functions.CostFunctio
     if not problem.fixed_edges:
         return None
     forced_edges: list[tuple[int, int]] = []
-    for i, j in problem.fixed_edges:
+    for i, j in cast("list[tuple[int, int]]", problem.fixed_edges):
         forced_edges.append((i + 1, j + 1))
     return cost_functions.PathContainsEdgesExactlyOnce(forced_edges, [1])
 
