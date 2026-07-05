@@ -7,8 +7,8 @@ Thank you for your interest in contributing to MQT ProblemSolver! This document
 outlines the development guidelines and how to contribute.
 
 We use GitHub to
-[host code](https://github.com/munich-quantum-toolkit/problemsolver), to
-[track issues and feature requests][issues], as well as accept
+[host code](https://github.com/munich-quantum-toolkit/problemsolver), to [track
+issues and feature requests][issues], as well as accept
 [pull requests](https://github.com/munich-quantum-toolkit/problemsolver/pulls).
 See <https://docs.github.com/en/get-started/quickstart> for a general
 introduction to working with GitHub and contributing to projects.
