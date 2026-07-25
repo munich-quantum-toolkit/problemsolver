@@ -106,7 +106,7 @@ def sort_acquisition_requests(acqs: list[LocationRequest]) -> list[LocationReque
         longitudes[idx] += acq.get_longitude_angle()
     indices_sorted = np.argsort(longitudes)
     for i in indices_sorted:
-        acqs_sorted.append(acqs[i])  # noqa: PERF401
+        acqs_sorted.append(acqs[i])  # ruff:ignore[manual-list-comprehension]
 
     return acqs_sorted
 

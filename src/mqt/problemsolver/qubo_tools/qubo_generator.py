@@ -642,7 +642,7 @@ class QuboGenerator:
             return encoding_variables.index(variable) + 1
         return -1
 
-    def decode_bit_array(self, _array: list[int]) -> Any:  # noqa: ANN401
+    def decode_bit_array(self, _array: list[int]) -> Any:  # ruff:ignore[any-type]
         """Given an assignment, decodes it into a meaningful result. May be extended by subclasses.
 
         Args:

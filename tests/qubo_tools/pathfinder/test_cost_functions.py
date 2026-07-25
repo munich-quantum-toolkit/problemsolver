@@ -617,16 +617,16 @@ def test_latex_output() -> None:
 
     s = cf.FormulaHelpers.sum_set(sp.Symbol("x"), ["x"], r"\in V", lambda: [1, 2, 3])
     s = cast("cf.SumSet", s)
-    assert s._latex(printer) == r"\sum_{x \in V} x"  # noqa: SLF001
+    assert s._latex(printer) == r"\sum_{x \in V} x"  # ruff:ignore[private-member-access]
 
     a = cf.A(1, 2)
-    assert a._latex(printer) == r"A_{1,2}"  # noqa: SLF001
+    assert a._latex(printer) == r"A_{1,2}"  # ruff:ignore[private-member-access]
 
     x = cf.X(1, 2, 3)
-    assert x._latex(printer) == r"x_{1,2,3}"  # noqa: SLF001
+    assert x._latex(printer) == r"x_{1,2,3}"  # ruff:ignore[private-member-access]
 
     d = cf.Decompose(5, 1)
-    assert d._latex(printer) == r"\bar{5}_{1}"  # noqa: SLF001
+    assert d._latex(printer) == r"\bar{5}_{1}"  # ruff:ignore[private-member-access]
 
 
 def test_composite_get_formula() -> None:

@@ -105,7 +105,7 @@ def eval_all_instances_qaoa(min_qubits: int = 3, max_qubits: int = 80, stepsize:
 
     res_csv.append(list(results[0].keys()))
     for res in results:
-        res_csv.append(list(res.values()))  # noqa: PERF401
+        res_csv.append(list(res.values()))  # ruff:ignore[manual-list-comprehension]
     np.savetxt(
         "res_qaoa.csv",
         res_csv,
@@ -122,7 +122,7 @@ def eval_all_instances_satellite(min_qubits: int = 3, max_qubits: int = 80, step
 
     res_csv.append(list(results[0].keys()))
     for res in results:
-        res_csv.append(list(res.values()))  # noqa: PERF401
+        res_csv.append(list(res.values()))  # ruff:ignore[manual-list-comprehension]
     np.savetxt(
         "res_satellite.csv",
         res_csv,
