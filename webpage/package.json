@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "16.2.11",
+    "next": "^16.2.12",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-graph-vis": "^1.0.7",
@@ -20,10 +20,11 @@
     "@types/node": "24.13.3",
     "@types/react": "19.2.17",
     "@types/react-dom": "^19.0.0",
+    "@typescript/native": "npm:typescript@^7.0.2",
     "eslint": "^10.0.0",
-    "eslint-config-next": "16.2.10",
+    "eslint-config-next": "^16.2.12",
     "postcss": "^8",
     "tailwindcss": "^4.1.17",
-    "typescript": "6.0.3"
+    "typescript": "npm:@typescript/typescript6@^6.0.2"
   }
 }
