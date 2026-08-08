@@ -158,32 +158,38 @@ _International Symposium on Multiple-Valued Logic (ISMVL)_, 2023.
 [[2]](https://arxiv.org/pdf/2308.00029) N. Quetschlich, V. Koch, L. Burgholzer,
 and R. Wille. A Hybrid Classical Quantum Computing Approach to the Satellite
 Mission Planning Problem.
-_IEEE International Conference on Quantum Computing and Engineering (QCE)_, 2023.
+_IEEE International Conference on Quantum Computing and Engineering (QCE)_,
+2023.
 
 [[3]](https://arxiv.org/pdf/2305.04941) N. Quetschlich, L. Burgholzer, and R.
 Wille. Reducing the Compilation Time of Quantum Circuits Using Pre-Compilation
 on the Gate Level.
-_IEEE International Conference on Quantum Computing and Engineering (QCE)_, 2023.
+_IEEE International Conference on Quantum Computing and Engineering (QCE)_,
+2023.
 
 [[4]](https://arxiv.org/pdf/2402.12434) N. Quetschlich, M. Soeken, P. Murali,
 and R. Wille. Utilizing Resource Estimation for the Development of Quantum
 Computing Applications.
-_IEEE International Conference on Quantum Computing and Engineering (QCE)_, 2024.
+_IEEE International Conference on Quantum Computing and Engineering (QCE)_,
+2024.
 
 [[5]](https://arxiv.org/pdf/2408.14539) N. Quetschlich, T. Forster, A.
 Osterwind, D. Helms, and R. Wille. Towards Equivalence Checking of Classical
 Circuits Using Quantum Computing.
-_IEEE International Conference on Quantum Computing and Engineering (QCE)_, 2024.
+_IEEE International Conference on Quantum Computing and Engineering (QCE)_,
+2024.
 
 [[6]](https://arxiv.org/pdf/2509.02683) T. Forster, N. Quetschlich, M. Soeken,
 and R. Wille. Improving Hardware Requirements for Fault-Tolerant Quantum
 Computing by Optimizing Error Budget Distributions.
-_IEEE International Conference on Quantum Computing and Engineering (QCE)_, 2025.
+_IEEE International Conference on Quantum Computing and Engineering (QCE)_,
+2025.
 
 [[7]](https://arxiv.org/pdf/2509.02668) T. Forster, N. Quetschlich, and R.
 Wille. Quantum Circuit Optimization for the Fault-Tolerance Era: Do We Have to
 Start from Scratch?
-_IEEE International Conference on Quantum Computing and Engineering (QCE)_, 2025.
+_IEEE International Conference on Quantum Computing and Engineering (QCE)_,
+2025.
 
 ---
 
