@@ -128,7 +128,7 @@ class PathFindingQuboGenerator(QuboGenerator):
         with (resources.files(__package__) / "resources" / "constraint.json").open("r") as f:
             constraint_schema = json.load(f)
 
-        registry: Registry[dict[str, Any]] = Registry().with_resources([
+        registry = Registry().with_resources([
             ("main_schema", Resource.from_contents(main_schema, DRAFT7)),
             ("constraint.json", Resource.from_contents(constraint_schema, DRAFT7)),
         ])
