@@ -1,8 +1,8 @@
 # References
 
-*MQT ProblemSolver* has a strong foundation in peer‑reviewed research. Many of
-its built‑in algorithms are based on methods published in scientific journals
-and conferences. For an overview of *MQT ProblemSolver* and its features, see
+MQT ProblemSolver has a strong foundation in peer‑reviewed research. Many of its
+built‑in algorithms are based on methods published in scientific journals and
+conferences. For an overview of MQT ProblemSolver and its features, see
 {cite:p}`quetschlich2023mqtproblemsolver`. If you want to cite this article,
 please use the following BibTeX entry:
 
@@ -17,7 +17,7 @@ please use the following BibTeX entry:
 }
 ```
 
-*MQT ProblemSolver* is part of the Munich Quantum Toolkit, which is described in
+MQT ProblemSolver is part of the Munich Quantum Toolkit, which is described in
 {cite:p}`mqt`. If you want to cite the Munich Quantum Toolkit, please use the
 following BibTeX entry:
 
