@@ -16,7 +16,7 @@ from pathlib import Path
 import pytest
 
 if sys.version_info >= (3, 13):
-    pytest.skip("This module requires Python 3.12 or lower", allow_module_level=True)
+    pytest.skip("Requires tsplib95, which is which is not available for Python 3.13 or later", allow_module_level=True)
 
 import tsplib95
 

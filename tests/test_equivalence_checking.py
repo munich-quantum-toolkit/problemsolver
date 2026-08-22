@@ -10,9 +10,13 @@
 
 from __future__ import annotations
 
+import sys
 from typing import TYPE_CHECKING
 
 import pytest
+
+if sys.version_info >= (3, 14):
+    pytest.skip(reason="Requires qiskit-aer, which is not available for Python 3.14 or later", allow_module_level=True)
 
 from mqt.problemsolver.equivalence_checking import equivalence_checking
 

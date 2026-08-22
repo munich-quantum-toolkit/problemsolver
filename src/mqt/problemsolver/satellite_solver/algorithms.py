@@ -10,11 +10,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from numpy.typing import NDArray
-    from qiskit.circuit import QuantumCircuit
-    from qiskit.providers import BackendV2
-
 import numpy as np
 from qiskit import transpile
 from qiskit.circuit.library import QAOAAnsatz, efficient_su2
@@ -22,6 +17,11 @@ from qiskit.providers.fake_provider import GenericBackendV2
 from scipy.optimize import minimize
 
 from mqt.problemsolver.satellite_solver.utils import cost_op_from_qubo
+
+if TYPE_CHECKING:
+    from numpy.typing import NDArray
+    from qiskit.circuit import QuantumCircuit
+    from qiskit.providers import BackendV2
 
 
 def solve_using_qaoa(qubo: NDArray[np.float64], noisy_flag: bool = True, layers: int = 10, num_init: int = 5) -> float:
@@ -57,8 +57,6 @@ def compute_expectation(counts: dict[str, int], qubo: NDArray[np.float64]) -> fl
         qubo: The QUBO matrix represented as a NumPy array.
 
     Returns:
-    -------
-    float
         The expectation value of the quadratic form Q with respect to the counts.
     """
     total_counts = sum(counts.values())
