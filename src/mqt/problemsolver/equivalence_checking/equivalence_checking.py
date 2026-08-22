@@ -19,7 +19,12 @@ import pandas as pd
 from qiskit import QuantumCircuit
 from qiskit.circuit.library import PhaseOracle, grover_operator
 from qiskit.compiler import transpile
-from qiskit_aer import AerSimulator
+
+try:
+    from qiskit_aer import AerSimulator
+except ImportError:
+    msg = "The 'equivalence_checking' module requires qiskit-aer, which is not available for Python 3.14 or later"
+    raise ImportError(msg) from None
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -32,19 +37,13 @@ def create_condition_string(num_bits: int, num_counter_examples: int) -> tuple[s
     The function also returns the corresponding counter examples to the miter string, that is, the bitstrings that satisfy the miter condition.
     A miter can be of the form "a & b & c & d" where a, b, c, d are input bits. The counter examples are the bitstrings that satisfy the miter condition, e.g. "0000" for the miter "a & b & c & d".
 
-    Parameters
-    ----------
-    num_bits : int
-        Number of input bits
-    num_counter_examples : int
-        Number of counter examples
+    Args:
+        num_bits: Number of input bits
+        num_counter_examples: Number of counter examples
 
     Returns:
-    -------
-    res_string : str
-        Resulting condition string
-    counter_examples : list[str]
-        The corresponding bitstrings to res_string (e.g. counter_examples is ['1111'] for res_string 'a & b & c & d')
+        - Resulting condition string
+        - The corresponding bitstrings to res_string (e.g. counter_examples is ['1111'] for res_string 'a & b & c & d')
     """
     if num_bits < 0 or num_counter_examples < 0:
         msg = "The number of bits or counter examples cannot be used."
@@ -97,22 +96,15 @@ def find_counter_examples(
     In this case, a synthetic miter is used for which the counter examples are known and one can check, if for given parameters (such as shots and delta)
     our approach can find the correct counter examples.
 
-    Parameters
-    ----------
-    miter : str
-        Miter condition string
-    num_bits : int
-        Number of input bits
-    shots : int
-        Number of shots to run the quantum circuit for
-    delta : float
-        Threshold for the stopping condition
-    predetermined_counter_examples : list[str] | NoneType
-        List of counter examples
+    Args:
+        miter: Miter condition string
+        num_bits: Number of input bits
+        shots: Number of shots to run the quantum circuit for
+        delta: Threshold for the stopping condition
+        predetermined_counter_examples: List of counter examples
 
     Returns:
-    -------
-    Found counter examples for a given miter (predetermined_counter_examples=None) or the number of iterations to find the counter examples (or "-" if no/wrong counter examples were found) if the counter examples are known beforehand.
+        Found counter examples for a given miter (predetermined_counter_examples=None) or the number of iterations to find the counter examples (or "-" if no/wrong counter examples were found) if the counter examples are known beforehand.
     """
     if not 0 <= delta <= 1:
         msg = f"Invalid value for delta {delta}, which must be between 0 and 1."
@@ -177,22 +169,14 @@ def try_parameter_combinations(
 ) -> None:
     """Tries different parameter combinations for Grover's algorithm to find the optimal parameters.
 
-    Parameters
-    ----------
-    path : str
-        Path to save the results
-    range_deltas : list[float]
-        List of delta values to try
-    range_num_bits : list[int]
-        List of numbers of input bits to try
-    range_fraction_counter_examples : list[float]
-        List of fractions of counter examples to try
-    shots_factor : float
-        Factor to scale the number of shots with the number of input bits (shots_factor * 2^num_bits)
-    num_runs : int
-        Number of runs for each parameter combination
-    verbose : bool
-        If True, print the current parameter combination
+    Args:
+        path: Path to save the results
+        range_deltas: List of delta values to try
+        range_num_bits: List of numbers of input bits to try
+        range_fraction_counter_examples: List of fractions of counter examples to try
+        shots_factor: Factor to scale the number of shots with the number of input bits (shots_factor * 2^num_bits)
+        num_runs: Number of runs for each parameter combination
+        verbose: If True, print the current parameter combination
     """
     data = pd.DataFrame(columns=["Input Bits", "Counter Examples", *range_deltas])
     i = 0

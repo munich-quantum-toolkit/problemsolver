@@ -8,6 +8,7 @@
 
 from __future__ import annotations
 
+import sys
 from typing import TYPE_CHECKING
 
 import numpy as np
@@ -19,6 +20,11 @@ from mqt.problemsolver.satellite_solver.imaging_location import LocationRequest
 
 if TYPE_CHECKING:
     from numpy.typing import NDArray
+
+
+if sys.version_info >= (3, 14):
+    pytest.skip(reason="Requires qiskit-aer, which is not available for Python 3.14 or later", allow_module_level=True)
+
 
 rng = np.random.default_rng(42)  # Set seed for reproducibility
 
@@ -35,8 +41,8 @@ def test_solve_using_qaoa(qubo: NDArray[np.float64]) -> None:
 
 
 def test_solve_using_vqe(qubo: NDArray[np.float64]) -> None:
-    res_qaoa = algorithms.solve_using_vqe(qubo)
-    assert res_qaoa is not None
+    res_vqe = algorithms.solve_using_vqe(qubo)
+    assert res_vqe is not None
 
 
 def test_eval_all_instances_satellite_solver() -> None:
