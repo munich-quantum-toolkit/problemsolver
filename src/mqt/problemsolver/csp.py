@@ -8,12 +8,17 @@
 
 from __future__ import annotations
 
+import sys
 from typing import TYPE_CHECKING, TypedDict
 
 import numpy as np
 from mqt.core import load
-from mqt.core.dd import sample
 from qiskit import QuantumCircuit, QuantumRegister
+
+if sys.version_info >= (3, 11):
+    from mqt.ddsim import sample
+else:
+    from mqt.core.dd import sample
 
 if TYPE_CHECKING:
     from qiskit.circuit import Instruction

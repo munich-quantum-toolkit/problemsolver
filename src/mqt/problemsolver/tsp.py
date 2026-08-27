@@ -9,16 +9,21 @@
 # Code is adapted from https://arxiv.org/abs/1805.10928 and https://qiskit.org/textbook/ch-paper-implementations/tsp.html
 from __future__ import annotations
 
+import sys
 from typing import TYPE_CHECKING, cast
 
 import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
 from mqt.core import load
-from mqt.core.dd import sample
 from python_tsp.exact import solve_tsp_dynamic_programming
 from qiskit import ClassicalRegister, QuantumCircuit, QuantumRegister
 from qiskit.synthesis.qft import synth_qft_full
+
+if sys.version_info >= (3, 11):
+    from mqt.ddsim import sample
+else:
+    from mqt.core.dd import sample
 
 if TYPE_CHECKING:
     from qiskit.circuit import Gate
