@@ -22,7 +22,7 @@ dynamic = ["version"]
 
 dependencies = [
     "mqt.core>=3.8.0",
-    "mqt.ddsim>=2.6.0; python_version >= '3.11'",
+    "mqt.ddsim>=2.6.0",
     "qiskit>=2.0.3",
     "qiskit_aer>=0.16.4; python_version < '3.14'",
     "numpy>=1.24",
