@@ -98,6 +98,7 @@ myst_heading_anchors = 3
 # -- Options for {MyST}NB ----------------------------------------------------
 
 nb_execution_mode = "cache"
+nb_execution_raise_on_error = True
 
 
 class CDAStyle(UnsrtStyle):
