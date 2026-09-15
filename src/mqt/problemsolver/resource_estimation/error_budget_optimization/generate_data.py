@@ -225,7 +225,7 @@ def generate_data(
             transpiled_qc = transpile(qc, basis_gates=QISKIT_STD_GATES, optimization_level=1)
             try:
                 # Estimate logical counts
-                counts = estimate(transpiled_qc)["logicalCounts"]
+                counts = estimate(transpiled_qc, skip_transpilation=True)["logicalCounts"]
                 if counts["rotationCount"] == 0:
                     continue  # Skip circuits without rotations, as we want to ensure distributing error budgets among all three types.
                 # Optimize error budgets
@@ -235,6 +235,7 @@ def generate_data(
                 )
             except Exception:
                 logger.exception(f"Error processing circuit {qc.name}.")
+                raise
 
             # Collect results
             specific_data = OrderedDict(counts)
@@ -259,6 +260,7 @@ def generate_data(
                 )
             except Exception:
                 logger.exception(f"Error processing logical counts entry {c}.")
+                raise
 
             # Collect results
             specific_data = OrderedDict(counts)
