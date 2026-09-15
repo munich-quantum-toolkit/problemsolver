@@ -38,7 +38,7 @@ dependencies = [
   "matplotlib>=3.9.4",
   "matplotlib>=3.10.5; python_version>='3.14'",
   "mqt-bench>=2.0.1",
-  "mqt-core>=3.8",
+  "mqt-core>=3.8,<4",
   "networkx>=2.8.8",
   "numpy>=1.24",
   "numpy>=1.26; python_version>='3.12'",
