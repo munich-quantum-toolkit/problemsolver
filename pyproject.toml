@@ -54,7 +54,7 @@ dependencies = [
   "pytket-qiskit>=0.71.1",
   "pytket-qiskit>=0.78; python_version>='3.14'",
   "qdk[qiskit]>=1.20",
-  "qiskit>=2.1.1",
+  "qiskit>=2.1.1,<3",
   "qiskit-aer>=0.16.4; python_version<'3.14'",
   "qiskit-ibm-runtime>=0.30",
   "referencing>=0.37",
