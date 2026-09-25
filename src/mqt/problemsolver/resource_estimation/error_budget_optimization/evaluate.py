@@ -49,14 +49,15 @@ def evaluate(x: NDArray[np.float64], y: NDArray[np.float64], total_budget: float
 
     product_diffs = []
 
-    for i, params in enumerate(y):
+    for i in range(len(y)):
         # Create logical counts dictionary
         counts_dict = {name: int(x[i, j]) for j, name in enumerate(logical_count_names)}
         logical_counts = LogicalCounts(counts_dict)
 
         # Normalize parameters to the total budget
-        params_sum = sum(params[:3])
-        params_normalized = [param / params_sum * total_budget for param in params[:3]]
+        params = y[i, :3]
+        params_sum = sum(params)
+        params_normalized = [param / params_sum * total_budget for param in params]
 
         # Create custom error budget
         custom_params = EstimatorParams()

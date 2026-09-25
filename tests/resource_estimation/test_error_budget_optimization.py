@@ -28,5 +28,5 @@ def test_error_budget_optimization(benchmark: str) -> None:
         assert row["logical"] + row["t_states"] + row["rotations"] == pytest.approx(total_error_budget)
     model, x_test, y_test = train(data)
     y_pred = model.predict(x_test)
-    evaluate(x_test, y_pred, total_error_budget)
-    evaluate(x_test, y_test, total_error_budget)
+    assert len(evaluate(x_test, y_pred, total_error_budget)) == len(x_test)
+    assert len(evaluate(x_test, y_test, total_error_budget)) == len(x_test)
