@@ -60,4 +60,4 @@ def test_location_request() -> None:
     assert req.imaging_attempt_score == 5
     assert req.get_longitude_angle()
     assert req.get_latitude_angle()
-    assert req.get_coordinates()
+    assert all(req.get_coordinates())
