@@ -21,7 +21,7 @@ from qiskit.circuit.library import PhaseOracle, grover_operator
 from qiskit.compiler import transpile
 
 try:
-    from qiskit_aer import AerSimulator
+    from qiskit_aer import AerSimulator  # ty: ignore[unresolved-import]
 except ImportError:
     msg = "The 'equivalence_checking' module requires qiskit-aer, which is not available for Python 3.14 or later"
     raise ImportError(msg) from None
